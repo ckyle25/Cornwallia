@@ -1,14 +1,13 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
 # compiled output
-/client-dev/dist
-/client-dev/dist-server
-/client-dev/tmp
-/client-dev/out-tsc
+/dist
+/dist-server
+/tmp
+/out-tsc
 
 # dependencies
 /node_modules
-/client-dev/node_modules
 
 # IDEs and editors
 /.idea
@@ -36,15 +35,12 @@ testem.log
 /typings
 
 # e2e
-/client-dev/e2e/*.js
-/client-dev/e2e/*.map
+/e2e/*.js
+/e2e/*.map
 
 # System Files
 .DS_Store
 Thumbs.db
 
 # configs
-/client-dev/src/app/services/auth/auth0-variables.ts
-
-# server
-.env
+src/app/services/auth/auth0-variables.ts

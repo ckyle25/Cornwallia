@@ -1,0 +1,15 @@
+<div class='navbar'>
+  <a routerLink="/home" class="text-sub-title logo-style clickable">Cornwallia</a>
+  <i [matMenuTriggerFor]="menu" class="fa fa-bars bars-style clickable"></i>
+</div>
+
+<mat-menu #menu="matMenu">
+  <div (click)="auth.logout()" mat-menu-item>
+    <i class="fa fa-sign-out"></i>
+    <span class="mleft-10">Logout</span>
+  </div>
+  <div mat-menu-item>
+    <i class="fa fa-question-circle"></i>
+    <span class="mleft-10">Help</span>
+  </div>
+</mat-menu>
