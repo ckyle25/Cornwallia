@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const sql = require('mssql');
 
-const { getConfig } = require('./server/controllers/configController');
+const { getConfig } = require('./controllers/configController');
 
 const app = express();
 app.use(express.static(__dirname + '/dist'))

@@ -1,13 +1,12 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
 # compiled output
-/client-dev/dist
 /client-dev/dist-server
 /client-dev/tmp
 /client-dev/out-tsc
 
 # dependencies
-/node_modules
+/server/node_modules
 /client-dev/node_modules
 
 # IDEs and editors
@@ -47,4 +46,4 @@ Thumbs.db
 /client-dev/src/app/services/auth/auth0-variables.ts
 
 # server
-.env
+/server/.env
