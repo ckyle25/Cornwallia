@@ -93,9 +93,9 @@ echo Selecting Node Version
 call :SelectNodeVersion
 
 :: 2. Install Angular npm packages
-echo Installing Angular NPM Packages
 IF EXIST "%DEPLOYMENT_SOURCE%\client-dev\package.json" (
-  pushd "%DEPLOYMENT_SOURCE%"
+  echo Installing Angular NPM Packages
+  pushd "%DEPLOYMENT_SOURCE%\client-dev"
   call :ExecuteCmd !NPM_CMD! install --production
   IF !ERRORLEVEL! NEQ 0 goto error
   popd
@@ -103,8 +103,8 @@ IF EXIST "%DEPLOYMENT_SOURCE%\client-dev\package.json" (
 
 :: 3. Angular Prod Build
 IF EXIST "%DEPLOYMENT_SOURCE%\client-dev\angular.json" (
-echo Building App in %DEPLOYMENT_SOURCE%…
-pushd "%DEPLOYMENT_SOURCE%"
+echo Building App in client-dev
+pushd "%DEPLOYMENT_SOURCE%\client-dev"
 call :ExecuteCmd !NPM_CMD! run build
 :: If the above command fails comment above and uncomment below one
 :: call ./node_modules/.bin/ng build –prod
@@ -114,13 +114,15 @@ popd
 
 :: 4. Copy Angular Production to prod server
 IF /I "%IN_PLACE_DEPLOYMENT%" NEQ "1" (
+  echo Copying Production App to Server
   call :ExecuteCmd "%KUDU_SYNC_CMD%" -v 50 -f "%DEPLOYMENT_SOURCE%\client-dev\dist" -t "%DEPLOYMENT_SOURCE%\server\dist" -n "%NEXT_MANIFEST_PATH%" -p "%PREVIOUS_MANIFEST_PATH%" -i ".git;.hg;.deployment;deploy.cmd"
   IF !ERRORLEVEL! NEQ 0 goto error
 )
 
 :: 5. Install node npm packages
 IF EXIST "%DEPLOYMENT_SOURCE%\server\package.json" (
-  pushd "%DEPLOYMENT_SOURCE%"
+  echo Installing Node Packages
+  pushd "%DEPLOYMENT_SOURCE%\server"
   call :ExecuteCmd !NPM_CMD! install --production
   IF !ERRORLEVEL! NEQ 0 goto error
   popd
@@ -128,6 +130,7 @@ IF EXIST "%DEPLOYMENT_SOURCE%\server\package.json" (
 
 :: 6. KuduSync
 IF /I "%IN_PLACE_DEPLOYMENT%" NEQ "1" (
+  echo Copying Server Packages to target
   call :ExecuteCmd "%KUDU_SYNC_CMD%" -v 50 -f "%DEPLOYMENT_SOURCE%\server" -t "%DEPLOYMENT_TARGET%" -n "%NEXT_MANIFEST_PATH%" -p "%PREVIOUS_MANIFEST_PATH%" -i ".git;.hg;.deployment;deploy.cmd"
   IF !ERRORLEVEL! NEQ 0 goto error
 )
