@@ -1,6 +1,7 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
 # compiled output
+/client-dev/dist
 /client-dev/dist-server
 /client-dev/tmp
 /client-dev/out-tsc
@@ -41,9 +42,6 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
-
-# configs
-/client-dev/src/app/services/auth/auth0-variables.ts
 
 # server
 /server/.env
