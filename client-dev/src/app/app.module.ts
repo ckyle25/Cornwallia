@@ -31,6 +31,7 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component';
     RouterModule.forRoot([
       { path: 'login', component: LoginPageComponent },
       { path: '', redirectTo: 'login', pathMatch: 'full'},
+      { path: '/', redirectTo: 'login', pathMatch: 'full'},
       { path: 'callback', component: CallbackComponent },
       { path: 'home', component: LandingComponent, canActivate: [AuthGuardService] },
     ])
