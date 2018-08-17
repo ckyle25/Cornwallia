@@ -33,7 +33,7 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component';
       { path: '', redirectTo: 'login', pathMatch: 'full'},
       { path: 'callback', component: CallbackComponent },
       { path: 'home', component: LandingComponent, canActivate: [AuthGuardService] },
-    ], {useHash: true})
+    ])
   ],
   providers: [AuthService, AuthGuardService],
   bootstrap: [AppComponent]
