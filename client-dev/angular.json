@@ -19,7 +19,7 @@
             "assets": [
               "src/assets",
               "src/favicon.ico",
-              "src/web.config"
+              "web.config"
             ],
             "styles": [
               "src/styles.scss",
@@ -79,7 +79,7 @@
             "assets": [
               "src/assets",
               "src/favicon.ico",
-              "src/web.config"
+              "web.config"
             ]
           }
         },
