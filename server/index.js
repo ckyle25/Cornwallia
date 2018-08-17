@@ -9,7 +9,7 @@ const sql = require('mssql');
 const { getConfig } = require('./controllers/configController');
 
 const app = express();
-app.use(express.static(__dirname + '/dist'))
+app.use(express.static(__dirname + '/../public/dist'))
 app.use( bodyParser.json() );
 app.use( cors() );    
 

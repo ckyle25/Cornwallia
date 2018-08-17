@@ -26,6 +26,10 @@ IF NOT DEFINED DEPLOYMENT_SOURCE (
   SET DEPLOYMENT_SOURCE=%~dp0%.
 )
 
+IF NOT DEFINED PUBLIC_TARGET (
+  SET PUBLIC_TARGET=%ARTIFACTS%\public
+)
+
 IF NOT DEFINED DEPLOYMENT_TARGET (
   SET DEPLOYMENT_TARGET=%ARTIFACTS%\wwwroot
 )
@@ -115,7 +119,7 @@ popd
 :: 4. Copy Angular Production to prod server
 IF /I "%IN_PLACE_DEPLOYMENT%" NEQ "1" (
   echo Copying Production App to Server
-  call :ExecuteCmd "%KUDU_SYNC_CMD%" -v 50 -f "%DEPLOYMENT_SOURCE%\client-dev\dist" -t "%DEPLOYMENT_SOURCE%\server\dist" -n "%NEXT_MANIFEST_PATH%" -p "%PREVIOUS_MANIFEST_PATH%" -i ".git;.hg;.deployment;deploy.cmd"
+  call :ExecuteCmd "%KUDU_SYNC_CMD%" -v 50 -f "%DEPLOYMENT_SOURCE%\client-dev\dist" -t "%PUBLIC_TARGET%\dist" -n "%NEXT_MANIFEST_PATH%" -p "%PREVIOUS_MANIFEST_PATH%" -i ".git;.hg;.deployment;deploy.cmd"
   IF !ERRORLEVEL! NEQ 0 goto error
 )
 
