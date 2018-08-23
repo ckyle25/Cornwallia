@@ -13,10 +13,10 @@
         "src/"
       ],
       "@app/*": [
-        "src/app/*"
+        "src/client/app/*"
       ],
       "@wishes/*": [
-        "src/app/applications/wishes*"
+        "src/client/app/applications/wishes*"
       ]
     },
     "typeRoots": [
