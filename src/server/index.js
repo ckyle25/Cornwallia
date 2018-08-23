@@ -9,9 +9,10 @@ const sql = require('mssql');
 const { getConfig } = require('./controllers/configController');
 
 const app = express();
-app.use(express.static(__dirname + '/dist'))
+const publicweb = process.env.PUBLICWEB || './publicweb';
+app.use(express.static(publicweb))
 app.use( bodyParser.json() );
-app.use( cors() );    
+app.use( cors() );
 
 const baseUrl = '/api';
 
