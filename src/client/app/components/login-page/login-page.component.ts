@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../services/auth/auth.service';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-login-page',
@@ -7,9 +7,10 @@ import { AuthService } from '../../services/auth/auth.service';
   styleUrls: ['./login-page.component.scss']
 })
 export class LoginPageComponent implements OnInit {
+  loginURL = `${environment.serverUrl}auth`;
 
-  constructor(public auth: AuthService) {
-    auth.handleAuthentication();
+  constructor() {
+
    }
 
   ngOnInit() {

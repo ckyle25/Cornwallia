@@ -4,10 +4,10 @@
 </div>
 
 <mat-menu #menu="matMenu">
-  <div (click)="auth.logout()" mat-menu-item>
+  <a [href]="logoutURL" mat-menu-item>
     <i class="fa fa-sign-out"></i>
     <span class="mleft-10">Logout</span>
-  </div>
+  </a>
   <div mat-menu-item>
     <i class="fa fa-question-circle"></i>
     <span class="mleft-10">Help</span>

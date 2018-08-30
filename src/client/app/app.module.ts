@@ -12,7 +12,6 @@ import { LandingComponent } from './components/landing/landing.component';
 import { CallbackComponent } from './components/callback/callback.component';
 
 // Services
-import { AuthService } from './services/auth/auth.service';
 import { AuthGuardService } from './services/auth/authGuard-service';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 
@@ -31,11 +30,10 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component';
     RouterModule.forRoot([
       { path: 'login', component: LoginPageComponent },
       { path: '', redirectTo: 'login', pathMatch: 'full'},
-      { path: 'callback', component: CallbackComponent },
-      { path: 'home', component: LandingComponent, canActivate: [AuthGuardService] },
+      { path: 'home', component: LandingComponent},
     ])
   ],
-  providers: [AuthService, AuthGuardService],
+  providers: [AuthGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

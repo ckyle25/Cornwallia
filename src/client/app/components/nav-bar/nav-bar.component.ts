@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../services/auth/auth.service';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-nav-bar',
@@ -7,8 +7,9 @@ import { AuthService } from '../../services/auth/auth.service';
   styleUrls: ['./nav-bar.component.scss']
 })
 export class NavBarComponent implements OnInit {
+  logoutURL = `${environment.serverUrl}auth/logout`;
 
-  constructor(public auth: AuthService) { }
+  constructor() { }
 
   ngOnInit() {
   }

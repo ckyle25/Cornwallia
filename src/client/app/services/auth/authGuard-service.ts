@@ -1,16 +1,22 @@
-import { CanActivate, Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import { CanActivate, Router } from '@angular/router';
 import { Injectable } from '@angular/core';
-import { AuthService } from '../../services/auth/auth.service';
+import { environment } from '../../../environments/environment';
+import axios from 'axios';
+
 
 @Injectable()
 export class AuthGuardService implements CanActivate {
+    isLoggedIn: any;
 
-    constructor(private router: Router, public auth: AuthService) { }
+    constructor(private router: Router) { }
 
-    canActivate(route: ActivatedRouteSnapshot) {
-        const isLoggedIn = this.auth.isAuthenticated();
+    canActivate() {
+        axios.get(`${environment.serverUrl}auth/me`)
+          .then(res => {
+            this.isLoggedIn = res.data;
+          });
 
-        if (isLoggedIn) {
+        if (this.isLoggedIn) {
             return true;
         } else {
             this.router.navigate(['login']);
