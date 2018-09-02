@@ -47,8 +47,8 @@ const baseUrl = '/api';
 //Auth Endpoints
 app.get('/auth', passport.authenticate('auth0'));
 app.get('/callback', passport.authenticate('auth0', {
-  successRedirect: `${process.env.FRONTEND_URL}home`,
-  failureRedirect: `${process.env.FRONTEND_URL}`
+  successRedirect: `${process.env.FRONTEND_URL}#/home`,
+  failureRedirect: `${process.env.FRONTEND_URL}#`
 }))
 
 passport.serializeUser(function(user, done) {
@@ -60,10 +60,11 @@ passport.deserializeUser(function(user, done) {
 });
 
 app.get('/auth/me', (req, res, next) => {
-  if (!req.user) {
-    return res.status(401).send('Log in required');
+  console.log(req.sessionStore.sessions)
+  if (Object.keys(req.sessionStore.sessions).length === 0 && req.sessionStore.sessions.constructor === Object) {
+    return res.status(401).send('Login Required');
   } else {
-    return res.status(200).send(req.user);
+    return res.status(200).send(req.sessionStore.sessions);
   }
 })
 

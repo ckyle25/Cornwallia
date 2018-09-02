@@ -30,8 +30,8 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component';
     RouterModule.forRoot([
       { path: 'login', component: LoginPageComponent },
       { path: '', redirectTo: 'login', pathMatch: 'full'},
-      { path: 'home', component: LandingComponent},
-    ])
+      { path: 'home', component: LandingComponent, canActivate: [AuthGuardService]},
+    ], {useHash: true})
   ],
   providers: [AuthGuardService],
   bootstrap: [AppComponent]
