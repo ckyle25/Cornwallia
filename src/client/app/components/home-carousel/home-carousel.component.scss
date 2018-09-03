@@ -1,0 +1,11 @@
+.container {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: blue;
+    height: 45vh;
+    min-height: 400px;
+    width: 100%;
+}

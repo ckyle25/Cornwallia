@@ -14,6 +14,7 @@ import { CallbackComponent } from './components/callback/callback.component';
 // Services
 import { AuthGuardService } from './services/auth/authGuard-service';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
+import { HomeCarouselComponent } from './components/home-carousel/home-carousel.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component';
     LoginPageComponent,
     LandingComponent,
     CallbackComponent,
-    NavBarComponent
+    NavBarComponent,
+    HomeCarouselComponent
   ],
   imports: [
     BrowserModule,

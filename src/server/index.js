@@ -60,7 +60,6 @@ passport.deserializeUser(function(user, done) {
 });
 
 app.get('/auth/me', (req, res, next) => {
-  console.log(req.sessionStore.sessions)
   if (Object.keys(req.sessionStore.sessions).length === 0 && req.sessionStore.sessions.constructor === Object) {
     return res.status(401).send('Login Required');
   } else {
