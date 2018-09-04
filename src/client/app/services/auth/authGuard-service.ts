@@ -14,6 +14,7 @@ export class AuthGuardService implements CanActivate {
     return axios.get(`${environment.serverUrl}auth/me`)
           .then(res => {
             this.isLoggedIn = res.data;
+            console.log(res.data)
 
             if (this.isLoggedIn) {
                 return true;

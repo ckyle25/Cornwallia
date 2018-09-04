@@ -15,6 +15,7 @@ import { CallbackComponent } from './components/callback/callback.component';
 import { AuthGuardService } from './services/auth/authGuard-service';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { HomeCarouselComponent } from './components/home-carousel/home-carousel.component';
+import { AppCardComponent } from './components/app-card/app-card.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { HomeCarouselComponent } from './components/home-carousel/home-carousel.
     LandingComponent,
     CallbackComponent,
     NavBarComponent,
-    HomeCarouselComponent
+    HomeCarouselComponent,
+    AppCardComponent
   ],
   imports: [
     BrowserModule,

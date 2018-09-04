@@ -68,6 +68,7 @@ app.get('/auth/me', (req, res, next) => {
 })
 
 app.get('/auth/logout', (req, res) => {
+  req.session.destroy();
   req.logOut();
   return res.redirect(`${process.env.FRONTEND_URL}/`);
 })
