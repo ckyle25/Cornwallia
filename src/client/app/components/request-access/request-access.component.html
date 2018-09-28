@@ -1,3 +1,12 @@
-<p>
-  request-access works!
-</p>
+<div class="container">
+  <div class="text-style text-section-title logo-style">What would you like access to?</div>
+  <textarea class="text-area-style" [(ngModel)]="messageContent"></textarea>
+  <div class="button-container">
+      <div class="btn-offblack logo-style text-section-title" (click)="sendEmail()">Send</div>
+  </div>
+</div>
+
+<modal-template [modalID]="'accessEmailSent'" class="modal-style">
+  <i (click)="modal.closeModal('accessEmailSent')" class="fa fa-times x-style clickable"></i>
+  <div>Email Sent</div>
+</modal-template>

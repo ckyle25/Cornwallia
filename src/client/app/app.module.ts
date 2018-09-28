@@ -20,6 +20,8 @@ import { LandingSubNavBarComponent } from './components/landing-sub-nav-bar/land
 import { AppListComponent } from './components/app-list/app-list.component';
 import { RequestAccessComponent } from './components/request-access/request-access.component';
 import { LeaveFeedbackComponent } from './components/leave-feedback/leave-feedback.component';
+import { FormsModule } from '@angular/forms';
+import { ModalTemplateComponent } from './shared/modal-template/modal-template.component';
 
 @NgModule({
   declarations: [
@@ -33,9 +35,11 @@ import { LeaveFeedbackComponent } from './components/leave-feedback/leave-feedba
     LandingSubNavBarComponent,
     AppListComponent,
     RequestAccessComponent,
-    LeaveFeedbackComponent
+    LeaveFeedbackComponent,
+    ModalTemplateComponent
   ],
   imports: [
+    FormsModule,
     BrowserModule,
     BrowserAnimationsModule,
     MatMenuModule,
@@ -50,7 +54,7 @@ import { LeaveFeedbackComponent } from './components/leave-feedback/leave-feedba
       ]},
     ], {useHash: true})
   ],
-  providers: [AuthGuardService],
+  providers: [AuthGuardService, ModalTemplateComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
