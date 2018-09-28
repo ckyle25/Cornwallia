@@ -16,6 +16,10 @@ import { AuthGuardService } from './services/auth/authGuard-service';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { HomeCarouselComponent } from './components/home-carousel/home-carousel.component';
 import { AppCardComponent } from './components/app-card/app-card.component';
+import { LandingSubNavBarComponent } from './components/landing-sub-nav-bar/landing-sub-nav-bar.component';
+import { AppListComponent } from './components/app-list/app-list.component';
+import { RequestAccessComponent } from './components/request-access/request-access.component';
+import { LeaveFeedbackComponent } from './components/leave-feedback/leave-feedback.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +29,11 @@ import { AppCardComponent } from './components/app-card/app-card.component';
     CallbackComponent,
     NavBarComponent,
     HomeCarouselComponent,
-    AppCardComponent
+    AppCardComponent,
+    LandingSubNavBarComponent,
+    AppListComponent,
+    RequestAccessComponent,
+    LeaveFeedbackComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +42,12 @@ import { AppCardComponent } from './components/app-card/app-card.component';
     RouterModule.forRoot([
       { path: 'login', component: LoginPageComponent },
       { path: '', redirectTo: 'login', pathMatch: 'full'},
-      { path: 'home', component: LandingComponent, canActivate: [AuthGuardService]},
+      { path: 'home', component: LandingComponent, canActivate: [AuthGuardService], children: [
+        { path: '', redirectTo: 'apps', pathMatch: 'full', canActivate: [AuthGuardService] },
+        { path: 'apps', component: AppListComponent, canActivate: [AuthGuardService] },
+        { path: 'access', component: RequestAccessComponent, canActivate: [AuthGuardService] },
+        { path: 'feedback', component: LeaveFeedbackComponent, canActivate: [AuthGuardService] }
+      ]},
     ], {useHash: true})
   ],
   providers: [AuthGuardService],

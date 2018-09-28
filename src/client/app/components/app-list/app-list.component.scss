@@ -1,0 +1,28 @@
+@import "../../../assets/styles/_colors";
+@import "../../../assets/styles/_typography";
+@import "../../../assets/styles/_ui-features";
+
+.container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  flex-wrap: wrap;
+}
+
+.app {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $white;
+  border: 1px solid $black;
+  margin: 5px;
+  height: 350px;
+  width: 350px;
+}
