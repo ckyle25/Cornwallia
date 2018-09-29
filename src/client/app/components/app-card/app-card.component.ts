@@ -12,6 +12,7 @@ export class AppCardComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    
   }
 
 }
