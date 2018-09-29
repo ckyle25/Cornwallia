@@ -1,3 +1,4 @@
+declare function require(path: string);
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AppCardComponent implements OnInit {
 
+  appImage = require('../../../assets/photos/settings.png');
   constructor() { }
 
   ngOnInit() {

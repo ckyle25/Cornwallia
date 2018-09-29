@@ -1,0 +1,70 @@
+@import "../../../assets/styles/_colors";
+@import "../../../assets/styles/_typography";
+@import "../../../assets/styles/_ui-features";
+
+.container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 10px;
+  height: 100%;
+  width: 100%;
+}
+
+.text-style {
+  color: $offblack;
+}
+
+.text-area-style {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 250px;
+  width: 100%;
+  margin: 10px 0px 10px 0px;
+}
+
+.button-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.btn-offblack {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  width: 200px;
+  padding: 10px;
+  color: $black;
+  background-color: $slate-gray-300;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-offblack:hover {
+  color: $white;
+  background-color: $offblack;
+  transition: 0.3s;
+}
+
+/* The Close Button */
+.x-style {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.x-style:hover,
+.x-style:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}

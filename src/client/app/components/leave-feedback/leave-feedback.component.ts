@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ModalTemplateComponent } from '../../shared/modal-template/modal-template.component';
 
 @Component({
   selector: 'leave-feedback',
@@ -7,9 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LeaveFeedbackComponent implements OnInit {
 
-  constructor() { }
+  messageContent: string;
+
+  constructor(
+    public modal: ModalTemplateComponent
+  ) { }
 
   ngOnInit() {
+
   }
 
+  sendEmail() {
+    this.modal.openModal('improvementEmailSent');
+    this.messageContent = '';
+  }
 }

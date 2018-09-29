@@ -1,3 +1,12 @@
-<p>
-  leave-feedback works!
-</p>
+<div class="container">
+  <div class="text-style text-section-title logo-style">How can we improve the site?</div>
+  <textarea class="text-area-style" [(ngModel)]="messageContent"></textarea>
+  <div class="button-container">
+      <div class="btn-offblack logo-style text-section-title" (click)="sendEmail()">Send</div>
+  </div>
+</div>
+
+<modal-template [modalID]="'improvementEmailSent'" class="modal-style">
+  <i (click)="modal.closeModal('improvementEmailSent')" class="fa fa-times x-style clickable"></i>
+  <div>Thank you for the feedback</div>
+</modal-template>
