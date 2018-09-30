@@ -8,19 +8,29 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class AppCardComponent implements OnInit {
 
-  @Input() appImage: string;
+  @Input() appName: string;
   @Input() title: string;
   @Input() caption: string;
 
-  imageSource: any;
+  class: any;
   
   constructor() { }
 
   ngOnInit() {
-    this.imageSource = this.require(this.appImage);
+    switch (this.appName) {
+      case 'wishes':
+        this.class = 'wishes-image-style'
+        break;
+      case 'lanParty':
+        this.class = 'lan-image-style'
+        break;
+      case 'calendar':
+        this.class = 'calendar-image-style'
+        break;
+    }
   }
 
-  require(path: string) {
-
+  onLaunchClick() {
+    
   }
 }

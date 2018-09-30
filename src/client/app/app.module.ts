@@ -22,6 +22,7 @@ import { RequestAccessComponent } from './components/request-access/request-acce
 import { LeaveFeedbackComponent } from './components/leave-feedback/leave-feedback.component';
 import { FormsModule } from '@angular/forms';
 import { ModalTemplateComponent } from './shared/modal-template/modal-template.component';
+import { AppLoadingComponent } from './components/app-loading/app-loading.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { ModalTemplateComponent } from './shared/modal-template/modal-template.c
     AppListComponent,
     RequestAccessComponent,
     LeaveFeedbackComponent,
-    ModalTemplateComponent
+    ModalTemplateComponent,
+    AppLoadingComponent
   ],
   imports: [
     FormsModule,
@@ -46,6 +48,7 @@ import { ModalTemplateComponent } from './shared/modal-template/modal-template.c
     RouterModule.forRoot([
       { path: 'login', component: LoginPageComponent },
       { path: '', redirectTo: 'login', pathMatch: 'full'},
+      { path: 'loading', component: AppLoadingComponent, canActivate: [AuthGuardService] },
       { path: 'home', component: LandingComponent, canActivate: [AuthGuardService], children: [
         { path: '', redirectTo: 'apps', pathMatch: 'full', canActivate: [AuthGuardService] },
         { path: 'apps', component: AppListComponent, canActivate: [AuthGuardService] },
