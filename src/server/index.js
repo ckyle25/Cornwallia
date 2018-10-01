@@ -10,11 +10,14 @@ const express = require('express')
     , cors = require('cors')
     , sql = require('mssql');
 const { getConfig } = require('./controllers/configController');
+const isAuthenticated = require('./middleware/isAuthenticated');
 
 const app = express();
 
 const publicweb = process.env.PUBLICWEB || './publicweb';
 
+app.use( bodyParser.json() );
+app.use( cors() );
 app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: false,
@@ -45,13 +48,20 @@ passport.use(new Auth0Strategy(
   //     "refreshToken": refreshToken,
   //     "extraParams": extraParams
   // };
-  //console.log('info', info)
+   //console.log('Profile', profile)
     return done(null, profile);
   }
 ));
 
-app.use( bodyParser.json() );
-app.use( cors() );
+passport.serializeUser(function(user, done) {
+  //console.log('serialize user', user)
+  done(null, user);
+});
+
+passport.deserializeUser(function(user_id, done) {
+  console.log('deserialize user', user_id)
+  done(null, user_id);
+});
 
 const baseUrl = '/api';
 
@@ -62,24 +72,40 @@ app.get('/callback', passport.authenticate('auth0', {
   failureRedirect: `${process.env.FRONTEND_URL}#`
 }))
 
-passport.serializeUser(function(user, done) {
-  //console.log('user1', user)
-  done(null, user);
-});
 
-passport.deserializeUser(function(user, done) {
-  done(null, user);
-});
 
 app.get('/auth/me', (req, res, next) => {
-  if (Object.keys(req.sessionStore.sessions).length === 0 && req.sessionStore.sessions.constructor === Object) {
-    return res.status(401).send('Login Required');
+  // if (Object.keys(req.sessionStore.sessions).length === 0 && req.sessionStore.sessions.constructor === Object) {
+  //   return res.status(401).send('Login Required');
+  // } else {
+  //   //console.log('user', req);
+  //   // console.log('body', req.body);
+  //   return res.status(200).send(req.sessionStore.sessions);
+  // }
+    // console.log("auth/me")
+    // console.log('isAuthenticated', req.isAuthenticated())
+    // console.log('req', req)
+    // console.log('req.sessionStore.sessions', req.sessionStore.sessions)
+    const sessions = req.sessionStore.sessions;
+    console.log('sessions', sessions)
+    const cookie = sessions[Object.keys(sessions)[0]]
+    console.log('cookie', cookie)
+  if (cookie) {
+    const check2 = JSON.parse(cookie)
+    console.log('1')
+    console.log('check2', check2)
+    if (check2.hasOwnProperty('passport')) {
+      console.log('2')
+      const newCookie = check2
+      const user = newCookie.passport.user;
+      return res.status(200).send(user);
+    }
+    //   console.log("authenticated")
   } else {
-    //console.log('user', req.user);
-    // console.log('body', req.body);
-    return res.status(200).send(req.sessionStore.sessions);
+    //   console.log("not authenticated")
+    return res.status(200).send("Login Required");
   }
-})
+});
 
 app.get('/auth/logout', (req, res) => {
   req.session.destroy();
