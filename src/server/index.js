@@ -18,7 +18,10 @@ const publicweb = process.env.PUBLICWEB || './publicweb';
 app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: false,
-  saveUninitialized: true
+  saveUninitialized: true,
+  cookie: {
+    secure: false
+  }
 }));
 app.use(passport.initialize());
 app.use(passport.session());
@@ -29,12 +32,20 @@ passport.use(new Auth0Strategy(
     domain: process.env.AUTH_DOMAIN,
     clientID: process.env.AUTH_CLIENT_ID,
     clientSecret: process.env.AUTH_CLIENT_SECRET,
-    callbackURL: process.env.AUTH_CALLBACK_URL || 'http://localhost:3000/callback'
+    callbackURL: process.env.AUTH_CALLBACK_URL || 'http://localhost:3000/callback',
+    scope: "openid email profile"
   },
   function(accessToken, refreshToken, extraParams, profile, done) {
     // accessToken is the token to call Auth0 API (not needed in the most cases)
     // extraParams.id_token has the JSON Web Token
     // profile has all the information from the user
+  //   const info = {
+  //     "profile": profile,
+  //     "accessToken": accessToken,
+  //     "refreshToken": refreshToken,
+  //     "extraParams": extraParams
+  // };
+  //console.log('info', info)
     return done(null, profile);
   }
 ));
@@ -52,6 +63,7 @@ app.get('/callback', passport.authenticate('auth0', {
 }))
 
 passport.serializeUser(function(user, done) {
+  //console.log('user1', user)
   done(null, user);
 });
 
@@ -63,6 +75,8 @@ app.get('/auth/me', (req, res, next) => {
   if (Object.keys(req.sessionStore.sessions).length === 0 && req.sessionStore.sessions.constructor === Object) {
     return res.status(401).send('Login Required');
   } else {
+    //console.log('user', req.user);
+    // console.log('body', req.body);
     return res.status(200).send(req.sessionStore.sessions);
   }
 })
