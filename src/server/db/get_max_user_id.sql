@@ -1,0 +1,3 @@
+SELECT
+MAX(userID)
+FROM users

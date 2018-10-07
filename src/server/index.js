@@ -54,18 +54,47 @@ passport.use(new Auth0Strategy(
   //     "extraParams": extraParams
   // };
    //console.log('Profile', profile)
-    return done(null, profile);
-  }
-));
+   const db = app.get('db');
+
+   db.find_user([ profile.user_id ])
+    .then( user => {
+      if ( user[0] ) {
+        return done( null, { id: user[0].userid } );
+      } else {
+        
+        db.get_max_user_id()
+          .then(maxID => {
+
+            var newID = maxID + 1;
+
+            if (profile.given_name) {
+              var firstName = profile.given_name;
+              var lastName = profile.family_name;
+            } else {
+              var firstName = profile.nickname;
+              var lastName = profile.nickname;
+            }
+
+            db.create_user([newID, profile.email, firstName, lastName, profile.user_id])
+              .then( user => {
+                return done( null, { id: user[0].userid } );
+              });
+          });
+      };
+  });
+}));
+  
 
 passport.serializeUser(function(user, done) {
   //console.log('serialize user', user)
   done(null, user);
 });
 
-passport.deserializeUser(function(user_id, done) {
-  console.log('deserialize user', user_id)
-  done(null, user_id);
+passport.deserializeUser(function(user, done) {
+  app.get('db').find_session_user([user.id])
+  .then( user => {
+    return done(null, user[0]);
+  })
 });
 
 const baseUrl = '/api';
@@ -77,6 +106,14 @@ app.get('/callback', passport.authenticate('auth0', {
   failureRedirect: `${process.env.FRONTEND_URL}#`
 }))
 
+// app.get('/auth/me', (req, res, next) => {
+//   if (!req.user) {
+//     return res.status(200).send('Login Required');
+//   } else {
+//     return res.status(200).send(req.user);
+//   }
+// })
+
 
 
 app.get('/auth/me', (req, res, next) => {
@@ -87,30 +124,27 @@ app.get('/auth/me', (req, res, next) => {
   //   // console.log('body', req.body);
   //   return res.status(200).send(req.sessionStore.sessions);
   // }
-    // console.log("auth/me")
+     console.log("auth/me")
     // console.log('isAuthenticated', req.isAuthenticated())
     // console.log('req', req)
-    // console.log('req.sessionStore.sessions', req.sessionStore.sessions)
+     console.log('req.sessionStore.sessions', req.sessionStore.sessions)
     const sessions = req.sessionStore.sessions;
     // console.log('sessions', sessions)
-    const cookie = sessions[Object.keys(sessions)[0]]
-    // console.log('cookie', cookie)
-  if (cookie) {
-    const check2 = JSON.parse(cookie)
-    // console.log('1')
-    // console.log('check2', check2)
-    if (check2.hasOwnProperty('passport')) {
-      // console.log('2')
-      const newCookie = check2
-      const user = newCookie.passport.user;
-      return res.status(200).send(user);
-    } else {
-      return res.status(200).send("Login Required");
+    let passport = {}
+
+  for(let sessionID in sessions) {
+    let sessionTest = JSON.parse(sessions[sessionID]);
+    if (sessionTest.hasOwnProperty('passport')) {
+      passport = sessionTest.passport
     }
-    //   console.log("authenticated")
+  }
+
+  if (Object.keys(passport).length === 0 && passport.constructor === Object) {
+    return res.status(200).send("Login Required"); 
   } else {
-    //   console.log("not authenticated")
-    return res.status(200).send("Login Required");
+    console.log('1')
+    console.log('passport', passport)
+    return res.status(200).send(passport.user)
   }
 });
 
