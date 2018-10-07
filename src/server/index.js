@@ -106,30 +106,8 @@ app.get('/callback', passport.authenticate('auth0', {
   failureRedirect: `${process.env.FRONTEND_URL}#`
 }))
 
-// app.get('/auth/me', (req, res, next) => {
-//   if (!req.user) {
-//     return res.status(200).send('Login Required');
-//   } else {
-//     return res.status(200).send(req.user);
-//   }
-// })
-
-
-
 app.get('/auth/me', (req, res, next) => {
-  // if (Object.keys(req.sessionStore.sessions).length === 0 && req.sessionStore.sessions.constructor === Object) {
-  //   return res.status(401).send('Login Required');
-  // } else {
-  //   //console.log('user', req);
-  //   // console.log('body', req.body);
-  //   return res.status(200).send(req.sessionStore.sessions);
-  // }
-     console.log("auth/me")
-    // console.log('isAuthenticated', req.isAuthenticated())
-    // console.log('req', req)
-     console.log('req.sessionStore.sessions', req.sessionStore.sessions)
     const sessions = req.sessionStore.sessions;
-    // console.log('sessions', sessions)
     let passport = {}
 
   for(let sessionID in sessions) {
@@ -142,8 +120,6 @@ app.get('/auth/me', (req, res, next) => {
   if (Object.keys(passport).length === 0 && passport.constructor === Object) {
     return res.status(200).send("Login Required"); 
   } else {
-    console.log('1')
-    console.log('passport', passport)
     return res.status(200).send(passport.user)
   }
 });
