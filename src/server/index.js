@@ -87,18 +87,20 @@ app.get('/auth/me', (req, res, next) => {
     // console.log('req', req)
     // console.log('req.sessionStore.sessions', req.sessionStore.sessions)
     const sessions = req.sessionStore.sessions;
-    console.log('sessions', sessions)
+    // console.log('sessions', sessions)
     const cookie = sessions[Object.keys(sessions)[0]]
-    console.log('cookie', cookie)
+    // console.log('cookie', cookie)
   if (cookie) {
     const check2 = JSON.parse(cookie)
-    console.log('1')
-    console.log('check2', check2)
+    // console.log('1')
+    // console.log('check2', check2)
     if (check2.hasOwnProperty('passport')) {
-      console.log('2')
+      // console.log('2')
       const newCookie = check2
       const user = newCookie.passport.user;
       return res.status(200).send(user);
+    } else {
+      return res.status(200).send("Login Required");
     }
     //   console.log("authenticated")
   } else {
