@@ -8,11 +8,16 @@ const express = require('express')
     , Auth0Strategy = require('passport-auth0')
     , session = require('express-session')
     , cors = require('cors')
+    , massive = require('massive')
     , sql = require('mssql');
 const { getConfig } = require('./controllers/configController');
 const isAuthenticated = require('./middleware/isAuthenticated');
 
 const app = express();
+
+massive(process.env.CONNECTION_STRING).then( db => {
+  app.set('db', db);
+})
 
 const publicweb = process.env.PUBLICWEB || './publicweb';
 
