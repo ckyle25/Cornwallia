@@ -1,0 +1,49 @@
+@import "../../../../../assets/styles/_colors";
+@import "../../../../../assets/styles/_typography";
+@import "../../../../../assets/styles/_ui-features";
+
+.content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 100vh;
+  background-color: $slate-gray-100;
+  animation: fade 1s;
+  -webkit-animation: fade 1s;
+}
+
+.header-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 400px;
+}
+
+.black-film {
+  background-color: $black;
+  opacity: 0.6;
+  width: 100%;
+  height: 400px;
+  z-index: 1;
+  position: absolute;
+}
+
+.title-text-style {
+  color: $white;
+  z-index: 2
+}
+
+.top-splash {
+  width: 100%;
+  height: 400px;
+  background-image: url('../../../../../assets/photos/top-splash.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: absolute;
+}

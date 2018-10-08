@@ -16,7 +16,7 @@ export class AuthGuardService implements CanActivate {
             this.isLoggedIn = res.data;
             console.log('user', res.data)
 
-            if (this.isLoggedIn !== 'Login Required') {
+            if (res.data !== 'Login Required') {
                 return true;
             } else {
                 this.router.navigate(['login']);

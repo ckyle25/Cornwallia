@@ -23,6 +23,7 @@ import { LeaveFeedbackComponent } from './components/leave-feedback/leave-feedba
 import { FormsModule } from '@angular/forms';
 import { ModalTemplateComponent } from './shared/modal-template/modal-template.component';
 import { AppLoadingComponent } from './components/app-loading/app-loading.component';
+import { WishesModule } from './applications/wishes/wishes.module';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { AppLoadingComponent } from './components/app-loading/app-loading.compon
         { path: 'access', component: RequestAccessComponent, canActivate: [AuthGuardService] },
         { path: 'feedback', component: LeaveFeedbackComponent, canActivate: [AuthGuardService] }
       ]},
+      { path: 'wishes', loadChildren: './applications/wishes/wishes.module#WishesModule', canActivate: [AuthGuardService]}
     ], {useHash: true})
   ],
   providers: [AuthGuardService, ModalTemplateComponent],

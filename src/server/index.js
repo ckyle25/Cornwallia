@@ -9,7 +9,6 @@ const express = require('express')
     , session = require('express-session')
     , cors = require('cors')
     , massive = require('massive')
-    , sql = require('mssql');
 const { getConfig } = require('./controllers/configController');
 const isAuthenticated = require('./middleware/isAuthenticated');
 
@@ -61,7 +60,7 @@ passport.use(new Auth0Strategy(
       if ( user[0] ) {
         return done( null, { id: user[0].userid } );
       } else {
-        
+
         db.get_max_user_id()
           .then(maxID => {
 
@@ -83,7 +82,7 @@ passport.use(new Auth0Strategy(
       };
   });
 }));
-  
+
 
 passport.serializeUser(function(user, done) {
   //console.log('serialize user', user)
@@ -102,8 +101,8 @@ const baseUrl = '/api';
 //Auth Endpoints
 app.get('/auth', passport.authenticate('auth0'));
 app.get('/callback', passport.authenticate('auth0', {
-  successRedirect: `${process.env.FRONTEND_URL}#/home`,
-  failureRedirect: `${process.env.FRONTEND_URL}#`
+  successRedirect: `${process.env.FRONTEND_URL}/home`,
+  failureRedirect: `${process.env.FRONTEND_URL}/login`
 }))
 
 app.get('/auth/me', (req, res, next) => {
@@ -118,7 +117,7 @@ app.get('/auth/me', (req, res, next) => {
   }
 
   if (Object.keys(passport).length === 0 && passport.constructor === Object) {
-    return res.status(200).send("Login Required"); 
+    return res.status(200).send("Login Required");
   } else {
     return res.status(200).send(passport.user)
   }
