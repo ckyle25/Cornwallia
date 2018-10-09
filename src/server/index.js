@@ -46,13 +46,6 @@ passport.use(new Auth0Strategy(
     // accessToken is the token to call Auth0 API (not needed in the most cases)
     // extraParams.id_token has the JSON Web Token
     // profile has all the information from the user
-  //   const info = {
-  //     "profile": profile,
-  //     "accessToken": accessToken,
-  //     "refreshToken": refreshToken,
-  //     "extraParams": extraParams
-  // };
-   //console.log('Profile', profile)
    const db = app.get('db');
 
    db.find_user([ profile.user_id ])
@@ -63,18 +56,23 @@ passport.use(new Auth0Strategy(
 
         db.get_max_user_id()
           .then(maxID => {
+            
+            var newID = maxID[0].max + 1;
+            var profileJson = profile._json
 
-            var newID = maxID + 1;
-
-            if (profile.given_name) {
-              var firstName = profile.given_name;
-              var lastName = profile.family_name;
+            if (profileJson.given_name) {
+              var firstName = profileJson.given_name;
+              var lastName = profileJson.family_name;
+              var email = profileJson.email
+              var newUserID = profile.user_id
             } else {
-              var firstName = profile.nickname;
-              var lastName = profile.nickname;
+              var firstName = profileJson.nickname;
+              var lastName = profileJson.nickname;
+              var email = profileJson.email
+              var newUserID = profile.user_id
             }
 
-            db.create_user([newID, profile.email, firstName, lastName, profile.user_id])
+            db.create_user([newID, email, firstName, lastName, newUserID])
               .then( user => {
                 return done( null, { id: user[0].userid } );
               });
@@ -101,7 +99,7 @@ const baseUrl = '/api';
 //Auth Endpoints
 app.get('/auth', passport.authenticate('auth0'));
 app.get('/callback', passport.authenticate('auth0', {
-  successRedirect: `${process.env.FRONTEND_URL}/home`,
+  successRedirect: `${process.env.FRONTEND_URL}/#/home`,
   failureRedirect: `${process.env.FRONTEND_URL}/login`
 }))
 

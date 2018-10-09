@@ -1,3 +1,3 @@
 SELECT
-MAX(userID)
+MAX(userid)
 FROM users

@@ -2,18 +2,6 @@
 @import "../../../../../assets/styles/_typography";
 @import "../../../../../assets/styles/_ui-features";
 
-.content {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  min-height: 100vh;
-  background-color: $slate-gray-100;
-  animation: fade 1s;
-  -webkit-animation: fade 1s;
-}
-
 .header-container {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -46,4 +34,28 @@
   background-repeat: no-repeat;
   background-size: 100% 400px;
   position: absolute;
+}
+
+.instructions-container {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+    min-width: 600px;
+    margin-top: 10px;
+}
+
+.instructions-content {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    flex-direction: column;
+    width: 75%;
+    min-width: 600px;
+}
+
+.instructions-style {
+    color: $offblack;
 }
