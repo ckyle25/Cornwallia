@@ -58,7 +58,8 @@ import { SharedService } from './services/shared/sharedServices';
         { path: 'feedback', component: LeaveFeedbackComponent, canActivate: [AuthGuardService] }
       ]},
       { path: 'wishes', loadChildren: './applications/wishes/wishes.module#WishesModule', canActivate: [AuthGuardService]},
-      { path: 'shared', loadChildren: './shared/shared.module#SharedModule', canActivate: [AuthGuardService]}
+      { path: 'shared', loadChildren: './shared/shared.module#SharedModule', canActivate: [AuthGuardService]},
+      { path: 'lanparty', loadChildren: './applications/lan-party-planner/lan-party-planner.module#LanPartyModule', canActivate: [AuthGuardService]}
     ], {useHash: true})
   ],
   providers: [

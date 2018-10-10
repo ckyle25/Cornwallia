@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgRedux, select } from 'ng2-redux';
 import { IGlobalState as GlobalState } from '../../redux/rootReducer';
 import { environment } from '../../../environments/environment';
+import { SharedActionCreators } from '../../redux/shared/sharedReducer';
 
 @Component({
   selector: 'app-nav-bar',
@@ -14,11 +15,11 @@ export class NavBarComponent implements OnInit {
 
   @select(['shared']) sharedObs;
 
-  constructor(private ngRedux: NgRedux<GlobalState>) { }
+  constructor(private ngRedux: NgRedux<GlobalState>,
+              private sharedActionCreators: SharedActionCreators) { }
 
   ngOnInit() {
     this.sharedObs.subscribe(result => {
-      console.log('result', result)
       this.loggedInName = result.userObject.firstnameval;
     })
   }
@@ -27,4 +28,7 @@ export class NavBarComponent implements OnInit {
     localStorage.setItem('currentUserID', '');
   }
 
+  clearSelectedApp() {
+    this.ngRedux.dispatch(this.sharedActionCreators.clearSelectedApp());
+  }
 }

@@ -2,19 +2,19 @@
   <app-card 
     [appName]="'wishes'" 
     [title]="'Wishes'"
-    [caption]="'Family gift giving portal'">
+    [caption]="'Family gift giving portal'"
+    *ngIf="wishesFlag === 1">
   </app-card>
   <app-card 
     [appName]="'lanParty'" 
     [title]="'LAN Party Planner'"
-    [caption]="'Plan/Get Ready for LAN parties'">
+    [caption]="'Plan/Get Ready for LAN parties'"
+    *ngIf="lanPartyFlag === 1">
   </app-card>
   <app-card 
     [appName]="'calendar'" 
     [title]="'Family Calendar'"
-    [caption]="'Keep track of family events'">
+    [caption]="'Keep track of family events'"
+    *ngIf="calendarFlag === 1">
   </app-card>
-  <div class="app">App4</div>
-  <div class="app">App5</div>
-  <div class="app">App6</div>
 </div>

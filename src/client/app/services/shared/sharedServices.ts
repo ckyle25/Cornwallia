@@ -7,7 +7,6 @@ export class SharedService {
   private url: string = environment.serverUrl;
 
   public getUser(userId: number): Promise<any> {
-    console.log ('servicesUserId', userId);
     const idObj = {
       id: userId
     }

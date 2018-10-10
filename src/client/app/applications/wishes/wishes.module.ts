@@ -4,14 +4,14 @@ import { RouterModule, ChildrenOutletContexts } from '@angular/router';
 
 // Components
 import { WishesLandingComponent } from './components/wishes-landing/wishes-landing.component';
-import { CommonModule } from '@angular/common';
-
-// Modules
-import { SharedModule } from '../../shared/shared.module';
 import { WishesSubNavComponent } from './components/wishes-sub-nav/wishes-sub-nav.component';
 import { HowToUseComponent } from './components/how-to-use/how-to-use.component';
 import { WishListComponent } from './components/wish-list/wish-list.component';
 import { AllWishesComponent } from './components/all-wishes/all-wishes.component';
+
+// Modules
+import { SharedModule } from '../../shared/shared.module';
+import { CommonModule } from '@angular/common';
 import { NgRedux, NgReduxModule } from 'ng2-redux';
 
 // Redux Store

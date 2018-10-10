@@ -5,16 +5,20 @@ import { SharedService } from '../../services/shared/sharedServices';
 const GET_USER = 'GET_USER';
 const GET_USER_PENDING = 'GET_USER_PENDING';
 const GET_USER_FULFILLED = 'GET_USER_FULFILLED';
+const SET_SELECTED_APP = 'SET_SELECTED_APP';
+const CLEAR_SELECTED_APP = 'CLEAR_SELECTED_APP'
 
 // Initial State
 export interface ISharedState {
   loading: boolean;
   userObject: object;
+  appSelection: string;
 }
 
 const sharedInitialState: ISharedState = {
   loading: false,
-  userObject: {}
+  userObject: {},
+  appSelection: ''
 };
 
 // Reducer
@@ -27,6 +31,10 @@ export function sharedReducer(state: ISharedState = sharedInitialState, action):
         loading: false,
         userObject: action.payload
       });
+    case SET_SELECTED_APP:
+      return Object.assign({}, state, {appSelection: action.payload})
+    case CLEAR_SELECTED_APP:
+      return Object.assign({}, state, {appSelection: action.payload})
 
     default:
       return state;
@@ -44,10 +52,23 @@ export class SharedActionCreators implements ISharedActionCreators {
   constructor(private sharedService: SharedService) { }
 
   getUser(userId: number) {
-    console.log('reduceruserID', userId);
     return {
       type: GET_USER,
       payload: this.sharedService.getUser(userId)
+    };
+  }
+
+  setSelectedApp(appSelection: string) {
+    return {
+      type: SET_SELECTED_APP,
+      payload: appSelection
+    };
+  }
+
+  clearSelectedApp() {
+    return {
+      type: CLEAR_SELECTED_APP,
+      payload: ''
     };
   }
 }

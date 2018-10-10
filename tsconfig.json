@@ -8,17 +8,7 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "target": "es5",
-    "paths": {
-      "@src/*": [
-        "src/"
-      ],
-      "@app/*": [
-        "src/client/app/*"
-      ],
-      "@wishes/*": [
-        "src/client/app/applications/wishes*"
-      ]
-    },
+    "paths": {},
     "typeRoots": [
       "node_modules/@types"
     ],

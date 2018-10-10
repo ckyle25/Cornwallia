@@ -1,5 +1,9 @@
 // declare function require(path: string);
 import { Component, OnInit, Input } from '@angular/core';
+import { NgRedux, select } from 'ng2-redux';
+import { IGlobalState as GlobalState } from '../../redux/rootReducer';
+import { SharedActionCreators } from '../../redux/shared/sharedReducer';
+
 
 @Component({
   selector: 'app-card',
@@ -14,7 +18,8 @@ export class AppCardComponent implements OnInit {
 
   class: any;
   
-  constructor() { }
+  constructor(private ngRedux: NgRedux<GlobalState>,
+              private sharedActionCreators: SharedActionCreators) { }
 
   ngOnInit() {
     switch (this.appName) {
@@ -32,5 +37,6 @@ export class AppCardComponent implements OnInit {
 
   onLaunchClick() {
     
+    this.ngRedux.dispatch(this.sharedActionCreators.setSelectedApp(this.title));
   }
 }

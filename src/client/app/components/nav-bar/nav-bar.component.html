@@ -1,8 +1,8 @@
 <div class='navbar'>
-  <a routerLink="/home" class="text-sub-title logo-style clickable">Cornwallia</a>
-  <div [matMenuTriggerFor]="menu" class="top-right-container clickable">
+  <a routerLink="/home" (click)="clearSelectedApp()" class="text-sub-title logo-style clickable">Cornwallia</a>
+  <div class="top-right-container">
     <div class="name-style logo-style">{{loggedInName}}</div>
-    <i  class="fa fa-chevron-down bars-style"></i>
+    <i [matMenuTriggerFor]="menu" class="fa fa-chevron-down bars-style clickable"></i>
   </div>
 </div>
 
