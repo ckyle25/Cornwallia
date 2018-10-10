@@ -2,3 +2,15 @@
 @import "../../../assets/styles/_typography";
 @import "../../../assets/styles/_ui-features";
 
+.top-right-container {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.name-style {
+    color: $white;
+    margin-right: 10px;
+}
