@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { NgRedux, select } from 'ng2-redux';
+import { IGlobalState as GlobalState } from '../../redux/rootReducer';
+import { SharedActionCreators } from '../../redux/shared/sharedReducer';
 
 @Component({
   selector: 'app-landing',
@@ -7,9 +10,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LandingComponent implements OnInit {
 
-  constructor() { }
+  currentUser: number;
+
+  // Redux Observables
+  @select(['shared']) sharedObs;
+
+  constructor(private ngRedux: NgRedux<GlobalState>,
+              private sharedActionCreators: SharedActionCreators) { }
 
   ngOnInit() {
+    this.currentUser = parseInt(localStorage.getItem('currentUserID'), 10);
+    this.ngRedux.dispatch(this.sharedActionCreators.getUser(this.currentUser));
   }
 
 }

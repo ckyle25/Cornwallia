@@ -10,6 +10,7 @@ const express = require('express')
     , cors = require('cors')
     , massive = require('massive')
 const { getConfig } = require('./controllers/configController');
+const { getUser } = require('./controllers/sharedController');
 const isAuthenticated = require('./middleware/isAuthenticated');
 
 const app = express();
@@ -56,7 +57,7 @@ passport.use(new Auth0Strategy(
 
         db.get_max_user_id()
           .then(maxID => {
-            
+
             var newID = maxID[0].max + 1;
             var profileJson = profile._json
 
@@ -129,6 +130,7 @@ app.get('/auth/logout', (req, res) => {
 
 // API Endpoints
 app.get(`${baseUrl}/authConfig`, getConfig);
+app.post(`${baseUrl}/shared/getuser`, getUser)
 
 const port = process.env.PORT || 3001
 app.listen( port , () => { console.log(`Server listening on port ${port}`); } );

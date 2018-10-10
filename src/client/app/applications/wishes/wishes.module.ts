@@ -12,7 +12,11 @@ import { WishesSubNavComponent } from './components/wishes-sub-nav/wishes-sub-na
 import { HowToUseComponent } from './components/how-to-use/how-to-use.component';
 import { WishListComponent } from './components/wish-list/wish-list.component';
 import { AllWishesComponent } from './components/all-wishes/all-wishes.component';
+import { NgRedux, NgReduxModule } from 'ng2-redux';
 
+// Redux Store
+import { store } from '../../redux/store';
+import { IGlobalState as GlobalState } from '../../redux/rootReducer';
 
 @NgModule({
   declarations: [
@@ -28,7 +32,7 @@ import { AllWishesComponent } from './components/all-wishes/all-wishes.component
     RouterModule.forChild([
       { path: '', redirectTo: 'landing', pathMatch: 'full' },
       { path: 'landing', component: WishesLandingComponent,  children: [
-        { path: '', redirectTo:'howto', pathMatch: 'full'},
+        { path: '', redirectTo: 'howto', pathMatch: 'full'},
         { path: 'howto', component: HowToUseComponent},
         { path: 'wishlist', component: WishListComponent},
         { path: 'allwishes', component: AllWishesComponent}
@@ -38,4 +42,8 @@ import { AllWishesComponent } from './components/all-wishes/all-wishes.component
   exports: [RouterModule],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
-export class WishesModule { }
+export class WishesModule {
+  constructor(ngRedux: NgRedux<GlobalState>) {
+    ngRedux.provideStore(store);
+  }
+ }

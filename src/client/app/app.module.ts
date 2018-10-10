@@ -21,8 +21,13 @@ import { AuthGuardService } from './services/auth/authGuard-service';
 
 // Modules
 import { SharedModule } from './shared/shared.module';
+import { NgRedux, NgReduxModule } from 'ng2-redux';
 
-
+// Redux
+import { store } from './redux/store';
+import { IGlobalState as GlobalState } from './redux/rootReducer';
+import { SharedActionCreators } from './redux/shared/sharedReducer';
+import { SharedService } from './services/shared/sharedServices';
 
 @NgModule({
   declarations: [
@@ -41,6 +46,7 @@ import { SharedModule } from './shared/shared.module';
     BrowserModule,
     BrowserAnimationsModule,
     SharedModule,
+    NgReduxModule,
     RouterModule.forRoot([
       { path: 'login', component: LoginPageComponent },
       { path: '', redirectTo: 'login', pathMatch: 'full'},
@@ -55,7 +61,15 @@ import { SharedModule } from './shared/shared.module';
       { path: 'shared', loadChildren: './shared/shared.module#SharedModule', canActivate: [AuthGuardService]}
     ], {useHash: true})
   ],
-  providers: [AuthGuardService],
+  providers: [
+    AuthGuardService,
+    SharedActionCreators,
+    SharedService
+  ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+    constructor(ngRedux: NgRedux<GlobalState>) {
+      ngRedux.provideStore(store);
+    }
+ }

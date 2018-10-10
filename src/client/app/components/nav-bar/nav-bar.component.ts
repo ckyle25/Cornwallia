@@ -14,4 +14,8 @@ export class NavBarComponent implements OnInit {
   ngOnInit() {
   }
 
+  removeUserId() {
+    localStorage.setItem('currentUserID', '');
+  }
+
 }
