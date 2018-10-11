@@ -17,6 +17,7 @@ import { NgRedux, NgReduxModule } from 'ng2-redux';
 // Redux Store
 import { store } from '../../redux/store';
 import { IGlobalState as GlobalState } from '../../redux/rootReducer';
+import { FilterCardComponent } from './components/filter-card/filter-card.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { IGlobalState as GlobalState } from '../../redux/rootReducer';
     WishesSubNavComponent,
     HowToUseComponent,
     WishListComponent,
-    AllWishesComponent
+    AllWishesComponent,
+    FilterCardComponent
   ],
   imports: [
     CommonModule,

@@ -1,0 +1,150 @@
+@import "../../../../../assets/styles/_colors";
+@import "../../../../../assets/styles/_typography";
+@import "../../../../../assets/styles/_ui-features";
+
+.container {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	flex-direction: column;
+	width: 350px;
+	height: 350px;
+	border: 1px solid $offblack;
+	margin: 10px;
+	border-radius: 10px;
+}
+
+.container:hover {
+  border: 3px solid $offblack;
+}
+
+.kj-image-style {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	background-image: url('../../../../../assets/photos/Kyle.Jodi.jpg');
+	background-size: cover;
+	background-repeat: no-repeat;
+	border-radius: 10px 10px 0px 0px;
+	width: 100%;
+	height: 75%;
+}
+
+.kk-image-style {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	background-image: url('../../../../../assets/photos/ethernet.jpg');
+	background-size: cover;
+	background-repeat: no-repeat;
+	border-radius: 10px 10px 0px 0px;
+	width: 100%;
+	height: 75%;
+}
+
+.rj-image-style {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	background-image: url('../../../../../assets/photos/calendar.jpg');
+	background-size: cover;
+	background-repeat: no-repeat;
+	border-radius: 10px 10px 0px 0px;
+	width: 100%;
+	height: 75%;
+}
+
+.d-image-style {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	background-image: url('../../../../../assets/photos/calendar.jpg');
+	background-size: cover;
+	background-repeat: no-repeat;
+	border-radius: 10px 10px 0px 0px;
+	width: 100%;
+	height: 75%;
+}
+
+.caption-container {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	flex-direction: row;
+	background-color: $white;
+	width: 100%;
+	height:25%;
+	align-items: center;
+	padding: 5px;
+	border-radius: 0px 0px 10px 10px;
+}
+
+.text-container {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+  justify-content: center;
+  align-items: center;
+	margin: 0px 0px 0px 25px;
+	width: 100%;
+	height: 100%;
+	flex-direction: column;
+}
+
+.title-text {
+	color: $offblack;
+	padding-bottom: 5px;
+}
+
+.caption-text {
+	font-size: 12px;
+	font-weight: 600;
+	color: $offblack;
+}
+
+.button-container {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: $offblack;
+	padding: 5px;
+	width: 100px;
+	height: 50px;
+	border-radius: 5px;
+	text-decoration: none;
+	cursor: pointer;
+
+	div {
+		color: $white;
+		margin-right: 10px;
+		text-decoration: none;
+	}
+
+	i {
+		color: $white;
+		font-size: 14px;
+		font-weight: 600;
+		line-height: 1.5;
+	}
+}
+
+.button-container:hover {
+	background-color: $white;
+	border: 2px solid $offblack;
+
+	div {
+		color: $offblack;
+	}
+
+	i {
+		color: $offblack;
+	}
+
+	transition: .5s;
+}
+
+.margin-r-10 {
+	margin-right: 10px;
+}
