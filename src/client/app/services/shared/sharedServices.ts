@@ -9,7 +9,7 @@ export class SharedService {
   public getUser(userId: number): Promise<any> {
     const idObj = {
       id: userId
-    }
+    };
     return axios
             .post(`${this.url}api/shared/getuser`, idObj)
             .then(response => {
