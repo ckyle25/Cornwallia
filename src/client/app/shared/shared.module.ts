@@ -11,7 +11,7 @@ import { ModalTemplateComponent } from '../shared/modal-template/modal-template.
 import { AppLoadingComponent } from '../components/app-loading/app-loading.component';
 
 // Modules
-import { NgRedux, NgReduxModule } from 'ng2-redux';
+import { NgRedux, NgReduxModule } from '@angular-redux/store';
 
 // Redux Store
 import { store } from '../redux/store';

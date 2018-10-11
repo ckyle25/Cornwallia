@@ -9,7 +9,7 @@ import { LanSubNavComponent } from './components/lan-sub-nav/lan-sub-nav.compone
 // Modules
 import { SharedModule } from '../../shared/shared.module';
 import { CommonModule } from '@angular/common';
-import { NgRedux, NgReduxModule } from 'ng2-redux';
+import { NgRedux, NgReduxModule } from '@angular-redux/store';
 
 // Redux Store
 import { store } from '../../redux/store';

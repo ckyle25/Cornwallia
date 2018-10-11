@@ -21,7 +21,7 @@ import { AuthGuardService } from './services/auth/authGuard-service';
 
 // Modules
 import { SharedModule } from './shared/shared.module';
-import { NgRedux, NgReduxModule } from 'ng2-redux';
+import { NgRedux, NgReduxModule } from '@angular-redux/store';
 
 // Redux
 import { store } from './redux/store';
