@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NgRedux, select } from '@angular-redux/store';
 import { IGlobalState as GlobalState } from '../../../../redux/rootReducer';
-import { WishesActionCreators } from '../../../../redux//wishes/wishesRootReducer';
+import { WishesLandingComponent } from '../wishes-landing/wishes-landing.component';
+import { LandingComponent } from '../../../../components/landing/landing.component';
 
 @Component({
   selector: 'how-to-use',
@@ -10,19 +11,12 @@ import { WishesActionCreators } from '../../../../redux//wishes/wishesRootReduce
 })
 export class HowToUseComponent implements OnInit {
 
-  @select('shared') sharedObs
-
-  currentUserID: number;
-
-  constructor(private ngRedux: NgRedux<GlobalState>,
-              private wishesActionCreators: WishesActionCreators) { }
+  constructor() { }
 
   ngOnInit() {
-    this.sharedObs.subscribe(result => {
-      this.currentUserID = result.userObject.userid
-      this.ngRedux.dispatch(this.wishesActionCreators.getActiveUser(this.currentUserID))
-      this.ngRedux.dispatch(this.wishesActionCreators.getAllUsers())
-    })
+
   }
+
+
 
 }

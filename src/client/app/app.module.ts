@@ -66,6 +66,7 @@ import { WishesService } from './services/wishes/wishesService';
   ],
   providers: [
     AuthGuardService,
+    LandingComponent,
     SharedActionCreators,
     SharedService,
     WishesActionCreators,

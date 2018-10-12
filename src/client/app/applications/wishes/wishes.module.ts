@@ -41,6 +41,9 @@ import { FilterCardComponent } from './components/filter-card/filter-card.compon
       ]},
     ])
   ],
+  providers: [
+    WishesLandingComponent
+  ],
   exports: [RouterModule],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })

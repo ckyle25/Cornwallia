@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Injectable } from '@angular/core';
 import { NgRedux, select } from '@angular-redux/store';
 import { IGlobalState as GlobalState } from '../../redux/rootReducer';
 import { SharedActionCreators } from '../../redux/shared/sharedReducer';
 
+@Injectable()
 @Component({
   selector: 'app-landing',
   templateUrl: './landing.component.html',
@@ -10,7 +11,7 @@ import { SharedActionCreators } from '../../redux/shared/sharedReducer';
 })
 export class LandingComponent implements OnInit {
 
-  currentUser: number;
+  appInitialized: boolean = false;
 
   // Redux Observables
   @select(['shared']) sharedObs;
@@ -18,9 +19,22 @@ export class LandingComponent implements OnInit {
   constructor(private ngRedux: NgRedux<GlobalState>,
               private sharedActionCreators: SharedActionCreators) { }
 
-  ngOnInit() {
-    this.currentUser = parseInt(localStorage.getItem('currentUserID'), 10);
-    this.ngRedux.dispatch(this.sharedActionCreators.getUser(this.currentUser));
+  async ngOnInit(): Promise<boolean> {
+    this.sharedObs.subscribe(result => {
+      this.appInitialized = result.appInitialized;
+    });
+    if (!this.appInitialized) {
+      await this.initializeApp();
+    } else {
+      console.log('app initialized');
+    }
+
+    return true;
   }
 
+  public async initializeApp(): Promise<boolean> {
+    await this.ngRedux.dispatch(this.sharedActionCreators.getUser(parseInt(localStorage.getItem('currentUserID'), 10)));
+    await this.ngRedux.dispatch(this.sharedActionCreators.initializeApp());
+    return true;
+  }
 }

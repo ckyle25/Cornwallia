@@ -8,6 +8,7 @@ const GET_ACTIVE_USER_FULFILLED = 'GET_ACTIVE_USER_FULFILLED';
 const GET_USERS = 'GET_USERS';
 const GET_USERS_PENDING = 'GET_USERS_PENDING';
 const GET_USERS_FULFILLED = 'GET_USERS_FULFILLED';
+const INITIALIZE_WISHES = 'INITIALIZE_WISHES';
 
 // Initial State
 export interface IWishesState {
@@ -15,13 +16,15 @@ export interface IWishesState {
   currentUser: object;
   allUsers: object;
   familyReference: object;
+  wishesInitialized: boolean;
 }
 
 const wishesInitialState: IWishesState = {
   loading: false,
   currentUser: {},
   allUsers: {},
-  familyReference: {}
+  familyReference: {},
+  wishesInitialized: false
 };
 
 // Reducer
@@ -41,6 +44,8 @@ export function wishesReducer(state: IWishesState = wishesInitialState, action):
         loading: false,
         allUsers: action.payload
       });
+    case INITIALIZE_WISHES:
+      return Object.assign({}, state, {wishesInitialized: action.payload});
 
     default:
       return state;
@@ -69,6 +74,13 @@ export class WishesActionCreators implements IWishesActionCreators {
     return {
       type: GET_USERS,
       payload: this.wishesService.getAllUsers()
+    };
+  }
+
+  initializeWishes() {
+    return {
+      type: INITIALIZE_WISHES,
+      payload: true
     };
   }
 }
