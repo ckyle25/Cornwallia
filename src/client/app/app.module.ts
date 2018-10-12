@@ -28,6 +28,8 @@ import { store } from './redux/store';
 import { IGlobalState as GlobalState } from './redux/rootReducer';
 import { SharedActionCreators } from './redux/shared/sharedReducer';
 import { SharedService } from './services/shared/sharedServices';
+import { WishesActionCreators } from './redux/wishes/wishesRootReducer';
+import { WishesService } from './services/wishes/wishesService';
 
 @NgModule({
   declarations: [
@@ -65,7 +67,9 @@ import { SharedService } from './services/shared/sharedServices';
   providers: [
     AuthGuardService,
     SharedActionCreators,
-    SharedService
+    SharedService,
+    WishesActionCreators,
+    WishesService
   ],
   bootstrap: [AppComponent]
 })

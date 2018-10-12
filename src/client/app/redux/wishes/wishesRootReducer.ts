@@ -39,7 +39,7 @@ export function wishesReducer(state: IWishesState = wishesInitialState, action):
     case GET_USERS_FULFILLED:
       return Object.assign({}, state, {
         loading: false,
-        familyReference: action.payload
+        allUsers: action.payload
       });
 
     default:
@@ -65,10 +65,10 @@ export class WishesActionCreators implements IWishesActionCreators {
     };
   }
 
-  getAllUsers(currentUser: number) {
+  getAllUsers() {
     return {
       type: GET_USERS,
-      payload: this.wishesService.getAllUsers(currentUser)
+      payload: this.wishesService.getAllUsers()
     };
   }
 }

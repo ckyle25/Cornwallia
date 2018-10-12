@@ -14,16 +14,14 @@ export class WishesService {
     return axios
             .post(`${this.url}api/wishes/getActiveUser`, idObj)
             .then(response => {
-              return response.data;
+              return response.data[0];
             });
   }
 
-  public getAllUsers(currentUser: number): Promise<any> {
-
-    const idObj = { id: currentUser };
+  public getAllUsers(): Promise<any> {
 
     return axios
-            .post(`${this.url}api/wishes/getAllUsers`, idObj)
+            .get(`${this.url}api/wishes/getAllUsers`)
             .then(response => {
               return response.data;
             });
