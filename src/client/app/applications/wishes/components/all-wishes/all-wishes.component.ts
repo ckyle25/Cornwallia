@@ -9,6 +9,7 @@ import { LandingComponent } from '../../../../components/landing/landing.compone
   templateUrl: './all-wishes.component.html',
   styleUrls: ['./all-wishes.component.scss']
 })
+
 export class AllWishesComponent implements OnInit {
 
   family1Access: boolean;
@@ -17,14 +18,20 @@ export class AllWishesComponent implements OnInit {
 
   @select('wishes') wishesObs;
 
-  constructor(private ngRedux: NgRedux<GlobalState>,) { }
+  viewMode: string = 'overall';
+
+  constructor(private ngRedux: NgRedux<GlobalState>) { }
 
   ngOnInit() {
-    this.wishesObs.subcribe(result => {
-      result.currentUser.accessgroup1flg === 1 ? this.family1Access = true : this.family1Access = false;
-      result.currentUser.accessgroup2flg === 1 ? this.family1Access = true : this.family1Access = false;
-      result.currentUser.accessgroup3flg === 1 ? this.family1Access = true : this.family1Access = false;
+      this.wishesObs.subscribe(result => {
+        result.currentUser.accessgroup1flg === 1 ? this.family1Access = true : this.family1Access = false;
+        result.currentUser.accessgroup2flg === 1 ? this.family2Access = true : this.family2Access = false;
+        result.currentUser.accessgroup3flg === 1 ? this.family3Access = true : this.family3Access = false;
+      });
   }
 
+  setViewToFamily() {
+    this.viewMode = 'family';
+  }
 
 }

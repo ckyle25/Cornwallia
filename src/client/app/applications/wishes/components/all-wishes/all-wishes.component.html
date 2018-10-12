@@ -1,11 +1,24 @@
 <div class="container">
-  <div class="content">
+  <div class="content" *ngIf="viewMode === 'overall'">
       <div class="label-style text-sub-title logo-style">Select A Family:</div>
       <div class="card-container">
-        <filter-card [title]="'Rob & Shari'" *ngIf="family1Access"></filter-card>
-        <filter-card [title]="'Kyle & Jodi'" *ngIf="family3Access"></filter-card>
-        <filter-card [title]="'Kevin & Kendal'" *ngIf="family1Access"></filter-card>
+        <a [routerLink]="['robshari']" (click)="setViewToFamily()">
+          <filter-card [title]="'Rob & Shari'" *ngIf="family1Access"></filter-card>
+        </a>
+        <a [routerLink]="['kylejodi']" (click)="setViewToFamily()">
+          <filter-card [title]="'Kyle & Jodi'" *ngIf="family3Access"></filter-card>
+        </a>
+        <a [routerLink]="['kevinkendal']" (click)="setViewToFamily()">
+          <filter-card [title]="'Kevin & Kendal'" *ngIf="family1Access"></filter-card>
+        </a>
         <filter-card [title]="'Drew'" *ngIf="family1Access"></filter-card>
+        <filter-card [title]="'Julie'" *ngIf="family2Access"></filter-card>
+        <a [routerLink]="['troyalison']" (click)="setViewToFamily()">
+          <filter-card [title]="'Troy & Alison'" *ngIf="family2Access"></filter-card>
+        </a>
       </div>
+  </div>
+  <div *ngIf="viewMode === 'family'">
+    <router-outlet></router-outlet>
   </div>
 </div>

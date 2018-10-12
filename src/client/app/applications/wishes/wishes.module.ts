@@ -8,6 +8,11 @@ import { WishesSubNavComponent } from './components/wishes-sub-nav/wishes-sub-na
 import { HowToUseComponent } from './components/how-to-use/how-to-use.component';
 import { WishListComponent } from './components/wish-list/wish-list.component';
 import { AllWishesComponent } from './components/all-wishes/all-wishes.component';
+import { FilterCardComponent } from './components/filter-card/filter-card.component';
+import { RobShariComponent } from './components/rob-shari/rob-shari.component';
+import { KyleJodiComponent } from './components/kyle-jodi/kyle-jodi.component';
+import { KevinKendalComponent } from './components/kevin-kendal/kevin-kendal.component';
+import { TroyAlisonComponent } from './components/troy-alison/troy-alison.component';
 
 // Modules
 import { SharedModule } from '../../shared/shared.module';
@@ -17,7 +22,7 @@ import { NgRedux, NgReduxModule } from '@angular-redux/store';
 // Redux Store
 import { store } from '../../redux/store';
 import { IGlobalState as GlobalState } from '../../redux/rootReducer';
-import { FilterCardComponent } from './components/filter-card/filter-card.component';
+
 
 @NgModule({
   declarations: [
@@ -26,7 +31,11 @@ import { FilterCardComponent } from './components/filter-card/filter-card.compon
     HowToUseComponent,
     WishListComponent,
     AllWishesComponent,
-    FilterCardComponent
+    FilterCardComponent,
+    RobShariComponent,
+    KyleJodiComponent,
+    KevinKendalComponent,
+    TroyAlisonComponent
   ],
   imports: [
     CommonModule,
@@ -37,7 +46,13 @@ import { FilterCardComponent } from './components/filter-card/filter-card.compon
         { path: '', redirectTo: 'howto', pathMatch: 'full'},
         { path: 'howto', component: HowToUseComponent},
         { path: 'wishlist', component: WishListComponent},
-        { path: 'allwishes', component: AllWishesComponent}
+        { path: 'allwishes', component: AllWishesComponent, children: [
+          { path: '', redirectTo: 'allwishes', pathMatch: 'full'}
+          { path: 'kylejodi', component: KyleJodiComponent},
+          { path: 'kevinkendal', component: KevinKendalComponent},
+          { path: 'robshari', component: RobShariComponent},
+          { path: 'troyalison', component: TroyAlisonComponent}
+        ]}
       ]},
     ])
   ],

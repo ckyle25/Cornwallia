@@ -11,7 +11,7 @@
 	height: 350px;
 	border: 1px solid $offblack;
 	margin: 10px;
-	border-radius: 10px;
+  border-radius: 10px;
 }
 
 .container:hover {
@@ -19,6 +19,54 @@
 }
 
 .kj-image-style {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	background-image: url('../../../../../assets/photos/Kyle.Jodi.jpg');
+	background-size: cover;
+	background-repeat: no-repeat;
+	border-radius: 10px 10px 0px 0px;
+	width: 100%;
+	height: 75%;
+}
+
+.kyle-image-style {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	background-image: url('../../../../../assets/photos/Kyle.Jodi.jpg');
+	background-size: cover;
+	background-repeat: no-repeat;
+	border-radius: 10px 10px 0px 0px;
+	width: 100%;
+	height: 75%;
+}
+
+.jodi-image-style {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	background-image: url('../../../../../assets/photos/Kyle.Jodi.jpg');
+	background-size: cover;
+	background-repeat: no-repeat;
+	border-radius: 10px 10px 0px 0px;
+	width: 100%;
+	height: 75%;
+}
+
+.miles-image-style {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	background-image: url('../../../../../assets/photos/Kyle.Jodi.jpg');
+	background-size: cover;
+	background-repeat: no-repeat;
+	border-radius: 10px 10px 0px 0px;
+	width: 100%;
+	height: 75%;
+}
+
+.owen-image-style {
 	display: -webkit-box;
 	display: -ms-flexbox;
 	display: flex;
@@ -42,6 +90,54 @@
 	height: 75%;
 }
 
+.kevin-image-style {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	background-image: url('../../../../../assets/photos/Kevin.Kendal.jpg');
+	background-size: cover;
+	background-repeat: no-repeat;
+	border-radius: 10px 10px 0px 0px;
+	width: 100%;
+	height: 75%;
+}
+
+.kendal-image-style {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	background-image: url('../../../../../assets/photos/Kevin.Kendal.jpg');
+	background-size: cover;
+	background-repeat: no-repeat;
+	border-radius: 10px 10px 0px 0px;
+	width: 100%;
+	height: 75%;
+}
+
+.lily-image-style {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	background-image: url('../../../../../assets/photos/Kevin.Kendal.jpg');
+	background-size: cover;
+	background-repeat: no-repeat;
+	border-radius: 10px 10px 0px 0px;
+	width: 100%;
+	height: 75%;
+}
+
+.quinten-image-style {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	background-image: url('../../../../../assets/photos/Kevin.Kendal.jpg');
+	background-size: cover;
+	background-repeat: no-repeat;
+	border-radius: 10px 10px 0px 0px;
+	width: 100%;
+	height: 75%;
+}
+
 .rj-image-style {
 	display: -webkit-box;
 	display: -ms-flexbox;
@@ -54,11 +150,83 @@
 	height: 75%;
 }
 
-.d-image-style {
+.rob-image-style {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	background-image: url('../../../../../assets/photos/Rob.Shari.jpg');
+	background-size: cover;
+	background-repeat: no-repeat;
+	border-radius: 10px 10px 0px 0px;
+	width: 100%;
+	height: 75%;
+}
+
+.shari-image-style {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	background-image: url('../../../../../assets/photos/Rob.Shari.jpg');
+	background-size: cover;
+	background-repeat: no-repeat;
+	border-radius: 10px 10px 0px 0px;
+	width: 100%;
+	height: 75%;
+}
+
+.drew-image-style {
 	display: -webkit-box;
 	display: -ms-flexbox;
 	display: flex;
 	background-image: url('../../../../../assets/photos/Drew.jpg');
+	background-size: cover;
+	background-repeat: no-repeat;
+	border-radius: 10px 10px 0px 0px;
+	width: 100%;
+	height: 75%;
+}
+
+.julie-image-style {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	background-image: url('../../../../../assets/photos/dandelion.jpg');
+	background-size: cover;
+	background-repeat: no-repeat;
+	border-radius: 10px 10px 0px 0px;
+	width: 100%;
+	height: 75%;
+}
+
+.ta-image-style {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	background-image: url('../../../../../assets/photos/dandelion.jpg');
+	background-size: cover;
+	background-repeat: no-repeat;
+	border-radius: 10px 10px 0px 0px;
+	width: 100%;
+	height: 75%;
+}
+
+.troy-image-style {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	background-image: url('../../../../../assets/photos/dandelion.jpg');
+	background-size: cover;
+	background-repeat: no-repeat;
+	border-radius: 10px 10px 0px 0px;
+	width: 100%;
+	height: 75%;
+}
+
+.alison-image-style {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	background-image: url('../../../../../assets/photos/dandelion.jpg');
 	background-size: cover;
 	background-repeat: no-repeat;
 	border-radius: 10px 10px 0px 0px;
@@ -93,13 +261,8 @@
 
 .title-text {
 	color: $offblack;
-	padding-bottom: 5px;
-}
-
-.caption-text {
-	font-size: 12px;
-	font-weight: 600;
-	color: $offblack;
+  padding-bottom: 5px;
+  text-decoration: none;
 }
 
 .button-container {
