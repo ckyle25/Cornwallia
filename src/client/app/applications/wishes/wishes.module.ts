@@ -47,7 +47,7 @@ import { IGlobalState as GlobalState } from '../../redux/rootReducer';
         { path: 'howto', component: HowToUseComponent},
         { path: 'wishlist', component: WishListComponent},
         { path: 'allwishes', component: AllWishesComponent, children: [
-          { path: '', redirectTo: 'allwishes', pathMatch: 'full'}
+          { path: '', redirectTo: 'allwishes', pathMatch: 'full'},
           { path: 'kylejodi', component: KyleJodiComponent},
           { path: 'kevinkendal', component: KevinKendalComponent},
           { path: 'robshari', component: RobShariComponent},
