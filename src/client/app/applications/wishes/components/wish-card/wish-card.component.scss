@@ -1,0 +1,42 @@
+@import "../../../../../assets/styles/_colors";
+@import "../../../../../assets/styles/_typography";
+@import "../../../../../assets/styles/_ui-features";
+
+.container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background-color: $white;
+  border: 1px solid $offblack;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.top-content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+
+.middle-content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 5px;
+}
+
+.title-style {
+  color: $offblack;
+}
+
+.text-style {
+  color: $offblack;
+  font-weight: 550;
+}

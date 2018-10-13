@@ -22,6 +22,8 @@ import { NgRedux, NgReduxModule } from '@angular-redux/store';
 // Redux Store
 import { store } from '../../redux/store';
 import { IGlobalState as GlobalState } from '../../redux/rootReducer';
+import { WishCardComponent } from './components/wish-card/wish-card.component';
+import { MyWishesComponent } from './components/my-wishes/my-wishes.component';
 
 
 @NgModule({
@@ -35,7 +37,9 @@ import { IGlobalState as GlobalState } from '../../redux/rootReducer';
     RobShariComponent,
     KyleJodiComponent,
     KevinKendalComponent,
-    TroyAlisonComponent
+    TroyAlisonComponent,
+    WishCardComponent,
+    MyWishesComponent
   ],
   imports: [
     CommonModule,
@@ -45,6 +49,7 @@ import { IGlobalState as GlobalState } from '../../redux/rootReducer';
       { path: 'landing', component: WishesLandingComponent,  children: [
         { path: '', redirectTo: 'howto', pathMatch: 'full'},
         { path: 'howto', component: HowToUseComponent},
+        { path: 'mywishes', component: MyWishesComponent},
         { path: 'wishlist', component: WishListComponent},
         { path: 'allwishes', component: AllWishesComponent, children: [
           { path: '', redirectTo: 'allwishes', pathMatch: 'full'},

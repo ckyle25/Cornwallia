@@ -11,14 +11,16 @@
         <a [routerLink]="['kevinkendal']" (click)="setViewToFamily()">
           <filter-card [title]="'Kevin & Kendal'" *ngIf="family1Access"></filter-card>
         </a>
-        <filter-card [title]="'Drew'" *ngIf="family1Access"></filter-card>
+        <a [routerLink]="['/wishes/landing/wishlist']">
+          <filter-card [title]="'Drew'" *ngIf="family1Access"></filter-card>
+        </a>
         <filter-card [title]="'Julie'" *ngIf="family2Access"></filter-card>
         <a [routerLink]="['troyalison']" (click)="setViewToFamily()">
           <filter-card [title]="'Troy & Alison'" *ngIf="family2Access"></filter-card>
         </a>
       </div>
   </div>
-  <div *ngIf="viewMode === 'family'">
+  <div class="content" *ngIf="viewMode === 'family'">
     <router-outlet></router-outlet>
   </div>
 </div>

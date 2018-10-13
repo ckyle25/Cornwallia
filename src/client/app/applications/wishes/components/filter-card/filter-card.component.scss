@@ -12,6 +12,8 @@
 	border: 1px solid $offblack;
 	margin: 10px;
   border-radius: 10px;
+  animation: fade 1.5s;
+  -webkit-animation: fade 1.5s;
 }
 
 .container:hover {
@@ -311,3 +313,7 @@
 .margin-r-10 {
 	margin-right: 10px;
 }
+
+@keyframes fade { 0% { opacity: 0; } 100% { opacity: 1; } }
+
+@-webkit-keyframes fade { 0% { opacity: 0; } 100% { opacity: 1; } }
