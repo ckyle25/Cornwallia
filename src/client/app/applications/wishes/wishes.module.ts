@@ -16,7 +16,7 @@ import { TroyAlisonComponent } from './components/troy-alison/troy-alison.compon
 
 // Modules
 import { SharedModule } from '../../shared/shared.module';
-import { CommonModule } from '@angular/common';
+import { CommonModule, CurrencyPipe } from '@angular/common';
 import { NgRedux, NgReduxModule } from '@angular-redux/store';
 
 // Redux Store
@@ -24,6 +24,7 @@ import { store } from '../../redux/store';
 import { IGlobalState as GlobalState } from '../../redux/rootReducer';
 import { WishCardComponent } from './components/wish-card/wish-card.component';
 import { MyWishesComponent } from './components/my-wishes/my-wishes.component';
+import { RatingComponent } from './components/rating/rating.component';
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import { MyWishesComponent } from './components/my-wishes/my-wishes.component';
     KevinKendalComponent,
     TroyAlisonComponent,
     WishCardComponent,
-    MyWishesComponent
+    MyWishesComponent,
+    RatingComponent
   ],
   imports: [
     CommonModule,
@@ -62,7 +64,8 @@ import { MyWishesComponent } from './components/my-wishes/my-wishes.component';
     ])
   ],
   providers: [
-    WishesLandingComponent
+    WishesLandingComponent,
+    CurrencyPipe
   ],
   exports: [RouterModule],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]

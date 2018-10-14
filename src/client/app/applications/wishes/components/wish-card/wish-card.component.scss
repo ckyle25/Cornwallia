@@ -40,3 +40,92 @@
   color: $offblack;
   font-weight: 550;
 }
+
+.link-style {
+  color: $blue;
+  font-weight: 550;
+}
+
+.button-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-direction: row;
+}
+
+.release-button {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: $yellow-orange;
+  border-radius: 5px;
+  margin-right: 3px;
+  padding: 10px;
+}
+
+.release-button:hover {
+  background-color: #b89c38;
+  transition: 1s;
+}
+
+.reserve-button {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: $green;
+  border-radius: 5px;
+  margin-right: 3px;
+  padding: 10px;
+}
+
+.reserve-button:hover {
+  background-color: #00753e;
+  transition: 1s;
+}
+
+.edit-button {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: $blue;
+  border-radius: 5px;
+  margin-right: 3px;
+  padding: 10px;
+}
+
+.edit-button:hover {
+  background-color: #0079b2;
+  transition: 1s;
+}
+
+.delete-button {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: $red;
+  border-radius: 5px;
+  margin-right: 3px;
+  padding: 10px;
+}
+
+.delete-button:hover {
+  background-color: #a82a30;
+  transition: 1s;
+}
+
+.button-text-style {
+  color: $white;
+  font-size: 20px;
+}
