@@ -16,6 +16,15 @@ module.exports = {
             .then(result => {
                 return res.status(200).send(result);
             });
+    },
+
+    getWishes: (req, res, next) => {
+        const dbInstance = req.app.get('db')
+  
+        dbInstance.get_wishes_for_user([body.id])
+            .then(result => {
+                return res.status(200).send(result);
+            });
     }
   }
   
