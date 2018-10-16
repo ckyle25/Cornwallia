@@ -10,10 +10,10 @@
           <i class="fa fa-tag button-text-style"></i>
           <pre class="button-text-style logo-style"> Reserve</pre>
       </div>
-      <div class="edit-button button-container clickable" *ngIf="currentUser === wishUser || currentUser === parentUsers">
+      <div class="edit-button button-container clickable" *ngIf="currentUser === wishUser || parentUsers.indexOf(currentUser) !== -1">
           <i class="fa fa-pencil button-text-style"> </i>
       </div>
-      <div class="delete-button button-container clickable" *ngIf="currentUser === wishUser || currentUser === parentUsers">
+      <div class="delete-button button-container clickable" *ngIf="currentUser === wishUser || parentUsers.indexOf(currentUser) !== -1">
           <i class="fa fa-trash button-text-style"> </i>
       </div>
     </div>
