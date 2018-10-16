@@ -8,6 +8,10 @@ const GET_ACTIVE_USER_FULFILLED = 'GET_ACTIVE_USER_FULFILLED';
 const GET_USERS = 'GET_USERS';
 const GET_USERS_PENDING = 'GET_USERS_PENDING';
 const GET_USERS_FULFILLED = 'GET_USERS_FULFILLED';
+const GET_WISHES = 'GET_WISHES';
+const GET_WISHES_PENDING = 'GET_WISHES_PENDING';
+const GET_WISHES_FULFILLED = 'GET_WISHES_FULFILLED';
+const SET_WISHLIST_USER = 'SET_WISHLET_USER';
 const INITIALIZE_WISHES = 'INITIALIZE_WISHES';
 
 // Initial State
@@ -17,6 +21,8 @@ export interface IWishesState {
   allUsers: object;
   familyReference: object;
   wishesInitialized: boolean;
+  wishes: any[];
+  wishListUser: number;
 }
 
 const wishesInitialState: IWishesState = {
@@ -24,12 +30,15 @@ const wishesInitialState: IWishesState = {
   currentUser: {},
   allUsers: {},
   familyReference: {},
-  wishesInitialized: false
+  wishesInitialized: false,
+  wishes: [],
+  wishListUser: 0
 };
 
 // Reducer
 export function wishesReducer(state: IWishesState = wishesInitialState, action): IWishesState {
   switch (action.type) {
+
     case GET_ACTIVE_USER_PENDING:
       return Object.assign({}, state, {loading: true});
     case GET_ACTIVE_USER_FULFILLED:
@@ -37,6 +46,7 @@ export function wishesReducer(state: IWishesState = wishesInitialState, action):
         loading: false,
         currentUser: action.payload
       });
+
     case GET_USERS_PENDING:
       return Object.assign({}, state, {loading: true});
     case GET_USERS_FULFILLED:
@@ -44,6 +54,18 @@ export function wishesReducer(state: IWishesState = wishesInitialState, action):
         loading: false,
         allUsers: action.payload
       });
+
+    case GET_WISHES_PENDING:
+      return Object.assign({}, state, {loading: true});
+    case GET_WISHES_FULFILLED:
+      return Object.assign({}, state, {
+        loading: false,
+        wishes: action.payload
+      });
+    
+    case SET_WISHLIST_USER:
+      return Object.assign({}, state, {wishListUser: action.payload})
+
     case INITIALIZE_WISHES:
       return Object.assign({}, state, {wishesInitialized: action.payload});
 
@@ -74,6 +96,20 @@ export class WishesActionCreators implements IWishesActionCreators {
     return {
       type: GET_USERS,
       payload: this.wishesService.getAllUsers()
+    };
+  }
+
+  getWishes(userId: number) {
+    return {
+      type: GET_WISHES,
+      payload: this.wishesService.getWishes(userId)
+    };
+  }
+
+  setWishListUser(userId: number) {
+    return {
+      type: SET_WISHLIST_USER,
+      payload: userId
     };
   }
 

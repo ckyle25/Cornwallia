@@ -9,44 +9,42 @@ import { CurrencyPipe } from '@angular/common';
 export class WishCardComponent implements OnInit, OnChanges {
 
   @Input() wish: any;
-
+  @Input() currentUser: number;
+  
   title: string;
   price: number;
   link: string;
   description: string;
   rating: number;
-  currentUser: number;
   wishUser: number;
   reserved: boolean;
   reservedUser: number;
-  parentUser: number;
+  parentUsers: any[];
 
   constructor() { }
 
   ngOnInit() {
-    this.title = 'The Thing I Want';
-    this.price = 2.56;
-    this.link = 'http://www.google.com';
-    this.description = 'This is a description';
-    this.rating = 2.5;
-    this.currentUser = 1;
-    this.wishUser = 2;
-    this.reserved = false;
-    this.parentUser = 1;
-    this.reservedUser = 4;
+    this.title = this.wish.titledsc;
+    this.price = this.wish.costamt;
+    this.link = this.wish.linktxt;
+    this.description = this.wish.descriptiondsc;
+    this.rating = parseFloat(this.wish.ratingnbr);
+    this.wishUser = this.wish.userid;
+    this.wish.reserved === 1 ? this.reserved = true : this.reserved = false
+    this.parentUsers = [this.wish.parent1wishesuserid, this.wish.parent2wishesuserid];
+    this.reservedUser = this.wish.reserveduserid;
 
   }
 
   ngOnChanges() {
-    this.title = 'The Thing I Want';
-    this.price = 2.56;
-    this.link = 'http://www.google.com';
-    this.description = 'This is a description';
-    this.rating = 3;
-    this.currentUser = 1;
-    this.wishUser = 2;
-    this.reserved = false;
-    this.parentUser = 1;
-    this.reservedUser = 4;
+    this.title = this.wish.titledsc;
+    this.price = this.wish.costamt;
+    this.link = this.wish.linktxt;
+    this.description = this.wish.descriptiondsc;
+    this.rating = parseFloat(this.wish.ratingnbr);
+    this.wishUser = this.wish.userid;
+    this.wish.reserved === 1 ? this.reserved = true : this.reserved = false
+    this.parentUsers = [this.wish.parent1wishesuserid, this.wish.parent2wishesuserid];
+    this.reservedUser = this.wish.reserveduserid;
   }
 }

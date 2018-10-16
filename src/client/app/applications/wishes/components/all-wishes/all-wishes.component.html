@@ -11,7 +11,7 @@
         <a [routerLink]="['kevinkendal']" (click)="setViewToFamily()">
           <filter-card [title]="'Kevin & Kendal'" *ngIf="family1Access"></filter-card>
         </a>
-        <a [routerLink]="['/wishes/landing/wishlist']">
+        <a [routerLink]="['/wishes/landing/wishlist']" (click)="setWishUserID(11)">
           <filter-card [title]="'Drew'" *ngIf="family1Access"></filter-card>
         </a>
         <filter-card [title]="'Julie'" *ngIf="family2Access"></filter-card>

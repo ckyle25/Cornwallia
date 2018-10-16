@@ -19,6 +19,7 @@ module.exports = {
     },
 
     getWishes: (req, res, next) => {
+        const body = req.body;
         const dbInstance = req.app.get('db')
   
         dbInstance.get_wishes_for_user([body.id])

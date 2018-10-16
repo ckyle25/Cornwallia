@@ -16,7 +16,7 @@ export class WishesService {
             .then(response => {
               return response.data[0];
             });
-  }
+  };
 
   public getAllUsers(): Promise<any> {
 
@@ -25,5 +25,16 @@ export class WishesService {
             .then(response => {
               return response.data;
             });
-  }
+  };
+
+  public getWishes(userId: number): Promise<any> {
+
+    const idObj = { id: userId };
+
+    return axios
+            .post(`${this.url}api/wishes/getWishes`, idObj)
+            .then(response => {
+              return response.data;
+            });
+  };
 }

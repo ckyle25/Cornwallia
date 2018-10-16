@@ -17,7 +17,29 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   width: 80%;
   min-width: 600px;
+}
+
+.left-content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+}
+
+.right-content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-direction: column;
+  width: 20%;
+  margin-left: 10px;
+}
+
+.title-style {
+  color: $offblack;
+  margin-bottom: 10px;
 }

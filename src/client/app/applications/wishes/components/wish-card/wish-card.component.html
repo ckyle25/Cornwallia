@@ -1,6 +1,6 @@
 <div class="container">
   <div class="top-content">
-    <div class="title-style text-sub-title logo-style">The Thing I want</div>
+    <div class="title-style text-sub-title logo-style">{{title}}</div>
     <div class="button-container">
       <div class="release-button button-container clickable" *ngIf="currentUser !== wishUser && reserved && currentUser === reservedUser">
         <i class="fa fa-times button-text-style"></i>
@@ -10,20 +10,20 @@
           <i class="fa fa-tag button-text-style"></i>
           <pre class="button-text-style logo-style"> Reserve</pre>
       </div>
-      <div class="edit-button button-container clickable" *ngIf="currentUser === wishUser || currentUser === parentUser">
+      <div class="edit-button button-container clickable" *ngIf="currentUser === wishUser || currentUser === parentUsers">
           <i class="fa fa-pencil button-text-style"> </i>
       </div>
-      <div class="delete-button button-container clickable" *ngIf="currentUser === wishUser || currentUser === parentUser">
+      <div class="delete-button button-container clickable" *ngIf="currentUser === wishUser || currentUser === parentUsers">
           <i class="fa fa-trash button-text-style"> </i>
       </div>
     </div>
   </div>
   <div class="middle-content">
     <rating [rating]="rating"></rating>
-    <pre class="text-style text-paragraph logo-style"> | {{ price | currency:'USD':true }} | </pre>
+    <pre class="text-style text-paragraph logo-style"> | {{ price | currency:'USD':'symbol' }} | </pre>
     <a href={{link}} target="_blank" class="link-style text-paragraph logo-style clickable">Example</a>
   </div>
   <div class="text-style text-paragraph logo-style">
-    Description
+    {{description}}
   </div>
 </div>

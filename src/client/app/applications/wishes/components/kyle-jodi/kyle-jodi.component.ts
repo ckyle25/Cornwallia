@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { NgRedux, select } from '@angular-redux/store';
+import { IGlobalState as GlobalState } from '../../../../redux/rootReducer';
+import { WishesActionCreators } from '../../../../redux/wishes/wishesRootReducer';
 
 @Component({
   selector: 'kyle-jodi',
@@ -7,9 +10,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class KyleJodiComponent implements OnInit {
 
-  constructor() { }
+  constructor(private ngRedux: NgRedux<GlobalState>,
+    private wishesActionCreators: WishesActionCreators) { }
 
   ngOnInit() {
+  }
+
+  setWishUserID(userid: number) {
+    this.ngRedux.dispatch(this.wishesActionCreators.setWishListUser(userid));
   }
 
 }
