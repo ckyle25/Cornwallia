@@ -1,3 +1,8 @@
+UPDATE wishes_wishes
+SET reservedflg = 1,
+reserveduserid = $1
+WHERE wishid = $2;
+
 SELECT
 ww.wishid
 ,ww.titledsc
@@ -15,4 +20,5 @@ FROM wishes_wishes ww
 		on wu.userid = ww.userid
 	LEFT JOIN wishes_family wf
 		on wf.familyid = wu.familyid
-WHERE ww.userid = $1
+WHERE ww.userid = $3
+

@@ -2,9 +2,14 @@
   <div class="content" >
     <div class="left-content">
         <div class="title-style text-sub-title logo-style">{{wishListUserName}}'s Wishes:</div>
+        <div class="title-style text-sub-title logo-style">Active Wishes</div>
         <div *ngFor="let wish of wishes">
-            <wish-card [wish]="wish" [currentUser]="currentUserID"></wish-card>
+            <wish-card [wish]="wish" [currentUser]="currentUserID" *ngIf="wish.reservedflg === 0"></wish-card>
         </div>
+        <div class="title-style text-sub-title logo-style">Reserved Wishes</div>
+        <div *ngFor="let wish of wishes">
+          <wish-card [wish]="wish" [currentUser]="currentUserID" *ngIf="wish.reservedflg === 1"></wish-card>
+      </div>
     </div>
     <div class="right-content">
       <div class="title-style text-sub-title logo-style">About me</div>

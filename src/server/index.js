@@ -11,7 +11,7 @@ const express = require('express')
     , massive = require('massive')
 const { getConfig } = require('./controllers/configController');
 const { getUser } = require('./controllers/sharedController');
-const { getAllUsers, getActiveUser, getWishes } = require('./controllers/wishesController')
+const { getAllUsers, getActiveUser, getWishes, reserveWish, releaseWish } = require('./controllers/wishesController')
 const isAuthenticated = require('./middleware/isAuthenticated');
 
 const app = express();
@@ -137,6 +137,8 @@ app.post(`${baseUrl}/shared/getuser`, getUser);
 app.get(`${baseUrl}/wishes/getAllUsers`, getAllUsers);
 app.post(`${baseUrl}/wishes/getActiveUser`, getActiveUser)
 app.post(`${baseUrl}/wishes/getWishes`, getWishes)
+app.post(`${baseUrl}/wishes/reserveWish`, reserveWish)
+app.post(`${baseUrl}/wishes/releaseWish`, releaseWish)
 
 const port = process.env.PORT || 3001
 app.listen( port , () => { console.log(`Server listening on port ${port}`); } );

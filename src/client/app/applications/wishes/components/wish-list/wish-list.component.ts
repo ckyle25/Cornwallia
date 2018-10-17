@@ -37,7 +37,7 @@ export class WishListComponent implements OnInit {
 
     this.wishesObs.subscribe(result => {
       this.wishes = result.wishes;
-      const currentUserDetail = result.allUsers.filter(obj => obj.userid == this.wishListUserID)[0];
+      const currentUserDetail = result.allUsers.filter(obj => obj.userid === this.wishListUserID)[0];
       this.wishListUserName = currentUserDetail.firstnameval;
       this.wishListUserBio = currentUserDetail.biographytxt;
     });

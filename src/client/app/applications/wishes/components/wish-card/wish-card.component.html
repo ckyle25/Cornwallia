@@ -2,11 +2,14 @@
   <div class="top-content">
     <div class="title-style text-sub-title logo-style">{{title}}</div>
     <div class="button-container">
-      <div class="release-button button-container clickable" *ngIf="currentUser !== wishUser && reserved && currentUser === reservedUser">
+      <div class="release-button button-container clickable" *ngIf="currentUser !== wishUser && reserved && currentUser === reservedUser" (click)="onReleaseClick()">
         <i class="fa fa-times button-text-style"></i>
         <pre class="button-text-style logo-style"> Release</pre>
       </div>
-      <div class="reserve-button button-container clickable" *ngIf="currentUser !== wishUser && !reserved">
+      <div class="text-style text-paragraph logo-style" *ngIf="currentUser !== wishUser && reserved && currentUser !== reservedUser">
+        Reserved by: {{currentUser}}
+      </div>
+      <div class="reserve-button button-container clickable" *ngIf="currentUser !== wishUser && !reserved" (click)="onReserveClick()">
           <i class="fa fa-tag button-text-style"></i>
           <pre class="button-text-style logo-style"> Reserve</pre>
       </div>
