@@ -6,7 +6,14 @@
   </div>
 </div>
 
-<modal-template [modalID]="'accessEmailSent'" class="modal-style">
-  <i (click)="modal.closeModal('accessEmailSent')" class="fa fa-times x-style clickable"></i>
-  <div>Email Sent</div>
+<modal-template [modalID]="'accessEmailSent'">
+  <div class="modal-style">
+    <div class="x-container">
+        <i (click)="modal.closeModal('accessEmailSent')" class="fa fa-times x-style clickable"></i>
+    </div>
+      <div class="modal-content">
+          <div class="email-gif"></div>
+          <div class="text-style text-section-title logo-style">Access Request Sent</div>
+      </div>
+  </div>
 </modal-template>

@@ -6,7 +6,14 @@
   </div>
 </div>
 
-<modal-template [modalID]="'improvementEmailSent'" class="modal-style">
-  <i (click)="modal.closeModal('improvementEmailSent')" class="fa fa-times x-style clickable"></i>
-  <div>Thank you for the feedback</div>
-</modal-template>
+<modal-template [modalID]="'improvementEmailSent'">
+    <div class="modal-style">
+      <div class="x-container">
+          <i (click)="modal.closeModal('improvementEmailSent')" class="fa fa-times x-style clickable"></i>
+      </div>
+        <div class="modal-content">
+            <div class="checkmark-gif"></div>
+            <div class="text-style text-section-title logo-style">Thank you for the feedback!</div>
+        </div>
+    </div>
+  </modal-template>

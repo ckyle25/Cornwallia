@@ -33,6 +33,38 @@
   justify-content: flex-end;
 }
 
+.modal-style {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-direction: column;
+  background-color: $white;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  height: 400px;
+  width: 400px;
+}
+
+.modal-content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.checkmark-gif {
+  background-image: url('../../../assets/gifs/checkmark.gif');
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 400px;
+  height: 400px;
+}
+
 .btn-offblack {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -52,6 +84,15 @@
   color: $white;
   background-color: $offblack;
   transition: 0.3s;
+}
+
+.x-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  width: 100%;
 }
 
 /* The Close Button */
