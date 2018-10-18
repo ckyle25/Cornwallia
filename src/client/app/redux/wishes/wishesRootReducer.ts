@@ -5,6 +5,9 @@ import { WishesService } from '../../services/wishes/wishesService';
 const GET_ACTIVE_USER = 'GET_ACTIVE_USER';
 const GET_ACTIVE_USER_PENDING = 'GET_ACTIVE_USER_PENDING';
 const GET_ACTIVE_USER_FULFILLED = 'GET_ACTIVE_USER_FULFILLED';
+const GET_FAMILY_REFERENCE = 'GET_FAMILY_REFERENCE';
+const GET_FAMILY_REFERENCE_PENDING = 'GET_FAMILY_REFERENCE_PENDING';
+const GET_FAMILY_REFERENCE_FULFILLED = 'GET_FAMILY_REFERENCE_FULFILLED';
 const GET_USERS = 'GET_USERS';
 const GET_USERS_PENDING = 'GET_USERS_PENDING';
 const GET_USERS_FULFILLED = 'GET_USERS_FULFILLED';
@@ -54,6 +57,14 @@ export function wishesReducer(state: IWishesState = wishesInitialState, action):
         currentUser: action.payload
       });
 
+    case GET_FAMILY_REFERENCE_PENDING:
+      return Object.assign({}, state, {loading: true});
+    case GET_FAMILY_REFERENCE_FULFILLED:
+      return Object.assign({}, state, {
+        loading: false,
+        familyReference: action.payload
+      });
+
     case GET_USERS_PENDING:
       return Object.assign({}, state, {loading: true});
     case GET_USERS_FULFILLED:
@@ -71,7 +82,7 @@ export function wishesReducer(state: IWishesState = wishesInitialState, action):
       });
 
     case SET_WISHLIST_USER:
-      return Object.assign({}, state, {wishListUser: action.payload})
+      return Object.assign({}, state, {wishListUser: action.payload});
 
     case INITIALIZE_WISHES:
       return Object.assign({}, state, {wishesInitialized: action.payload});
@@ -80,16 +91,14 @@ export function wishesReducer(state: IWishesState = wishesInitialState, action):
       return Object.assign({}, state, {loading: true});
     case RESERVE_WISH_FULFILLED:
       return Object.assign({}, state, {
-        loading: false,
-        wishes: action.payload
+        loading: false
       });
 
     case RELEASE_WISH_PENDING:
       return Object.assign({}, state, {loading: true});
     case RELEASE_WISH_FULFILLED:
       return Object.assign({}, state, {
-        loading: false,
-        wishes: action.payload
+        loading: false
       });
     default:
       return state;
@@ -111,6 +120,13 @@ export class WishesActionCreators implements IWishesActionCreators {
     return {
       type: GET_ACTIVE_USER,
       payload: this.wishesService.getActiveUser(userId)
+    };
+  }
+
+  getFamilyReference() {
+    return {
+      type: GET_FAMILY_REFERENCE,
+      payload: this.wishesService.getFamilyReference()
     };
   }
 
@@ -142,17 +158,17 @@ export class WishesActionCreators implements IWishesActionCreators {
     };
   }
 
-  reserveWish(reservedUserId: number, wishId: number, wishUserId: number) {
+  reserveWish(reservedUserId: number, wishId: number) {
     return {
       type: RESERVE_WISH,
-      payload: this.wishesService.reserveWish(reservedUserId, wishId, wishUserId)
+      payload: this.wishesService.reserveWish(reservedUserId, wishId)
     };
   }
 
-  releaseWish(wishId: number, wishUserId: number) {
+  releaseWish(wishId: number) {
     return {
       type: RELEASE_WISH,
-      payload: this.wishesService.releaseWish(wishId, wishUserId)
+      payload: this.wishesService.releaseWish(wishId)
     };
   }
 }

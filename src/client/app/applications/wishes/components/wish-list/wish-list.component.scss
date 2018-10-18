@@ -43,3 +43,27 @@
   color: $offblack;
   margin-bottom: 10px;
 }
+
+.add-button {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: $green;
+  border-radius: 5px;
+  width: 200px;
+  padding: 15px;
+  margin-bottom: 10px;
+}
+
+.add-button:hover {
+  background-color: #00753e;
+  transition: 1s;
+}
+
+.button-text-style {
+  color: $white;
+  font-size: 20px;
+}

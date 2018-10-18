@@ -53,15 +53,17 @@ export class WishCardComponent implements OnInit, OnChanges {
     this.reservedUser = this.wish.reserveduserid;
   }
 
-  onReserveClick() {
+  async onReserveClick() {
     this.reserved = true;
     this.reservedUser = this.currentUser;
-    this.ngRedux.dispatch(this.wishesActionCreators.reserveWish(this.currentUser, this.wishid, this.wishUser));
+    await this.ngRedux.dispatch(this.wishesActionCreators.reserveWish(this.currentUser, this.wishid));
+    await this.ngRedux.dispatch(this.wishesActionCreators.getWishes(this.wishUser));
   }
 
-  onReleaseClick() {
+  async onReleaseClick() {
     this.reserved = false;
     this.reservedUser = 0;
-    this.ngRedux.dispatch(this.wishesActionCreators.releaseWish(this.wishid, this.wishUser));
+    await this.ngRedux.dispatch(this.wishesActionCreators.releaseWish(this.wishid));
+    await this.ngRedux.dispatch(this.wishesActionCreators.getWishes(this.wishUser));
   }
 }

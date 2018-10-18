@@ -9,6 +9,15 @@ module.exports = {
             });
     },
 
+    getFamilyReference: (req, res, net) => {
+      const dbInstance = req.app.get('db');
+
+      dbInstance.get_family_reference()
+          .then(result => {
+              return res.status(200).send(result);
+          });
+    },
+
     getAllUsers: (req, res, next) => {
         const dbInstance = req.app.get('db')
 
@@ -32,7 +41,7 @@ module.exports = {
       const body = req.body;
       const dbInstance = req.app.get('db');
 
-      dbInstance.reserve_wish([body.reservedUserId, body.wishId, body.wishUserId])
+      dbInstance.reserve_wish([body.reservedUserId, body.wishId])
       .then(result => {
           return res.status(200).send(result);
       });
@@ -42,7 +51,7 @@ module.exports = {
       const body = req.body;
       const dbInstance = req.app.get('db');
 
-      dbInstance.release_wish([body.wishId, body.wishUserId])
+      dbInstance.release_wish([body.wishId])
       .then(result => {
           return res.status(200).send(result);
       });

@@ -18,6 +18,15 @@ export class WishesService {
             });
   }
 
+  public getFamilyReference(): Promise<any> {
+
+    return axios
+            .get(`${this.url}api/wishes/getFamilyReference`)
+            .then(response => {
+              return response.data;
+            });
+  }
+
   public getAllUsers(): Promise<any> {
 
     return axios
@@ -38,12 +47,11 @@ export class WishesService {
             });
   }
 
-  public reserveWish(reservedUserId: number, wishId: number, wisheUserId: number): Promise<any> {
+  public reserveWish(reservedUserId: number, wishId: number): Promise<any> {
 
     const body = {
       reservedUserId: reservedUserId,
-      wishId: wishId,
-      wisheUserId: wisheUserId
+      wishId: wishId
      };
 
     return axios
@@ -53,11 +61,10 @@ export class WishesService {
             });
   }
 
-  public releaseWish(wishId: number, wisheUserId: number): Promise<any> {
+  public releaseWish(wishId: number): Promise<any> {
 
     const body = {
       wishId: wishId,
-      wisheUserId: wisheUserId
      };
 
     return axios

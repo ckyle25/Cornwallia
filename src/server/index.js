@@ -11,7 +11,7 @@ const express = require('express')
     , massive = require('massive')
 const { getConfig } = require('./controllers/configController');
 const { getUser } = require('./controllers/sharedController');
-const { getAllUsers, getActiveUser, getWishes, reserveWish, releaseWish } = require('./controllers/wishesController')
+const { getAllUsers, getActiveUser, getWishes, reserveWish, releaseWish, getFamilyReference } = require('./controllers/wishesController')
 const isAuthenticated = require('./middleware/isAuthenticated');
 
 const app = express();
@@ -135,6 +135,7 @@ app.post(`${baseUrl}/shared/getuser`, getUser);
 
 // Wishes API Endpoints
 app.get(`${baseUrl}/wishes/getAllUsers`, getAllUsers);
+app.get(`${baseUrl}/wishes/getFamilyReference`, getFamilyReference);
 app.post(`${baseUrl}/wishes/getActiveUser`, getActiveUser)
 app.post(`${baseUrl}/wishes/getWishes`, getWishes)
 app.post(`${baseUrl}/wishes/reserveWish`, reserveWish)

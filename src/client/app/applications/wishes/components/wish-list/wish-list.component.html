@@ -3,6 +3,10 @@
     <div class="left-content">
         <div class="title-style text-sub-title logo-style">{{wishListUserName}}'s Wishes:</div>
         <div class="title-style text-sub-title logo-style">Active Wishes</div>
+        <div class="add-button clickable" *ngIf="currentUserID === wishListUserID || parentUserIds.indexOf(wishListUserID) !== -1">
+          <i class="fa fa-plus button-text-style"></i>
+          <pre class="button-text-style logo-style"> Add A Wish</pre>
+        </div>
         <div *ngFor="let wish of wishes">
             <wish-card [wish]="wish" [currentUser]="currentUserID" *ngIf="wish.reservedflg === 0"></wish-card>
         </div>

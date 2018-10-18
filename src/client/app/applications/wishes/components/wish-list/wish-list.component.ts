@@ -13,6 +13,7 @@ export class WishListComponent implements OnInit {
   wishes: any;
   currentUserID: number;
   wishListUserID: number;
+  parentUserIds: number[];
 
   wishListUserName: string;
   wishListUserBio: string;
@@ -27,6 +28,8 @@ export class WishListComponent implements OnInit {
 
     this.wishesObs.subscribe(result => {
       this.wishListUserID = result.wishListUser;
+      const familyObj = result.familyReference.filter(obj => obj.familyid === result.currentUser.familyid)[0];
+      this.parentUserIds = [familyObj.parent1wishesuserid, familyObj.parent2wishesuserid !== null ? familyObj.parent2wishesuserid : 0];
     });
 
     this.sharedObs.subscribe(result => {
