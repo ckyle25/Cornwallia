@@ -4,6 +4,8 @@ import { RouterModule, ChildrenOutletContexts } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 // Components
 import { AppComponent } from './app.component';
@@ -49,10 +51,11 @@ import { WishesService } from './services/wishes/wishesService';
     BrowserAnimationsModule,
     SharedModule,
     NgReduxModule,
+    MatFormFieldModule,
+    MatInputModule,
     RouterModule.forRoot([
       { path: 'login', component: LoginPageComponent },
       { path: '', redirectTo: 'login', pathMatch: 'full'},
-      // { path: 'loading', component: AppLoadingComponent, canActivate: [AuthGuardService] },
       { path: 'home', component: LandingComponent, canActivate: [AuthGuardService], children: [
         { path: '', redirectTo: 'apps', pathMatch: 'full', canActivate: [AuthGuardService] },
         { path: 'apps', component: AppListComponent, canActivate: [AuthGuardService] },

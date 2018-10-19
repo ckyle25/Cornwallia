@@ -22,6 +22,15 @@ const RESERVE_WISH_FULFILLED = 'RESERVE_WISH_FULFILLED';
 const RELEASE_WISH = 'RELEASE_WISH';
 const RELEASE_WISH_PENDING = 'RELEASE_WISH_PENDING';
 const RELEASE_WISH_FULFILLED = 'RELEASE_WISH_FULFILLED';
+const ADD_WISH = 'ADD_WISH';
+const ADD_WISH_PENDING = 'ADD_WISH_PENDING';
+const ADD_WISH_FULFILLED = 'ADD_WISH_FULFILLED';
+const DELETE_WISH = 'DELETE_WISH';
+const DELETE_WISH_PENDING = 'DELETE_WISH_PENDING';
+const DELETE_WISH_FULFILLED = 'DELETE_WISH_FULFILLED';
+const UPDATE_WISH = 'UPDATE_WISH';
+const UPDATE_WISH_PENDING = 'UPDATE_WISH_PENDING';
+const UPDATE_WISH_FULFILLED = 'UPDATE_WISH_FULFILLED';
 
 
 // Initial State
@@ -90,16 +99,27 @@ export function wishesReducer(state: IWishesState = wishesInitialState, action):
     case RESERVE_WISH_PENDING:
       return Object.assign({}, state, {loading: true});
     case RESERVE_WISH_FULFILLED:
-      return Object.assign({}, state, {
-        loading: false
-      });
+      return Object.assign({}, state, {loading: false});
 
     case RELEASE_WISH_PENDING:
       return Object.assign({}, state, {loading: true});
     case RELEASE_WISH_FULFILLED:
-      return Object.assign({}, state, {
-        loading: false
-      });
+      return Object.assign({}, state, {loading: false});
+
+    case ADD_WISH_PENDING:
+      return Object.assign({}, state, {loading: true});
+    case ADD_WISH_FULFILLED:
+      return Object.assign({}, state, {loading: false});
+
+    case DELETE_WISH_PENDING:
+      return Object.assign({}, state, {loading: true});
+    case DELETE_WISH_FULFILLED:
+      return Object.assign({}, state, {loading: false});
+
+    case UPDATE_WISH_PENDING:
+      return Object.assign({}, state, {loading: true});
+    case UPDATE_WISH_FULFILLED:
+      return Object.assign({}, state, {loading: false});
     default:
       return state;
   }
@@ -169,6 +189,27 @@ export class WishesActionCreators implements IWishesActionCreators {
     return {
       type: RELEASE_WISH,
       payload: this.wishesService.releaseWish(wishId)
+    };
+  }
+
+  addWish(userId: number, title: string, description: string, cost: number, link: string, rating: number) {
+    return {
+      type: ADD_WISH,
+      payload: this.wishesService.addWish(userId, title, description, cost, link, rating)
+    };
+  }
+
+  deleteWish(wishId: number) {
+    return {
+      type: DELETE_WISH,
+      payload: this.wishesService.deleteWish(wishId)
+    };
+  }
+
+  updateWish(title: string, description: string, cost: number, link: string, rating: number, wishId: number) {
+    return {
+      type: UPDATE_WISH,
+      payload: this.wishesService.updateWish(title, description, cost, link, rating, wishId)
     };
   }
 }

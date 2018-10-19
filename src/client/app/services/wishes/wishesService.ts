@@ -73,4 +73,53 @@ export class WishesService {
               return response.data;
             });
   }
+
+  public addWish(userId: number, title: string, description: string, cost: number, link: string, rating: number): Promise<any> {
+
+    const body = {
+      userId,
+      title,
+      description,
+      cost,
+      link,
+      rating
+    };
+
+    return axios
+            .post(`${this.url}api/wishes/addWish`, body)
+            .then(response => {
+              return response.data;
+            });
+  }
+
+  public deleteWish(wishId: number): Promise<any> {
+
+    const body = {
+      wishId: wishId,
+     };
+
+    return axios
+            .post(`${this.url}api/wishes/deleteWish`, body)
+            .then(response => {
+              return response.data;
+            });
+  }
+
+  public updateWish(title: string, description: string, cost: number, link: string, rating: number, wishId: number): Promise<any> {
+
+    const body = {
+      title,
+      description,
+      cost,
+      link,
+      rating,
+      wishId
+     };
+
+    return axios
+            .put(`${this.url}api/wishes/updateWish`, body)
+            .then(response => {
+              return response.data;
+            });
+  }
 }

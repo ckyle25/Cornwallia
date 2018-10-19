@@ -2,6 +2,7 @@ import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { NgRedux, select } from '@angular-redux/store';
 import { IGlobalState as GlobalState } from '../../../../redux/rootReducer';
 import { WishesActionCreators } from '../../../../redux/wishes/wishesRootReducer';
+import { ModalTemplateComponent } from '../../../../shared/modal-template/modal-template.component';
 
 @Component({
   selector: 'wish-card',
@@ -24,8 +25,15 @@ export class WishCardComponent implements OnInit, OnChanges {
   parentUsers: any[];
   wishid: number;
 
+  oldTitle: string;
+  oldPrice: number;
+  oldLink: string;
+  oldDescription: string;
+  oldRating: number;
+
   constructor(private ngRedux: NgRedux<GlobalState>,
-              private wishesActionCreators: WishesActionCreators) { }
+              private wishesActionCreators: WishesActionCreators,
+              private modal: ModalTemplateComponent) { }
 
   ngOnInit() {
     this.wishid = this.wish.wishid;
@@ -65,5 +73,50 @@ export class WishCardComponent implements OnInit, OnChanges {
     this.reservedUser = 0;
     await this.ngRedux.dispatch(this.wishesActionCreators.releaseWish(this.wishid));
     await this.ngRedux.dispatch(this.wishesActionCreators.getWishes(this.wishUser));
+  }
+
+  onDeleteClick() {
+    this.modal.openModal('deleteConfirm');
+  }
+
+  cancelDeleteWish() {
+    this.modal.closeModal('deleteConfirm');
+  }
+
+  async confirmDeleteWish() {
+    this.modal.closeModal('deleteConfirm');
+    await this.ngRedux.dispatch(this.wishesActionCreators.deleteWish(this.wishid));
+    await this.ngRedux.dispatch(this.wishesActionCreators.getWishes(this.wishUser));
+  }
+
+  onEditClick() {
+    this.modal.openModal('editWish');
+    this.oldTitle = this.title;
+    this.oldPrice = this.price;
+    this.oldLink = this.link;
+    this.oldDescription = this.description;
+    this.oldRating = this.rating;
+  }
+
+  async saveEditedWish() {
+    if (this.title && this.price && this.rating) {
+      this.modal.closeModal('editWish');
+      const newDescription = this.description ? this.description : '';
+      const newLink = this.link ? this.link : '';
+      await this.ngRedux.dispatch(this.wishesActionCreators.updateWish(this.title, newDescription, this.price, newLink, this.rating, this.wishid));
+      await this.ngRedux.dispatch(this.wishesActionCreators.getWishes(this.wishUser));
+    } else {
+      alert('Please fill in all required fields with a * next to them or shown in red');
+    }
+
+  }
+
+  cancelEditWish() {
+    this.modal.closeModal('editWish');
+    this.title = this.oldTitle;
+    this.price = this.oldPrice;
+    this.link = this.oldLink;
+    this.description = this.oldDescription;
+    this.rating = this.oldRating;
   }
 }

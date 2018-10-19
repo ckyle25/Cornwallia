@@ -11,7 +11,15 @@ const express = require('express')
     , massive = require('massive')
 const { getConfig } = require('./controllers/configController');
 const { getUser } = require('./controllers/sharedController');
-const { getAllUsers, getActiveUser, getWishes, reserveWish, releaseWish, getFamilyReference } = require('./controllers/wishesController')
+const { getAllUsers,
+        getActiveUser,
+        getWishes,
+        reserveWish,
+        releaseWish,
+        getFamilyReference,
+        addWish,
+        deleteWish,
+        updateWish } = require('./controllers/wishesController')
 const isAuthenticated = require('./middleware/isAuthenticated');
 
 const app = express();
@@ -136,10 +144,13 @@ app.post(`${baseUrl}/shared/getuser`, getUser);
 // Wishes API Endpoints
 app.get(`${baseUrl}/wishes/getAllUsers`, getAllUsers);
 app.get(`${baseUrl}/wishes/getFamilyReference`, getFamilyReference);
-app.post(`${baseUrl}/wishes/getActiveUser`, getActiveUser)
-app.post(`${baseUrl}/wishes/getWishes`, getWishes)
-app.post(`${baseUrl}/wishes/reserveWish`, reserveWish)
-app.post(`${baseUrl}/wishes/releaseWish`, releaseWish)
+app.post(`${baseUrl}/wishes/getActiveUser`, getActiveUser);
+app.post(`${baseUrl}/wishes/getWishes`, getWishes);
+app.post(`${baseUrl}/wishes/reserveWish`, reserveWish);
+app.post(`${baseUrl}/wishes/releaseWish`, releaseWish);
+app.post(`${baseUrl}/wishes/addWish`, addWish);
+app.post(`${baseUrl}/wishes/deleteWish`, deleteWish);
+app.put(`${baseUrl}/wishes/updateWish`, updateWish);
 
 const port = process.env.PORT || 3001
 app.listen( port , () => { console.log(`Server listening on port ${port}`); } );

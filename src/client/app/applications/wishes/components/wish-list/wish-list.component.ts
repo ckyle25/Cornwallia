@@ -25,6 +25,9 @@ export class WishListComponent implements OnInit {
   description: string;
   rating: number;
 
+  numberReservedWishes: number;
+  numberActiveWishes: number;
+
   @select('shared') sharedObs;
   @select('wishes') wishesObs;
 
@@ -51,15 +54,41 @@ export class WishListComponent implements OnInit {
       const currentUserDetail = result.allUsers.filter(obj => obj.userid === this.wishListUserID)[0];
       this.wishListUserName = currentUserDetail.firstnameval;
       this.wishListUserBio = currentUserDetail.biographytxt;
+      this.numberReservedWishes = result.wishes.filter(obj => obj.reservedflg === 1).length;
+      this.numberActiveWishes = result.wishes.filter(obj => obj.reservedflg !== 1).length;
     });
+
+
   }
 
   openAddWishDialog() {
-    this.modal.openModal('addWish')
+    this.modal.openModal('addWish');
+  }
+
+  async saveAddedWish() {
+    if (this.title && this.cost && this.rating) {
+      this.modal.closeModal('addWish');
+      const newDescription = this.description ? this.description : '';
+      const newLink = this.link ? this.link : '';
+      await this.ngRedux.dispatch(this.wishesActionCreators.addWish(this.wishListUserID, this.title, newDescription, this.cost, newLink, this.rating));
+      await this.ngRedux.dispatch(this.wishesActionCreators.getWishes(this.wishListUserID));
+      this.title = null;
+      this.cost = null;
+      this.rating = null;
+      this.link = null;
+      this.description = null;
+    } else {
+      alert('Please fill in all required fields with a * next to them or shown in red');
+    }
   }
 
   cancelAddWishDialog() {
-    this.modal.closeModal('addWish')
+    this.modal.closeModal('addWish');
+    this.title = null;
+    this.cost = null;
+    this.rating = null;
+    this.link = null;
+    this.description = null;
   }
 
 }

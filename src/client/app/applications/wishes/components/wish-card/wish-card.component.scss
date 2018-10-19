@@ -130,3 +130,104 @@
   color: $white;
   font-size: 20px;
 }
+
+.delete-modal-style {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: $white;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 300px;
+  height: 200px;
+  border-radius: 5px;
+}
+
+.add-title-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.confirm-button {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: $green;
+  border-radius: 5px;
+  width: 150px;
+  padding: 10px;
+}
+
+.confirm-button:hover {
+  background-color: #00753e;
+  transition: 1s;
+}
+
+.cancel-button {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: $red;
+  border-radius: 5px;
+  width: 150px;
+  padding: 10px;
+  margin-right: 10px;
+}
+
+.cancel-button:hover {
+  background-color: #c03037;
+  transition: 1s;
+}
+
+.input-style:valid {
+  width: 100%;
+  color: $blue;
+}
+
+.input-style:invalid {
+  width: 100%;
+  color: $red;
+}
+
+.save-button {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: $green;
+  border-radius: 5px;
+  width: 150px;
+  padding: 10px;
+}
+
+.save-button:hover {
+  background-color: #00753e;
+  transition: 1s;
+}
+
+.edit-modal-style {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-direction: column;
+  background-color: $white;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 700px;
+  border-radius: 5px;
+}
