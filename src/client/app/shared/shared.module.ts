@@ -2,6 +2,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, ChildrenOutletContexts } from '@angular/router';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { CommonModule } from '@angular/common';
 
 // Components
@@ -27,6 +29,8 @@ import { IGlobalState as GlobalState } from '../redux/rootReducer';
   imports: [
     CommonModule,
     MatMenuModule,
+    MatInputModule,
+    MatFormFieldModule,
     NgReduxModule,
     RouterModule.forChild([
         { path: 'loading', component: AppLoadingComponent },

@@ -1,6 +1,8 @@
 // Angular Imports
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 import { RouterModule, ChildrenOutletContexts } from '@angular/router';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 // Components
 import { WishesLandingComponent } from './components/wishes-landing/wishes-landing.component';
@@ -25,6 +27,7 @@ import { IGlobalState as GlobalState } from '../../redux/rootReducer';
 import { WishCardComponent } from './components/wish-card/wish-card.component';
 import { MyWishesComponent } from './components/my-wishes/my-wishes.component';
 import { RatingComponent } from './components/rating/rating.component';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -46,6 +49,9 @@ import { RatingComponent } from './components/rating/rating.component';
   imports: [
     CommonModule,
     SharedModule,
+    FormsModule,
+    MatFormFieldModule,
+    MatInputModule,
     RouterModule.forChild([
       { path: '', redirectTo: 'landing', pathMatch: 'full' },
       { path: 'landing', component: WishesLandingComponent,  children: [

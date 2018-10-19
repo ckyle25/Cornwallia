@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { NgRedux, select } from '@angular-redux/store';
 import { IGlobalState as GlobalState } from '../../../../redux/rootReducer';
 import { WishesActionCreators } from '../../../../redux//wishes/wishesRootReducer';
+import { ModalTemplateComponent } from '../../../../shared/modal-template/modal-template.component';
 
 @Component({
   selector: 'wish-list',
@@ -18,11 +19,18 @@ export class WishListComponent implements OnInit {
   wishListUserName: string;
   wishListUserBio: string;
 
+  title: string;
+  cost: number;
+  link: string;
+  description: string;
+  rating: number;
+
   @select('shared') sharedObs;
   @select('wishes') wishesObs;
 
   constructor(private ngRedux: NgRedux<GlobalState>,
-              private wishesActionCreators: WishesActionCreators) { }
+              private wishesActionCreators: WishesActionCreators,
+              private modal: ModalTemplateComponent) { }
 
   async ngOnInit() {
 
@@ -44,6 +52,14 @@ export class WishListComponent implements OnInit {
       this.wishListUserName = currentUserDetail.firstnameval;
       this.wishListUserBio = currentUserDetail.biographytxt;
     });
+  }
+
+  openAddWishDialog() {
+    this.modal.openModal('addWish')
+  }
+
+  cancelAddWishDialog() {
+    this.modal.closeModal('addWish')
   }
 
 }

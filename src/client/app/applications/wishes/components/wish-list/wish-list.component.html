@@ -3,7 +3,7 @@
     <div class="left-content">
         <div class="title-style text-sub-title logo-style">{{wishListUserName}}'s Wishes:</div>
         <div class="title-style text-sub-title logo-style">Active Wishes</div>
-        <div class="add-button clickable" *ngIf="currentUserID === wishListUserID || parentUserIds.indexOf(wishListUserID) !== -1">
+        <div class="add-button clickable" (click)="openAddWishDialog()" *ngIf="currentUserID === wishListUserID || parentUserIds.indexOf(wishListUserID) !== -1">
           <i class="fa fa-plus button-text-style"></i>
           <pre class="button-text-style logo-style">  Add A Wish</pre>
         </div>
@@ -20,3 +20,36 @@
     </div>
   </div>
 </div>
+
+<modal-template [modalID]="'addWish'">
+  <div class="modal-style">
+    <div class="add-title-container">
+        <div class="title-style text-sub-title logo-style">Add A Wish</div>
+    </div>
+    <mat-form-field class="input-style">
+        <input matInput placeholder="Title" [(ngModel)]="title">
+    </mat-form-field>
+    <mat-form-field class="input-style">
+        <input matInput placeholder="Cost" [(ngModel)]="cost">
+    </mat-form-field>
+    <mat-form-field class="input-style">
+        <input matInput placeholder="Link" [(ngModel)]="link">
+    </mat-form-field>
+    <mat-form-field class="input-style">
+        <input matInput placeholder="Description" [(ngModel)]="description">
+    </mat-form-field>
+    <mat-form-field class="input-style">
+        <input matInput placeholder="Rating" [(ngModel)]="rating">
+    </mat-form-field> 
+    <div class="add-title-container">
+      <div class="cancel-button clickable" (click)="cancelAddWishDialog()">
+        <i class="fa fa-times button-text-style"></i>
+        <pre class="button-text-style logo-style"> Cancel</pre>
+      </div>
+      <div class="save-button clickable">
+          <i class="fa fa-check button-text-style"></i>
+          <pre class="button-text-style logo-style"> Save</pre>
+        </div>
+    </div>
+  </div>
+</modal-template>

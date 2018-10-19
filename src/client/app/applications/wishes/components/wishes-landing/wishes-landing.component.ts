@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Injectable } from '@angular/core';
 import { NgRedux, select } from '@angular-redux/store';
 import { IGlobalState as GlobalState } from '../../../../redux/rootReducer';
 import { WishesActionCreators } from '../../../../redux//wishes/wishesRootReducer';
 import { LandingComponent } from '../../../../components/landing/landing.component';
 
+@Injectable()
 @Component({
   selector: 'wishes-landing',
   templateUrl: './wishes-landing.component.html',
