@@ -81,6 +81,7 @@ export class WishCardComponent implements OnInit, OnChanges {
 
   cancelDeleteWish() {
     this.modal.closeModal('deleteConfirm');
+    console.log('title', this.title);
   }
 
   async confirmDeleteWish() {
@@ -90,12 +91,14 @@ export class WishCardComponent implements OnInit, OnChanges {
   }
 
   onEditClick() {
-    this.modal.openModal('editWish');
+
+    console.log('title', this.title);
     this.oldTitle = this.title;
     this.oldPrice = this.price;
     this.oldLink = this.link;
     this.oldDescription = this.description;
     this.oldRating = this.rating;
+    this.modal.openModal('editWish');
   }
 
   async saveEditedWish() {
@@ -118,5 +121,9 @@ export class WishCardComponent implements OnInit, OnChanges {
     this.link = this.oldLink;
     this.description = this.oldDescription;
     this.rating = this.oldRating;
+  }
+
+  onTitleKey(event: any) {
+    this.title = event.target.value;
   }
 }

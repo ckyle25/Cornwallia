@@ -36,9 +36,9 @@ const UPDATE_WISH_FULFILLED = 'UPDATE_WISH_FULFILLED';
 // Initial State
 export interface IWishesState {
   loading: boolean;
-  currentUser: object;
-  allUsers: object;
-  familyReference: object;
+  currentUser: any;
+  allUsers: any[];
+  familyReference: any[];
   wishesInitialized: boolean;
   wishes: any[];
   wishListUser: number;
@@ -47,8 +47,8 @@ export interface IWishesState {
 const wishesInitialState: IWishesState = {
   loading: false,
   currentUser: {},
-  allUsers: {},
-  familyReference: {},
+  allUsers: [],
+  familyReference: [],
   wishesInitialized: false,
   wishes: [],
   wishListUser: 0

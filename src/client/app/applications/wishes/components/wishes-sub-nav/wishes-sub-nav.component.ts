@@ -24,6 +24,7 @@ export class WishesSubNavComponent implements OnInit {
   }
 
   setWishToCurrentUserID() {
+    localStorage.setItem('wishlistUser', this.currentUserID.toString());
     this.ngRedux.dispatch(this.wishesActionCreators.setWishListUser(this.currentUserID));
   }
 

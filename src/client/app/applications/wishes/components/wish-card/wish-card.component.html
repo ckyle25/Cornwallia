@@ -55,7 +55,7 @@
         <div class="title-style text-sub-title logo-style">Edit Wish</div>
     </div>
     <mat-form-field class="input-style">
-        <input matInput placeholder="Title" [(ngModel)]="title" required>
+        <input matInput placeholder="Title" (keyup)="onTitleKey($event)" value={{title}} required>
     </mat-form-field>
     <mat-form-field class="input-style">
         <input matInput type="number" step="0.01" placeholder="Cost (XXX.XX)" [(ngModel)]="price" required>

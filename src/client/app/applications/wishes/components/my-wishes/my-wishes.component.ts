@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { NgRedux, select } from '@angular-redux/store';
+import { IGlobalState as GlobalState } from '../../../../redux/rootReducer';
 
 @Component({
   selector: 'my-wishes',
@@ -7,9 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MyWishesComponent implements OnInit {
 
-  constructor() { }
+  wishesInitialized: boolean = false;
+
+  constructor(private ngRedux: NgRedux<GlobalState>) { }
+
+  @select('wishes') wishesObs;
 
   ngOnInit() {
+    this.wishesObs.subscribe(result => {
+      this.wishesInitialized = result.wishesInitialized;
+    });
   }
 
 }

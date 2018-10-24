@@ -48,9 +48,9 @@ export class WishesLandingComponent implements OnInit {
   }
 
   async initializeWishes(): Promise<boolean> {
+    await this.ngRedux.dispatch(this.wishesActionCreators.getFamilyReference());
     await this.ngRedux.dispatch(this.wishesActionCreators.getActiveUser(this.currentUserID));
     await this.ngRedux.dispatch(this.wishesActionCreators.getAllUsers());
-    await this.ngRedux.dispatch(this.wishesActionCreators.getFamilyReference());
     await this.ngRedux.dispatch(this.wishesActionCreators.initializeWishes());
     return true;
   }

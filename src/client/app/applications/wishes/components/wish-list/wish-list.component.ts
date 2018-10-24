@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { NgRedux, select } from '@angular-redux/store';
 import { IGlobalState as GlobalState } from '../../../../redux/rootReducer';
-import { WishesActionCreators } from '../../../../redux//wishes/wishesRootReducer';
+import { WishesActionCreators, IWishesState } from '../../../../redux//wishes/wishesRootReducer';
 import { ModalTemplateComponent } from '../../../../shared/modal-template/modal-template.component';
 
 @Component({
@@ -14,7 +14,7 @@ export class WishListComponent implements OnInit {
   wishes: any;
   currentUserID: number;
   wishListUserID: number;
-  parentUserIds: number[];
+  parentUserIdsContains: number;
 
   wishListUserName: string;
   wishListUserBio: string;
@@ -35,30 +35,31 @@ export class WishListComponent implements OnInit {
               private wishesActionCreators: WishesActionCreators,
               private modal: ModalTemplateComponent) { }
 
-  async ngOnInit() {
+  ngOnInit() {
 
-    this.wishesObs.subscribe(result => {
-      this.wishListUserID = result.wishListUser;
-      const familyObj = result.familyReference.filter(obj => obj.familyid === result.currentUser.familyid)[0];
-      this.parentUserIds = [familyObj.parent1wishesuserid, familyObj.parent2wishesuserid !== null ? familyObj.parent2wishesuserid : 0];
-    });
+    this.wishListUserID = parseInt(localStorage.getItem('wishlistUser'), 10);
 
     this.sharedObs.subscribe(result => {
       this.currentUserID = result.userObject.userid;
     });
 
-    this.ngRedux.dispatch(this.wishesActionCreators.getWishes(this.wishListUserID));
-
-    this.wishesObs.subscribe(result => {
+    this.wishesObs.subscribe((result: IWishesState) => {
+      this.wishListUserID = result.wishListUser;
       this.wishes = result.wishes;
-      const currentUserDetail = result.allUsers.filter(obj => obj.userid === this.wishListUserID)[0];
-      this.wishListUserName = currentUserDetail.firstnameval;
-      this.wishListUserBio = currentUserDetail.biographytxt;
+
+      const wishListUserDetail = result.allUsers.filter(obj => obj.userid === this.wishListUserID)[0];
+      this.wishListUserName = wishListUserDetail.firstnameval;
+      this.wishListUserBio = wishListUserDetail.biographytxt;
+
+      const familyObj = result.familyReference.filter(obj => obj.familyid === result.currentUser.familyid)[0];
+      const parentUserIds = [familyObj.parent1wishesuserid, familyObj.parent2wishesuserid !== null ? familyObj.parent2wishesuserid : 0];
+      this.parentUserIdsContains = parentUserIds.indexOf(this.wishListUserID);
+
       this.numberReservedWishes = result.wishes.filter(obj => obj.reservedflg === 1).length;
       this.numberActiveWishes = result.wishes.filter(obj => obj.reservedflg !== 1).length;
     });
 
-
+    this.ngRedux.dispatch(this.wishesActionCreators.getWishes(this.wishListUserID));
   }
 
   openAddWishDialog() {

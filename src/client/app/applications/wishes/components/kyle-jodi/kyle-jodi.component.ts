@@ -17,6 +17,7 @@ export class KyleJodiComponent implements OnInit {
   }
 
   setWishUserID(userid: number) {
+    localStorage.setItem('wishlistUser', userid.toString());
     this.ngRedux.dispatch(this.wishesActionCreators.setWishListUser(userid));
   }
 

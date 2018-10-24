@@ -12,7 +12,7 @@ const INITIALIZE_APP = 'INITIALIZE_APP';
 // Initial State
 export interface ISharedState {
   loading: boolean;
-  userObject: object;
+  userObject: any;
   appSelection: string;
   appInitialized: boolean;
 }

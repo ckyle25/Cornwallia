@@ -4,12 +4,12 @@
         <div class="title-style text-sub-title logo-style">{{wishListUserName}}'s Wishes:</div>
         <div class="active-wishes-container">
           <div class="title-style text-sub-title logo-style">Active Wishes</div>
-          <div class="add-button clickable" (click)="openAddWishDialog()" *ngIf="currentUserID === wishListUserID || parentUserIds.indexOf(wishListUserID) !== -1">
+          <div class="add-button clickable" (click)="openAddWishDialog()" *ngIf="currentUserID === wishListUserID || parentUserIdsContains !== -1">
             <i class="fa fa-plus button-text-style"></i>
             <pre class="button-text-style logo-style">  Add A Wish</pre>
           </div>
           <div *ngFor="let wish of wishes">
-              <wish-card [wish]="wish" [currentUser]="currentUserID" *ngIf="wish.reservedflg === 0"></wish-card>
+              <wish-card id={{wish}} [wish]="wish" [currentUser]="currentUserID" *ngIf="wish.reservedflg === 0"></wish-card>
           </div>
           <div *ngIf="numberActiveWishes == 0" class="none-style text-section-title logo-style">
             No Active Wishes
@@ -18,7 +18,7 @@
         <div class="reserved-wishes-container">
           <div class="title-style text-sub-title logo-style">Reserved Wishes</div>
           <div *ngFor="let wish of wishes">
-            <wish-card [wish]="wish" [currentUser]="currentUserID" *ngIf="wish.reservedflg === 1"></wish-card>
+            <wish-card id={{wish}} [wish]="wish" [currentUser]="currentUserID" *ngIf="wish.reservedflg === 1"></wish-card>
           </div>
           <div *ngIf="numberReservedWishes == 0" class="none-style text-section-title logo-style">
             No Reserved Wishes
