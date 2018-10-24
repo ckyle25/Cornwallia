@@ -45,18 +45,27 @@ export class WishListComponent implements OnInit {
 
     this.wishesObs.subscribe((result: IWishesState) => {
       this.wishListUserID = result.wishListUser;
+      if (this.wishListUserID === 0) {
+        this.wishListUserID = parseInt(localStorage.getItem('wishlistUser'), 10);
+      }
       this.wishes = result.wishes;
 
-      const wishListUserDetail = result.allUsers.filter(obj => obj.userid === this.wishListUserID)[0];
-      this.wishListUserName = wishListUserDetail.firstnameval;
-      this.wishListUserBio = wishListUserDetail.biographytxt;
+      if (result.allUsers.length > 0) {
+        const wishListUserDetail = result.allUsers.filter(obj => obj.userid === this.wishListUserID)[0];
+        this.wishListUserName = wishListUserDetail.firstnameval;
+        this.wishListUserBio = wishListUserDetail.biographytxt;
+      }
 
-      const familyObj = result.familyReference.filter(obj => obj.familyid === result.currentUser.familyid)[0];
-      const parentUserIds = [familyObj.parent1wishesuserid, familyObj.parent2wishesuserid !== null ? familyObj.parent2wishesuserid : 0];
-      this.parentUserIdsContains = parentUserIds.indexOf(this.wishListUserID);
+      if (result.familyReference.length > 0) {
+        const familyObj = result.familyReference.filter(obj => obj.familyid === result.currentUser.familyid)[0];
+        const parentUserIds = [familyObj.parent1wishesuserid, familyObj.parent2wishesuserid !== null ? familyObj.parent2wishesuserid : 0];
+        this.parentUserIdsContains = parentUserIds.indexOf(this.wishListUserID);
+      }
 
-      this.numberReservedWishes = result.wishes.filter(obj => obj.reservedflg === 1).length;
-      this.numberActiveWishes = result.wishes.filter(obj => obj.reservedflg !== 1).length;
+      if (result.wishes.length > 0) {
+        this.numberReservedWishes = result.wishes.filter(obj => obj.reservedflg === 1).length;
+        this.numberActiveWishes = result.wishes.filter(obj => obj.reservedflg !== 1).length;
+      }
     });
 
     this.ngRedux.dispatch(this.wishesActionCreators.getWishes(this.wishListUserID));
