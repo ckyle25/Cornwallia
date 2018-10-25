@@ -11,7 +11,7 @@ import { ModalTemplateComponent } from '../../../../shared/modal-template/modal-
 })
 export class WishListComponent implements OnInit {
 
-  wishes: any;
+  wishes: any[];
   currentUserID: number;
   wishListUserID: number;
   parentUserIdsContains: number;
@@ -25,8 +25,10 @@ export class WishListComponent implements OnInit {
   description: string;
   rating: number;
 
-  numberReservedWishes: number;
-  numberActiveWishes: number;
+  reservedWishes: any[];
+  activeWishes: any[];
+  activeWishesPresent: boolean;
+  reservedWishesPresent: boolean;
 
   @select('shared') sharedObs;
   @select('wishes') wishesObs;
@@ -63,8 +65,10 @@ export class WishListComponent implements OnInit {
       }
 
       if (result.wishes.length > 0) {
-        this.numberReservedWishes = result.wishes.filter(obj => obj.reservedflg === 1).length;
-        this.numberActiveWishes = result.wishes.filter(obj => obj.reservedflg !== 1).length;
+        this.reservedWishes = result.wishes.filter(obj => obj.reservedflg === 1);
+        this.activeWishes = result.wishes.filter(obj => obj.reservedflg !== 1);
+        this.activeWishes.length > 0 ? this.activeWishesPresent = true : this.activeWishesPresent = false;
+        this.reservedWishes.length > 0 ? this.reservedWishesPresent = true : this.reservedWishesPresent = false;
       }
     });
 

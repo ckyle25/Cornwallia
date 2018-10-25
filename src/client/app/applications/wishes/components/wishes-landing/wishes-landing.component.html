@@ -1,5 +1,7 @@
 <div class="content">
   <app-nav-bar></app-nav-bar>
   <wishes-sub-nav></wishes-sub-nav>
-  <router-outlet></router-outlet>
+  <div *ngIf="wishesInitialized !== false">
+    <router-outlet></router-outlet>
+  </div>
 </div>

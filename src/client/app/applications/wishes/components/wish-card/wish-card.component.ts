@@ -11,7 +11,7 @@ import { ModalTemplateComponent } from '../../../../shared/modal-template/modal-
 })
 export class WishCardComponent implements OnInit, OnChanges {
 
-  @Input() wish: any;
+  @Input() wishes: any[];
   @Input() currentUser: number;
 
   title: string;
@@ -19,11 +19,11 @@ export class WishCardComponent implements OnInit, OnChanges {
   link: string;
   description: string;
   rating: number;
-  wishUser: number;
+  wishUserId: number;
   reserved: boolean;
   reservedUser: number;
   parentUsers: any[];
-  wishid: number;
+  wishId: number;
 
   oldTitle: string;
   oldPrice: number;
@@ -36,78 +36,80 @@ export class WishCardComponent implements OnInit, OnChanges {
               private modal: ModalTemplateComponent) { }
 
   ngOnInit() {
-    this.wishid = this.wish.wishid;
-    this.title = this.wish.titledsc;
-    this.price = this.wish.costamt;
-    this.link = this.wish.linktxt;
-    this.description = this.wish.descriptiondsc;
-    this.rating = parseFloat(this.wish.ratingnbr);
-    this.wishUser = this.wish.userid;
-    this.wish.reservedflg === 1 ? this.reserved = true : this.reserved = false;
-    this.parentUsers = [this.wish.parent1wishesuserid, this.wish.parent2wishesuserid];
-    this.reservedUser = this.wish.reserveduserid;
+
   }
 
   ngOnChanges() {
-    this.wishid = this.wish.wishid;
-    this.title = this.wish.titledsc;
-    this.price = this.wish.costamt;
-    this.link = this.wish.linktxt;
-    this.description = this.wish.descriptiondsc;
-    this.rating = parseFloat(this.wish.ratingnbr);
-    this.wishUser = this.wish.userid;
-    this.wish.reservedflg === 1 ? this.reserved = true : this.reserved = false;
-    this.parentUsers = [this.wish.parent1wishesuserid, this.wish.parent2wishesuserid];
-    this.reservedUser = this.wish.reserveduserid;
+
+    // this.wishes.forEach(wish => {
+    //   parseFloat(wish.rating);
+    // });
+    // this.wishid = this.wish.wishid;
+    // this.title = this.wish.titledsc;
+    // this.price = this.wish.costamt;
+    // this.link = this.wish.linktxt;
+    // this.description = this.wish.descriptiondsc;
+    // this.rating = parseFloat(this.wish.ratingnbr);
+    // this.wishUser = this.wish.userid;
+    // this.wish.reservedflg === 1 ? this.reserved = true : this.reserved = false;
+    // this.parentUsers = [this.wish.parent1wishesuserid, this.wish.parent2wishesuserid];
+    // this.reservedUser = this.wish.reserveduserid;
   }
 
-  async onReserveClick() {
-    this.reserved = true;
-    this.reservedUser = this.currentUser;
-    await this.ngRedux.dispatch(this.wishesActionCreators.reserveWish(this.currentUser, this.wishid));
-    await this.ngRedux.dispatch(this.wishesActionCreators.getWishes(this.wishUser));
+  async onReserveClick(wishid: number, userid: number) {
+    await this.ngRedux.dispatch(this.wishesActionCreators.reserveWish(this.currentUser, wishid));
+    await this.ngRedux.dispatch(this.wishesActionCreators.getWishes(userid));
   }
 
-  async onReleaseClick() {
-    this.reserved = false;
-    this.reservedUser = 0;
-    await this.ngRedux.dispatch(this.wishesActionCreators.releaseWish(this.wishid));
-    await this.ngRedux.dispatch(this.wishesActionCreators.getWishes(this.wishUser));
+  async onReleaseClick(wishid: number, userid: number) {
+    await this.ngRedux.dispatch(this.wishesActionCreators.releaseWish(wishid));
+    await this.ngRedux.dispatch(this.wishesActionCreators.getWishes(userid));
   }
 
-  onDeleteClick() {
+  onDeleteClick(wishid: number, userid: number) {
+    this.wishId = wishid;
+    this.wishUserId = userid;
     this.modal.openModal('deleteConfirm');
   }
 
   cancelDeleteWish() {
+    this.wishId = null;
+    this.wishUserId = null;
     this.modal.closeModal('deleteConfirm');
-    console.log('title', this.title);
   }
 
-  async confirmDeleteWish() {
+  async confirmDeleteWish(wishid: number, userid: number) {
     this.modal.closeModal('deleteConfirm');
-    await this.ngRedux.dispatch(this.wishesActionCreators.deleteWish(this.wishid));
-    await this.ngRedux.dispatch(this.wishesActionCreators.getWishes(this.wishUser));
+    await this.ngRedux.dispatch(this.wishesActionCreators.deleteWish(wishid));
+    await this.ngRedux.dispatch(this.wishesActionCreators.getWishes(userid));
+    this.wishId = null;
+    this.wishUserId = null;
   }
 
-  onEditClick() {
-
-    console.log('title', this.title);
-    this.oldTitle = this.title;
-    this.oldPrice = this.price;
-    this.oldLink = this.link;
-    this.oldDescription = this.description;
-    this.oldRating = this.rating;
+  onEditClick(title: string, price: number, link: string, description: string, rating: number, wishId: number, userid: number) {
+    this.title = title;
+    this.price = price;
+    this.link = link;
+    this.description = description;
+    this.rating = rating;
+    this.wishId = wishId;
+    this.wishUserId = userid;
     this.modal.openModal('editWish');
   }
 
-  async saveEditedWish() {
-    if (this.title && this.price && this.rating) {
+  async saveEditedWish(title: string, price: number, link: string, description: string, rating: number, wishId: number, userid: number) {
+    if (title && price && rating) {
       this.modal.closeModal('editWish');
-      const newDescription = this.description ? this.description : '';
-      const newLink = this.link ? this.link : '';
-      await this.ngRedux.dispatch(this.wishesActionCreators.updateWish(this.title, newDescription, this.price, newLink, this.rating, this.wishid));
-      await this.ngRedux.dispatch(this.wishesActionCreators.getWishes(this.wishUser));
+      const newDescription = description ? description : '';
+      const newLink = link ? link : '';
+      await this.ngRedux.dispatch(this.wishesActionCreators.updateWish(title, newDescription, price, newLink, rating, wishId));
+      await this.ngRedux.dispatch(this.wishesActionCreators.getWishes(userid));
+      this.title = null;
+      this.price = null;
+      this.link = null;
+      this.description = null;
+      this.rating = null;
+      this.wishId = null;
     } else {
       alert('Please fill in all required fields with a * next to them or shown in red');
     }
@@ -116,14 +118,11 @@ export class WishCardComponent implements OnInit, OnChanges {
 
   cancelEditWish() {
     this.modal.closeModal('editWish');
-    this.title = this.oldTitle;
-    this.price = this.oldPrice;
-    this.link = this.oldLink;
-    this.description = this.oldDescription;
-    this.rating = this.oldRating;
-  }
-
-  onTitleKey(event: any) {
-    this.title = event.target.value;
+    this.title = null;
+    this.price = null;
+    this.link = null;
+    this.description = null;
+    this.rating = null;
+    this.wishId = null;
   }
 }

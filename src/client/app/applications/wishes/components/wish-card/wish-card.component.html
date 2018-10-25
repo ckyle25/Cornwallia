@@ -1,33 +1,35 @@
-<div class="container">
-  <div class="top-content">
-    <div class="title-style text-sub-title logo-style">{{title}}</div>
-    <div class="button-container">
-      <div class="release-button button-container clickable" *ngIf="currentUser !== wishUser && reserved && currentUser === reservedUser" (click)="onReleaseClick()">
-        <i class="fa fa-times button-text-style"></i>
-        <pre class="button-text-style logo-style"> Release</pre>
-      </div>
-      <div class="text-style text-paragraph logo-style" *ngIf="currentUser !== wishUser && reserved && currentUser !== reservedUser">
-        Reserved by: {{currentUser}}
-      </div>
-      <div class="reserve-button button-container clickable" *ngIf="currentUser !== wishUser && !reserved" (click)="onReserveClick()">
-          <i class="fa fa-tag button-text-style"></i>
-          <pre class="button-text-style logo-style"> Reserve</pre>
-      </div>
-      <div class="edit-button button-container clickable" *ngIf="currentUser === wishUser || parentUsers.indexOf(currentUser) !== -1" (click)="onEditClick()">
-          <i class="fa fa-pencil button-text-style"> </i>
-      </div>
-      <div class="delete-button button-container clickable" *ngIf="currentUser === wishUser || parentUsers.indexOf(currentUser) !== -1" (click)="onDeleteClick()">
-          <i class="fa fa-trash button-text-style"> </i>
+<div *ngFor="let wish of wishes">
+  <div class="container">
+    <div class="top-content">
+      <div class="title-style text-sub-title logo-style">{{wish.titledsc}}</div>
+      <div class="button-container">
+        <div class="release-button button-container clickable" *ngIf="currentUser !== wish.userid && wish.reservedflg == 1 && currentUser === wish.reserveduserid" (click)="onReleaseClick(wish.wishid, wish.userid)">
+          <i class="fa fa-times button-text-style"></i>
+          <pre class="button-text-style logo-style"> Release</pre>
+        </div>
+        <div class="text-style text-paragraph logo-style" *ngIf="currentUser !== wish.userid && wish.reservedflg == 1  && currentUser !== wish.reserveduserid">
+          Reserved by: {{currentUser}}
+        </div>
+        <div class="reserve-button button-container clickable" *ngIf="currentUser !== wish.userid && wish.reservedflg !== 1 " (click)="onReserveClick(wish.wishid, wish.userid)">
+            <i class="fa fa-tag button-text-style"></i>
+            <pre class="button-text-style logo-style"> Reserve</pre>
+        </div>
+        <div class="edit-button button-container clickable" *ngIf="currentUser === wish.userid || currentUser == wish.parent1wishesuserid || currentUser == wish.parent2wishesuserid" (click)="onEditClick(wish.titledsc, wish.costamt, wish.linktxt, wish.descriptiondsc, wish.ratingnbr, wish.wishid, wish.userid)">
+            <i class="fa fa-pencil button-text-style"> </i>
+        </div>
+        <div class="delete-button button-container clickable" *ngIf="currentUser === wish.userid || currentUser == wish.parent1wishesuserid || currentUser == wish.parent2wishesuserid" (click)="onDeleteClick(wish.wishid, wish.userid)">
+            <i class="fa fa-trash button-text-style"> </i>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="middle-content">
-    <rating [rating]="rating"></rating>
-    <pre class="text-style text-paragraph logo-style"> | {{ price | currency:'USD':'symbol' }} | </pre>
-    <a href={{link}} target="_blank" class="link-style text-paragraph logo-style clickable">Example</a>
-  </div>
-  <div class="text-style text-paragraph logo-style">
-    {{description}}
+    <div class="middle-content">
+      <rating [rating]="wish.ratingnbr"></rating>
+      <pre class="text-style text-paragraph logo-style"> | {{ wish.costamt | currency:'USD':'symbol' }} | </pre>
+      <a href={{wish.linktxt}} target="_blank" class="link-style text-paragraph logo-style clickable">Example</a>
+    </div>
+    <div class="text-style text-paragraph logo-style">
+      {{wish.descriptiondsc}}
+    </div>
   </div>
 </div>
 
@@ -41,7 +43,7 @@
         <i class="fa fa-times button-text-style"></i>
         <pre class="button-text-style logo-style"> Cancel</pre>
       </div>
-      <div class="confirm-button clickable" (click)="confirmDeleteWish()">
+      <div class="confirm-button clickable" (click)="confirmDeleteWish(wishId, wishUserId)">
           <i class="fa fa-check button-text-style"></i>
           <pre class="button-text-style logo-style"> Confirm</pre>
         </div>
@@ -55,7 +57,7 @@
         <div class="title-style text-sub-title logo-style">Edit Wish</div>
     </div>
     <mat-form-field class="input-style">
-        <input matInput placeholder="Title" (keyup)="onTitleKey($event)" value={{title}} required>
+        <input matInput placeholder="Title" [(ngModel)]="title" required>
     </mat-form-field>
     <mat-form-field class="input-style">
         <input matInput type="number" step="0.01" placeholder="Cost (XXX.XX)" [(ngModel)]="price" required>
@@ -74,7 +76,7 @@
         <i class="fa fa-times button-text-style"></i>
         <pre class="button-text-style logo-style"> Cancel</pre>
       </div>
-      <div class="save-button clickable" (click)="saveEditedWish()">
+      <div class="save-button clickable" (click)="saveEditedWish(title, price, link, description, rating, wishId, wishUserId)">
           <i class="fa fa-check button-text-style"></i>
           <pre class="button-text-style logo-style"> Save Updates</pre>
         </div>
