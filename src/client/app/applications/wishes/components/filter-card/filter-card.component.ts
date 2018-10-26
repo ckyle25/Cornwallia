@@ -61,13 +61,13 @@ export class FilterCardComponent implements OnInit {
       case 'Julie':
         this.class = 'julie-image-style';
         break;
-      case 'Troy & Alison':
+      case 'Troy & Allison':
         this.class = 'ta-image-style';
         break;
       case 'Troy':
         this.class = 'troy-image-style';
         break;
-      case 'Alison':
+      case 'Allison':
         this.class = 'alison-image-style';
         break;
     }

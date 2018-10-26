@@ -14,9 +14,11 @@
         <a [routerLink]="['/wishes/landing/wishlist']" (click)="setWishUserID(11)">
           <filter-card [title]="'Drew'" *ngIf="family1Access"></filter-card>
         </a>
-        <filter-card [title]="'Julie'" *ngIf="family2Access"></filter-card>
+        <a [routerLink]="['/wishes/landing/wishlist']" (click)="setWishUserID(12)">
+          <filter-card [title]="'Julie'" *ngIf="family2Access"></filter-card>
+        </a>
         <a [routerLink]="['troyalison']" (click)="setViewToFamily()">
-          <filter-card [title]="'Troy & Alison'" *ngIf="family2Access"></filter-card>
+          <filter-card [title]="'Troy & Allison'" *ngIf="family2Access"></filter-card>
         </a>
       </div>
   </div>

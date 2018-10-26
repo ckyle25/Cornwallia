@@ -31,6 +31,12 @@ const DELETE_WISH_FULFILLED = 'DELETE_WISH_FULFILLED';
 const UPDATE_WISH = 'UPDATE_WISH';
 const UPDATE_WISH_PENDING = 'UPDATE_WISH_PENDING';
 const UPDATE_WISH_FULFILLED = 'UPDATE_WISH_FULFILLED';
+const GET_RESERVED_WISHES = 'GET_RESERVED_WISHES';
+const GET_RESERVED_WISHES_PENDING = 'GET_RESERVED_WISHES_PENDING';
+const GET_RESERVED_WISHES_FULFILLED = 'GET_RESERVED_WISHES_FULFILLED';
+const GET_MY_WISHES = 'GET_MY_WISHES';
+const GET_MY_WISHES_PENDING = 'GET_MY_WISHES_PENDING';
+const GET_MY_WISHES_FULFILLED = 'GET_MY_WISHES_FULFILLED';
 
 
 // Initial State
@@ -41,6 +47,8 @@ export interface IWishesState {
   familyReference: any[];
   wishesInitialized: boolean;
   wishes: any[];
+  myReservedWishes: any[];
+  myWishes: any[];
   wishListUser: number;
 }
 
@@ -51,6 +59,8 @@ const wishesInitialState: IWishesState = {
   familyReference: [],
   wishesInitialized: false,
   wishes: [],
+  myReservedWishes: [],
+  myWishes: [],
   wishListUser: 0
 };
 
@@ -120,6 +130,17 @@ export function wishesReducer(state: IWishesState = wishesInitialState, action):
       return Object.assign({}, state, {loading: true});
     case UPDATE_WISH_FULFILLED:
       return Object.assign({}, state, {loading: false});
+
+    case GET_RESERVED_WISHES_PENDING:
+      return Object.assign({}, state, {loading: true});
+    case GET_RESERVED_WISHES_FULFILLED:
+      return Object.assign({}, state, {loading: false, myReservedWishes: action.payload});
+
+    case GET_MY_WISHES_PENDING:
+      return Object.assign({}, state, {loading: true});
+    case GET_MY_WISHES_FULFILLED:
+      return Object.assign({}, state, {loading: false, myWishes: action.payload});
+
     default:
       return state;
   }
@@ -210,6 +231,20 @@ export class WishesActionCreators implements IWishesActionCreators {
     return {
       type: UPDATE_WISH,
       payload: this.wishesService.updateWish(title, description, cost, link, rating, wishId)
+    };
+  }
+
+  getReservedWishes(userId: number) {
+    return {
+      type: GET_RESERVED_WISHES,
+      payload: this.wishesService.getReservedWishes(userId)
+    };
+  }
+
+  getMyWishes(userId: number) {
+    return {
+      type: GET_MY_WISHES,
+      payload: this.wishesService.getWishes(userId)
     };
   }
 }

@@ -19,7 +19,8 @@ const { getAllUsers,
         getFamilyReference,
         addWish,
         deleteWish,
-        updateWish } = require('./controllers/wishesController')
+        updateWish,
+        getReservedWishes } = require('./controllers/wishesController')
 const isAuthenticated = require('./middleware/isAuthenticated');
 
 const app = express();
@@ -151,6 +152,7 @@ app.post(`${baseUrl}/wishes/releaseWish`, releaseWish);
 app.post(`${baseUrl}/wishes/addWish`, addWish);
 app.post(`${baseUrl}/wishes/deleteWish`, deleteWish);
 app.put(`${baseUrl}/wishes/updateWish`, updateWish);
+app.post(`${baseUrl}/wishes/getReservedWishes`, getReservedWishes);
 
 const port = process.env.PORT || 3001
 app.listen( port , () => { console.log(`Server listening on port ${port}`); } );

@@ -5,16 +5,23 @@
           <div class="title-style text-page-title logo-style">{{wishListUserName}}'s Wishes</div>
         </div>
         <div class="active-wishes-container" *ngIf="currentUserID == wishListUserID">
-            <div class="title-style text-sub-title logo-style">Active Wishes</div>
-            <div class="add-button clickable" (click)="openAddWishDialog()" *ngIf="currentUserID === wishListUserID || parentUserIdsContains !== -1">
-              <i class="fa fa-plus button-text-style"></i>
-              <pre class="button-text-style logo-style">  Add A Wish</pre>
-            </div>
-            <wish-card [wishes]="allWishes" [currentUser]="currentUserID" *ngIf="allWishesPresent"></wish-card>
-            <div *ngIf="!allWishesPresent" class="none-style text-section-title logo-style">
-              No Active Wishes
-            </div>
+          <div class="title-style text-sub-title logo-style">My Active Wishes</div>
+          <div class="add-button clickable" (click)="openAddWishDialog()" *ngIf="currentUserID === wishListUserID || parentUserIdsContains !== -1">
+            <i class="fa fa-plus button-text-style"></i>
+            <pre class="button-text-style logo-style">  Add A Wish</pre>
           </div>
+          <wish-card [wishes]="myWishes" [currentUser]="currentUserID" *ngIf="myWishesPresent"></wish-card>
+          <div *ngIf="!myWishesPresent" class="none-style text-section-title logo-style">
+            No Active Wishes
+          </div>
+        </div>
+        <div class="active-wishes-container" *ngIf="currentUserID == wishListUserID">
+          <div class="title-style text-sub-title logo-style">My Reserved Wishes</div>
+          <wish-card [wishes]="myReservedWishes" [currentUser]="currentUserID" *ngIf="myReservedWishesPresent"></wish-card>
+          <div *ngIf="!myReservedWishesPresent" class="none-style text-section-title logo-style">
+            No Reserved Wishes
+          </div>
+        </div>
         <div class="active-wishes-container" *ngIf="currentUserID !== wishListUserID">
           <div class="title-style text-sub-title logo-style">Active Wishes</div>
           <div class="add-button clickable" (click)="openAddWishDialog()" *ngIf="currentUserID === wishListUserID || parentUserIdsContains !== -1">
@@ -39,7 +46,13 @@
         <pre class="title-style text-page-title logo-style"> </pre>
       </div>
       <div class="bio-container">
-          <div class="title-style text-sub-title logo-style">About me</div>
+        <div class="bio-top-content">
+            <div class="title-style text-sub-title logo-style">About me</div>
+            <div class="bio-edit-button clickable" *ngIf="currentUserID === wishListUserID || parentUserIdsContains !== -1" (click)="onBioEditClick()">
+                <i class="fa fa-pencil button-text-style"> </i>
+            </div>
+        </div>
+
           <div>{{wishListUserBio}}</div>
       </div>
     </div>
@@ -78,3 +91,24 @@
     </div>
   </div>
 </modal-template>
+
+<modal-template [modalID]="'editBio'">
+    <div class="modal-style">
+        <div class="add-title-container">
+            <div class="title-style text-sub-title logo-style">Edit About Me</div>
+        </div>
+        <mat-form-field class="text-area-style">
+            <textarea matInput placeholder="About Me" [(ngModel)]="wishListUserBio" style="white-space: pre-wrap;" required></textarea>
+        </mat-form-field>
+        <div class="add-title-container">
+          <div class="cancel-button clickable" (click)="cancelBioEdit()">
+            <i class="fa fa-times button-text-style"></i>
+            <pre class="button-text-style logo-style"> Cancel</pre>
+          </div>
+          <div class="save-button clickable" (click)="saveBioEdit()">
+              <i class="fa fa-check button-text-style"></i>
+              <pre class="button-text-style logo-style"> Save</pre>
+            </div>
+        </div>
+      </div>
+    </modal-template>

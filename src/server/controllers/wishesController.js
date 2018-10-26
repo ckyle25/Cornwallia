@@ -91,4 +91,14 @@ module.exports = {
           return res.status(200).send('Wish Updated')
         });
     },
+
+    getReservedWishes: (req, res, next) => {
+      const body = req.body;
+      const dbInstance = req.app.get('db');
+
+      dbInstance.get_my_reserved_wishes([body.userId])
+        .then(result => {
+          return res.status(200).send(result)
+        });
+    }
   }

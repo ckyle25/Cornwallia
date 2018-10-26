@@ -1,7 +1,15 @@
 <div class="label-style text-sub-title logo-style">Select An Individual:</div>
 <div class="card-container">
-  <filter-card [title]="'Kevin'"></filter-card>
-  <filter-card [title]="'Kendal'"></filter-card>
-  <filter-card [title]="'Lily'"></filter-card>
-  <filter-card [title]="'Quinten'"></filter-card>
+  <a [routerLink]="['/wishes/landing/wishlist']" (click)="setWishUserID(5)">
+    <filter-card [title]="'Kevin'"></filter-card>
+  </a>
+  <a [routerLink]="['/wishes/landing/wishlist']" (click)="setWishUserID(6)">
+    <filter-card [title]="'Kendal'"></filter-card>
+  </a>
+  <a [routerLink]="['/wishes/landing/wishlist']" (click)="setWishUserID(7)">
+    <filter-card [title]="'Lily'"></filter-card>
+  </a>
+  <a [routerLink]="['/wishes/landing/wishlist']" (click)="setWishUserID(8)">
+    <filter-card [title]="'Quinten'"></filter-card>
+  </a>
 </div>

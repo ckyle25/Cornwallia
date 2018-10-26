@@ -190,5 +190,38 @@
   padding: 10px;
   background-color: $white;
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-  
+  border-radius: 5px;
+}
+
+.bio-top-content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px
+}
+
+.bio-edit-button {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: $blue;
+  border-radius: 5px;
+  margin-right: 3px;
+  padding: 10px;
+}
+
+.bio-edit-button:hover {
+  background-color: #0079b2;
+  transition: 1s;
+}
+
+.text-area-style {
+  width: 100%;
+  height: 450px;
+  color: $blue;
 }

@@ -40,29 +40,17 @@ export class WishCardComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges() {
-
-    // this.wishes.forEach(wish => {
-    //   parseFloat(wish.rating);
-    // });
-    // this.wishid = this.wish.wishid;
-    // this.title = this.wish.titledsc;
-    // this.price = this.wish.costamt;
-    // this.link = this.wish.linktxt;
-    // this.description = this.wish.descriptiondsc;
-    // this.rating = parseFloat(this.wish.ratingnbr);
-    // this.wishUser = this.wish.userid;
-    // this.wish.reservedflg === 1 ? this.reserved = true : this.reserved = false;
-    // this.parentUsers = [this.wish.parent1wishesuserid, this.wish.parent2wishesuserid];
-    // this.reservedUser = this.wish.reserveduserid;
   }
 
   async onReserveClick(wishid: number, userid: number) {
     await this.ngRedux.dispatch(this.wishesActionCreators.reserveWish(this.currentUser, wishid));
+    await this.ngRedux.dispatch(this.wishesActionCreators.getReservedWishes(this.currentUser));
     await this.ngRedux.dispatch(this.wishesActionCreators.getWishes(userid));
   }
 
   async onReleaseClick(wishid: number, userid: number) {
     await this.ngRedux.dispatch(this.wishesActionCreators.releaseWish(wishid));
+    await this.ngRedux.dispatch(this.wishesActionCreators.getReservedWishes(this.currentUser));
     await this.ngRedux.dispatch(this.wishesActionCreators.getWishes(userid));
   }
 
@@ -82,6 +70,9 @@ export class WishCardComponent implements OnInit, OnChanges {
     this.modal.closeModal('deleteConfirm');
     await this.ngRedux.dispatch(this.wishesActionCreators.deleteWish(wishid));
     await this.ngRedux.dispatch(this.wishesActionCreators.getWishes(userid));
+    if (userid === this.currentUser) {
+      await this.ngRedux.dispatch(this.wishesActionCreators.getMyWishes(this.currentUser));
+    }
     this.wishId = null;
     this.wishUserId = null;
   }
@@ -104,6 +95,9 @@ export class WishCardComponent implements OnInit, OnChanges {
       const newLink = link ? link : '';
       await this.ngRedux.dispatch(this.wishesActionCreators.updateWish(title, newDescription, price, newLink, rating, wishId));
       await this.ngRedux.dispatch(this.wishesActionCreators.getWishes(userid));
+      if (userid === this.currentUser) {
+        await this.ngRedux.dispatch(this.wishesActionCreators.getMyWishes(this.currentUser));
+      }
       this.title = null;
       this.price = null;
       this.link = null;

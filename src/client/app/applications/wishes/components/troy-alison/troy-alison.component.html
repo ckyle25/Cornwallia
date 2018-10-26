@@ -1,5 +1,9 @@
 <div class="label-style text-sub-title logo-style">Select An Individual:</div>
 <div class="card-container">
-  <filter-card [title]="'Troy'"></filter-card>
-  <filter-card [title]="'Alison'"></filter-card>
+  <a [routerLink]="['/wishes/landing/wishlist']" (click)="setWishUserID(13)">
+    <filter-card [title]="'Troy'"></filter-card>
+  </a>
+  <a [routerLink]="['/wishes/landing/wishlist']" (click)="setWishUserID(14)">
+    <filter-card [title]="'Allison'"></filter-card>
+  </a>
 </div>

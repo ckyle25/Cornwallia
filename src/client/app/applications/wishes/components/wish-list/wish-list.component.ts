@@ -18,6 +18,7 @@ export class WishListComponent implements OnInit {
 
   wishListUserName: string;
   wishListUserBio: string;
+  wishListUserBioOld: string;
 
   title: string;
   cost: number;
@@ -25,13 +26,14 @@ export class WishListComponent implements OnInit {
   description: string;
   rating: number;
 
- 
   activeWishes: any[];
   activeWishesPresent: boolean;
   reservedWishes: any[];
   reservedWishesPresent: boolean;
-  allWishes: any[];
-  allWishesPresent: boolean;
+  myWishes: any[];
+  myWishesPresent: boolean;
+  myReservedWishes: any[];
+  myReservedWishesPresent: boolean;
 
   @select('shared') sharedObs;
   @select('wishes') wishesObs;
@@ -50,32 +52,27 @@ export class WishListComponent implements OnInit {
 
     this.wishesObs.subscribe((result: IWishesState) => {
       this.wishListUserID = result.wishListUser;
-      this.wishListUserBio = result.currentUser.biographytxt
       if (this.wishListUserID === 0) {
         this.wishListUserID = parseInt(localStorage.getItem('wishlistUser'), 10);
       }
       this.wishes = result.wishes;
 
-      if (result.allUsers.length > 0) {
-        const wishListUserDetail = result.allUsers.filter(obj => obj.userid === this.wishListUserID)[0];
-        this.wishListUserName = wishListUserDetail.firstnameval;
-        this.wishListUserBio = wishListUserDetail.biographytxt;
-      }
+      const wishListUserDetail = result.allUsers.filter(obj => obj.userid === this.wishListUserID)[0];
+      this.wishListUserName = wishListUserDetail.firstnameval;
+      this.wishListUserBio = wishListUserDetail.biographytxt;
 
-      if (result.familyReference.length > 0) {
-        const familyObj = result.familyReference.filter(obj => obj.familyid === result.currentUser.familyid)[0];
-        const parentUserIds = [familyObj.parent1wishesuserid, familyObj.parent2wishesuserid !== null ? familyObj.parent2wishesuserid : 0];
-        this.parentUserIdsContains = parentUserIds.indexOf(this.wishListUserID);
-      }
+      const familyObj = result.familyReference.filter(obj => obj.familyid === wishListUserDetail.familyid)[0];
+      const parentUserIds = [familyObj.parent1wishesuserid, familyObj.parent2wishesuserid !== null ? familyObj.parent2wishesuserid : 0];
+      this.parentUserIdsContains = parentUserIds.indexOf(this.currentUserID);
 
-      if (result.wishes.length > 0) {
-        this.reservedWishes = result.wishes.filter(obj => obj.reservedflg === 1);
-        this.activeWishes = result.wishes.filter(obj => obj.reservedflg !== 1);
-        this.activeWishes.length > 0 ? this.activeWishesPresent = true : this.activeWishesPresent = false;
-        this.reservedWishes.length > 0 ? this.reservedWishesPresent = true : this.reservedWishesPresent = false;
-        this.allWishes = result.wishes;
-        this.allWishes.length > 0 ? this.allWishesPresent = true : this.allWishesPresent = false;
-      }
+      this.reservedWishes = result.wishes.filter(obj => obj.reservedflg === 1);
+      this.activeWishes = result.wishes.filter(obj => obj.reservedflg !== 1);
+      this.activeWishes.length > 0 ? this.activeWishesPresent = true : this.activeWishesPresent = false;
+      this.reservedWishes.length > 0 ? this.reservedWishesPresent = true : this.reservedWishesPresent = false;
+      this.myWishes = result.myWishes;
+      this.myWishes.length > 0 ? this.myWishesPresent = true : this.myWishesPresent = false;
+      this.myReservedWishes = result.myReservedWishes;
+      this.myReservedWishes.length > 0 ? this.myReservedWishesPresent = true : this.myReservedWishesPresent = false;
     });
 
     this.ngRedux.dispatch(this.wishesActionCreators.getWishes(this.wishListUserID));
@@ -92,6 +89,9 @@ export class WishListComponent implements OnInit {
       const newLink = this.link ? this.link : '';
       await this.ngRedux.dispatch(this.wishesActionCreators.addWish(this.wishListUserID, this.title, newDescription, this.cost, newLink, this.rating));
       await this.ngRedux.dispatch(this.wishesActionCreators.getWishes(this.wishListUserID));
+      if (this.wishListUserID = this.currentUserID) {
+        await this.ngRedux.dispatch(this.wishesActionCreators.getMyWishes(this.currentUserID));
+      }
       this.title = null;
       this.cost = null;
       this.rating = null;
@@ -109,6 +109,21 @@ export class WishListComponent implements OnInit {
     this.rating = null;
     this.link = null;
     this.description = null;
+  }
+
+  onBioEditClick() {
+    this.wishListUserBioOld = this.wishListUserBio;
+    this.modal.openModal('editBio');
+  }
+
+  cancelBioEdit() {
+    this.wishListUserBio = this.wishListUserBioOld;
+    this.wishListUserBioOld = '';
+    this.modal.closeModal('editBio');
+  }
+
+  saveBioEdit() {
+
   }
 
 }

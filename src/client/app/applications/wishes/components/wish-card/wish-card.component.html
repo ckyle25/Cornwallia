@@ -23,6 +23,7 @@
         </div>
       </div>
     </div>
+    <div class="title-style logo-style" *ngIf="currentUser === wish.reserveduserid && wish.reservedflg == 1 && currentUser === wish.reserveduserid">Reserved For: {{wish.firstnameval}}</div>
     <div class="middle-content">
       <rating [rating]="wish.ratingnbr"></rating>
       <pre class="text-style text-paragraph logo-style"> | {{ wish.costamt | currency:'USD':'symbol' }} | </pre>

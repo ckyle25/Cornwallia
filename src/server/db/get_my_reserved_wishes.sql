@@ -16,4 +16,4 @@ FROM wishes_wishes ww
 		on wu.userid = ww.userid
 	LEFT JOIN wishes_family wf
 		on wf.familyid = wu.familyid
-WHERE ww.userid = $1
+WHERE ww.reserveduserid = $1

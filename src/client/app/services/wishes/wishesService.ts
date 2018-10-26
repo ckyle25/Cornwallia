@@ -105,6 +105,19 @@ export class WishesService {
             });
   }
 
+  public getReservedWishes(userId: number): Promise<any> {
+
+    const body = {
+      userId
+     };
+
+    return axios
+            .post(`${this.url}api/wishes/getReservedWishes`, body)
+            .then(response => {
+              return response.data;
+            });
+  }
+
   public updateWish(title: string, description: string, cost: number, link: string, rating: number, wishId: number): Promise<any> {
 
     const body = {
