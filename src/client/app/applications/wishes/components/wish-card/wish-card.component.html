@@ -8,7 +8,8 @@
           <pre class="button-text-style logo-style"> Release</pre>
         </div>
         <div class="text-style text-paragraph logo-style" *ngIf="currentUser !== wish.userid && wish.reservedflg == 1  && currentUser !== wish.reserveduserid">
-          Reserved by: {{currentUser}}
+          This wish is Reserved <br>
+          Contact Reserver
         </div>
         <div class="reserve-button button-container clickable" *ngIf="currentUser !== wish.userid && wish.reservedflg !== 1 " (click)="onReserveClick(wish.wishid, wish.userid)">
             <i class="fa fa-tag button-text-style"></i>

@@ -1,8 +1,21 @@
 <div class="container">
   <div class="content" >
     <div class="left-content">
-        <div class="title-style text-sub-title logo-style">{{wishListUserName}}'s Wishes:</div>
-        <div class="active-wishes-container">
+        <div class="title-container">
+          <div class="title-style text-page-title logo-style">{{wishListUserName}}'s Wishes</div>
+        </div>
+        <div class="active-wishes-container" *ngIf="currentUserID == wishListUserID">
+            <div class="title-style text-sub-title logo-style">Active Wishes</div>
+            <div class="add-button clickable" (click)="openAddWishDialog()" *ngIf="currentUserID === wishListUserID || parentUserIdsContains !== -1">
+              <i class="fa fa-plus button-text-style"></i>
+              <pre class="button-text-style logo-style">  Add A Wish</pre>
+            </div>
+            <wish-card [wishes]="allWishes" [currentUser]="currentUserID" *ngIf="allWishesPresent"></wish-card>
+            <div *ngIf="!allWishesPresent" class="none-style text-section-title logo-style">
+              No Active Wishes
+            </div>
+          </div>
+        <div class="active-wishes-container" *ngIf="currentUserID !== wishListUserID">
           <div class="title-style text-sub-title logo-style">Active Wishes</div>
           <div class="add-button clickable" (click)="openAddWishDialog()" *ngIf="currentUserID === wishListUserID || parentUserIdsContains !== -1">
             <i class="fa fa-plus button-text-style"></i>
@@ -13,7 +26,7 @@
             No Active Wishes
           </div>
         </div>
-        <div class="reserved-wishes-container">
+        <div class="reserved-wishes-container" *ngIf="currentUserID !== wishListUserID">
           <div class="title-style text-sub-title logo-style">Reserved Wishes</div>
           <wish-card [wishes]="reservedWishes" [currentUser]="currentUserID" *ngIf="reservedWishesPresent"></wish-card>
           <div *ngIf="!reservedWishesPresent" class="none-style text-section-title logo-style">
@@ -22,7 +35,13 @@
         </div>
     </div>
     <div class="right-content">
-      <div class="title-style text-sub-title logo-style">About me</div>
+      <div class="title-container">
+        <pre class="title-style text-page-title logo-style"> </pre>
+      </div>
+      <div class="bio-container">
+          <div class="title-style text-sub-title logo-style">About me</div>
+          <div>{{wishListUserBio}}</div>
+      </div>
     </div>
   </div>
 </div>

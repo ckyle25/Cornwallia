@@ -25,10 +25,13 @@ export class WishListComponent implements OnInit {
   description: string;
   rating: number;
 
-  reservedWishes: any[];
+ 
   activeWishes: any[];
   activeWishesPresent: boolean;
+  reservedWishes: any[];
   reservedWishesPresent: boolean;
+  allWishes: any[];
+  allWishesPresent: boolean;
 
   @select('shared') sharedObs;
   @select('wishes') wishesObs;
@@ -47,6 +50,7 @@ export class WishListComponent implements OnInit {
 
     this.wishesObs.subscribe((result: IWishesState) => {
       this.wishListUserID = result.wishListUser;
+      this.wishListUserBio = result.currentUser.biographytxt
       if (this.wishListUserID === 0) {
         this.wishListUserID = parseInt(localStorage.getItem('wishlistUser'), 10);
       }
@@ -69,6 +73,8 @@ export class WishListComponent implements OnInit {
         this.activeWishes = result.wishes.filter(obj => obj.reservedflg !== 1);
         this.activeWishes.length > 0 ? this.activeWishesPresent = true : this.activeWishesPresent = false;
         this.reservedWishes.length > 0 ? this.reservedWishesPresent = true : this.reservedWishesPresent = false;
+        this.allWishes = result.wishes;
+        this.allWishes.length > 0 ? this.allWishesPresent = true : this.allWishesPresent = false;
       }
     });
 
