@@ -25,9 +25,10 @@
     </div>
     <div class="title-style logo-style" *ngIf="currentUser === wish.reserveduserid && wish.reservedflg == 1 && currentUser === wish.reserveduserid">Reserved For: {{wish.firstnameval}}</div>
     <div class="middle-content">
-      <rating [rating]="wish.ratingnbr"></rating>
+      <rating [rating]="wish.ratingnbr" [wishId]="wish.wishid.toString()"></rating>
       <pre class="text-style text-paragraph logo-style"> | {{ wish.costamt | currency:'USD':'symbol' }} | </pre>
-      <a href={{wish.linktxt}} target="_blank" class="link-style text-paragraph logo-style clickable">Example</a>
+      <a href={{wish.linktxt}} target="_blank" class="link-style text-paragraph logo-style clickable" *ngIf="wish.linktxt !== ''">Link</a>
+      <div class="text-style text-paragraph logo-style" *ngIf="wish.linktxt == ''">No Link</div>
     </div>
     <div class="text-style text-paragraph logo-style">
       {{wish.descriptiondsc}}

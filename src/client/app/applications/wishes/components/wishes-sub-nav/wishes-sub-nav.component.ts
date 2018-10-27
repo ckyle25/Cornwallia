@@ -12,15 +12,17 @@ export class WishesSubNavComponent implements OnInit {
 
   currentUserID: number;
 
-  @select('shared') sharedObs;
+  @select('wishes') wishesObs;
 
   constructor(private ngRedux: NgRedux<GlobalState>,
     private wishesActionCreators: WishesActionCreators) { }
 
   ngOnInit() {
-    this.sharedObs.subscribe(result => {
-      this.currentUserID = result.userObject.userid;
+
+    this.wishesObs.subscribe(result => {
+      this.currentUserID = result.currentUser.userid
     });
+    
   }
 
   setWishToCurrentUserID() {

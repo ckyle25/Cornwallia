@@ -46,12 +46,9 @@ export class WishListComponent implements OnInit {
 
     this.wishListUserID = parseInt(localStorage.getItem('wishlistUser'), 10);
 
-    this.sharedObs.subscribe(result => {
-      this.currentUserID = result.userObject.userid;
-    });
-
     this.wishesObs.subscribe((result: IWishesState) => {
       this.wishListUserID = result.wishListUser;
+      this.currentUserID = result.currentUser.userid;
       if (this.wishListUserID === 0) {
         this.wishListUserID = parseInt(localStorage.getItem('wishlistUser'), 10);
       }
@@ -86,7 +83,12 @@ export class WishListComponent implements OnInit {
     if (this.title && this.cost && this.rating) {
       this.modal.closeModal('addWish');
       const newDescription = this.description ? this.description : '';
-      const newLink = this.link ? this.link : '';
+      let newLink = this.link ? this.link : '';
+      if (newLink !== '') {
+        if (newLink.substring(0,7) !== 'https://' || newLink.substring(0, 6) !== 'http://') {
+          newLink = 'http://' + newLink
+        }
+      }
       await this.ngRedux.dispatch(this.wishesActionCreators.addWish(this.wishListUserID, this.title, newDescription, this.cost, newLink, this.rating));
       await this.ngRedux.dispatch(this.wishesActionCreators.getWishes(this.wishListUserID));
       if (this.wishListUserID = this.currentUserID) {

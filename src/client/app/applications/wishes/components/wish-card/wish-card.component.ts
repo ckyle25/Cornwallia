@@ -92,7 +92,12 @@ export class WishCardComponent implements OnInit, OnChanges {
     if (title && price && rating) {
       this.modal.closeModal('editWish');
       const newDescription = description ? description : '';
-      const newLink = link ? link : '';
+      let newLink = link ? link : '';
+      if (newLink !== '') {
+        if (newLink.substring(0,7) !== 'https://' || newLink.substring(0, 6) !== 'http://') {
+          newLink = 'http://' + newLink
+        }
+      }
       await this.ngRedux.dispatch(this.wishesActionCreators.updateWish(title, newDescription, price, newLink, rating, wishId));
       await this.ngRedux.dispatch(this.wishesActionCreators.getWishes(userid));
       if (userid === this.currentUser) {
