@@ -1,5 +1,14 @@
-<div class="sub-navbar">
+<div class="sub-navbar" *ngIf="innerWidth >= 750" (window:resize)="onResize($event)">
   <a routerLink="apps" class="menu-item text-sub-title logo-style" routerLinkActive="menu-item-active">My Apps</a>
   <a routerLink="access" class="menu-item text-sub-title logo-style" routerLinkActive="menu-item-active">Request Access</a>
   <a routerLink="feedback" class="menu-item text-sub-title logo-style" routerLinkActive="menu-item-active">Leave Feedback</a>
 </div>
+<div class="sub-navbar-mobile" *ngIf="innerWidth < 750" (window:resize)="onResize($event)">
+  <i [matMenuTriggerFor]="subnavlanding" class="fa fa-bars subnav-icon-style clickable"></i>
+</div>
+
+<mat-menu #subnavlanding="matMenu">
+  <a routerLink="apps" mat-menu-item class="menu-item text-section-title logo-style" routerLinkActive="menu-item-active">My Apps</a>
+  <a routerLink="access" mat-menu-item class="menu-item text-section-title logo-style" routerLinkActive="menu-item-active">Request Access</a>
+  <a routerLink="feedback" mat-menu-item class="menu-item text-section-title logo-style" routerLinkActive="menu-item-active">Leave Feedback</a>
+</mat-menu>

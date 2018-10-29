@@ -1,10 +1,15 @@
-<div class="content">
+<div class="content" (window:resize)="onResize($event)">
   <app-nav-bar></app-nav-bar>
   <landing-sub-nav-bar></landing-sub-nav-bar>
-  <div class="header-container">
+  <div class="header-container" *ngIf="innerWidth >= 750">
     <div class="title-text-style text-large-page-title logo-style">Welcome to Cornwallia</div>
     <div class="top-splash"></div>
     <div class="black-film"></div>
+  </div>
+  <div class="header-container-mobile" *ngIf="innerWidth < 750">
+    <div class="title-text-style text-page-title logo-style">Welcome to <br> Cornwallia</div>
+    <div class="top-splash-mobile"></div>
+    <div class="black-film-mobile"></div>
   </div>
   <router-outlet></router-outlet>
 </div>

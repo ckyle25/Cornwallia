@@ -33,3 +33,21 @@
   padding: 10px;
   text-decoration: none;
 }
+
+.sub-navbar-mobile {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid $gray-500;
+  background-color: $white;
+  width: 100%;
+  height: 50px;
+}
+
+.subnav-icon-style {
+  font-size: 15px;
+  color: $offblack;
+}
