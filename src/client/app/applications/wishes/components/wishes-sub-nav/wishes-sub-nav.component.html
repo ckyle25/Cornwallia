@@ -1,5 +1,14 @@
-<div class="sub-navbar">
+<div class="sub-navbar" *ngIf="innerWidth >= 1000" (window:resize)="onResize($event)">
   <a routerLink="howto" class="menu-item text-sub-title logo-style" routerLinkActive="menu-item-active">How To Use</a>
   <a routerLink="mywishes" class="menu-item text-sub-title logo-style" routerLinkActive="menu-item-active" (click)="setWishToCurrentUserID()">My Wishes</a>
   <a routerLink="allwishes" class="menu-item text-sub-title logo-style" routerLinkActive="menu-item-active">All Wishes</a>
 </div>
+<div class="sub-navbar-mobile" *ngIf="innerWidth < 1000" (window:resize)="onResize($event)">
+  <i [matMenuTriggerFor]="wishesSubnavLanding" class="fa fa-bars subnav-icon-style clickable"></i>
+</div>
+
+<mat-menu #wishesSubnavLanding="matMenu">
+  <a routerLink="howto" mat-menu-item class="menu-item text-section-title logo-style" routerLinkActive="menu-item-active">How To Use</a>
+  <a routerLink="mywishes" mat-menu-item class="menu-item text-section-title logo-style" routerLinkActive="menu-item-active" (click)="setWishToCurrentUserID()">My Wishes</a>
+  <a routerLink="allwishes" mat-menu-item class="menu-item text-section-title logo-style" routerLinkActive="menu-item-active">All Wishes</a>
+</mat-menu>

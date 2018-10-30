@@ -1,5 +1,5 @@
-<div class="container">
-  <div class="content" >
+<div class="container" (window:resize)="onResize($event)">
+  <div class="content" *ngIf="innerWidth >= 1000" >
     <div class="left-content">
         <div class="title-container">
           <div class="title-style text-page-title logo-style">{{wishListUserName}}'s Wishes</div>
@@ -57,10 +57,34 @@
       </div>
     </div>
   </div>
+  <div class="content-mobile" *ngIf="innerWidth < 1000">
+    <div class="title-container">
+      <div class="title-style text-sub-title logo-style">{{wishListUserName}}'s Wishes</div>
+    </div>
+    <div class="active-wishes-container margin-rlb-10" *ngIf="currentUserID == wishListUserID">
+      <div class="active-wishes-top-row-mobile">
+          <div class="title-style text-sub-title logo-style">My Active Wishes</div>
+          <div class="add-button-mobile clickable" (click)="openAddWishDialog()" *ngIf="currentUserID === wishListUserID || parentUserIdsContains !== -1">
+              <i class="fa fa-plus button-text-style"></i>
+          </div>
+      </div>
+      <div *ngIf="!myWishesPresent" class="none-style text-section-title logo-style">
+        No Active Wishes
+      </div>
+    </div>
+    <div class="active-wishes-container margin-rlb-10" *ngIf="currentUserID == wishListUserID">
+        <div class="active-wishes-top-row-mobile">
+            <div class="title-style text-sub-title logo-style">My Reserved Wishes</div>
+        </div>
+        <div *ngIf="!myReservedWishesPresent" class="none-style text-section-title logo-style">
+          No Reserved Wishes
+        </div>
+      </div>
+  </div>
 </div>
 
 <modal-template [modalID]="'addWish'">
-  <div class="modal-style">
+  <div [ngClass]="{'modal-style' : innerWidth >= 1000, 'modal-style-mobile' : innerWidth < 1000}">
     <div class="add-title-container">
         <div class="title-style text-sub-title logo-style">Add A Wish</div>
     </div>
@@ -93,7 +117,7 @@
 </modal-template>
 
 <modal-template [modalID]="'editBio'">
-    <div class="modal-style">
+    <div [ngClass]="{'modal-style' : innerWidth >= 1000, 'modal-style-mobile' : innerWidth < 1000}">
         <div class="add-title-container">
             <div class="title-style text-sub-title logo-style">Edit About Me</div>
         </div>

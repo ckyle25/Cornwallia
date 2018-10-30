@@ -1,9 +1,14 @@
-<div class="header-container">
+<div class="header-container" *ngIf="innerWidth >= 1000" (window:resize)="onResize($event)">
   <div class="title-text-style text-large-page-title logo-style">Welcome to Wishes</div>
   <div class="top-splash"></div>
   <div class="black-film"></div>
 </div>
-<div class="instructions-container">
+<div class="header-container-mobile" *ngIf="innerWidth < 1000" (window:resize)="onResize($event)">
+  <div class="title-text-style text-page-title logo-style">Welcome to <br> Wishes</div>
+  <div class="top-splash-mobile"></div>
+  <div class="black-film-mobile"></div>
+</div>
+<div class="instructions-container" (window:resize)="onResize($event)">
   <div class="instructions-content">
       <div class="instructions-style text-section-title logo-style">Instructions:</div>
   </div>

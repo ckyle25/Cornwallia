@@ -13,6 +13,18 @@
   height: 400px;
 }
 
+.header-container-mobile {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 200px;
+}
+
 .black-film {
   background-color: $black;
   opacity: 0.6;
@@ -22,9 +34,19 @@
   position: absolute;
 }
 
+.black-film-mobile {
+  background-color: $black;
+  opacity: 0.6;
+  width: 100%;
+  height: 200px;
+  z-index: 1;
+  position: absolute;
+}
+
 .title-text-style {
   color: $white;
-  z-index: 2
+  z-index: 2;
+  text-align: center;
 }
 
 .top-splash {
@@ -33,6 +55,15 @@
   background-image: url('../../../../../assets/photos/dandelion2400.jpg');
   background-repeat: no-repeat;
   background-size: 100% 400px;
+  position: absolute;
+}
+
+.top-splash-mobile {
+  width: 100%;
+  height: 200px;
+  background-image: url('../../../../../assets/photos/dandelion2400.jpg');
+  background-repeat: no-repeat;
+  background-size: 100% 200px;
   position: absolute;
 }
 

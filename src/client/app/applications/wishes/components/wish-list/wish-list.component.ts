@@ -1,9 +1,10 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, HostListener } from '@angular/core';
 import { NgRedux, select } from '@angular-redux/store';
 import { IGlobalState as GlobalState } from '../../../../redux/rootReducer';
 import { WishesActionCreators, IWishesState } from '../../../../redux//wishes/wishesRootReducer';
 import { ModalTemplateComponent } from '../../../../shared/modal-template/modal-template.component';
 
+@HostListener('window:resize', ['$event'])
 @Component({
   selector: 'wish-list',
   templateUrl: './wish-list.component.html',
@@ -34,6 +35,7 @@ export class WishListComponent implements OnInit {
   myWishesPresent: boolean;
   myReservedWishes: any[];
   myReservedWishesPresent: boolean;
+  innerWidth: number = window.innerWidth;
 
   @select('shared') sharedObs;
   @select('wishes') wishesObs;
@@ -128,4 +130,7 @@ export class WishListComponent implements OnInit {
 
   }
 
+  onResize(event) {
+    this.innerWidth =  event.target.innerWidth;
+   }
 }
