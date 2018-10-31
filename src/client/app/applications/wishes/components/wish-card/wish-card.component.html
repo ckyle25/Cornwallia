@@ -17,7 +17,7 @@
             <pre class="button-text-style logo-style"> Reserve</pre>
         </div>
         <div class="edit-button button-container clickable" *ngIf="currentUser === wish.userid || currentUser == wish.parent1wishesuserid || currentUser == wish.parent2wishesuserid" (click)="onEditClick(wish.titledsc, wish.costamt, wish.linktxt, wish.descriptiondsc, wish.ratingnbr, wish.wishid, wish.userid)">
-            <i class="fa fa-pencil button-text-style"> </i>
+            <i class="fas fa-pencil-alt button-text-style"> </i>
         </div>
         <div class="delete-button button-container clickable" *ngIf="currentUser === wish.userid || currentUser == wish.parent1wishesuserid || currentUser == wish.parent2wishesuserid" (click)="onDeleteClick(wish.wishid, wish.userid)">
             <i class="fa fa-trash button-text-style"> </i>
@@ -82,7 +82,7 @@
         <input matInput placeholder="Description (Optional)" [(ngModel)]="description">
     </mat-form-field>
     <mat-form-field class="input-style">
-        <input matInput type="number" step="0.1" placeholder="Rating (1-5)" [(ngModel)]="rating" required>
+        <input matInput type="number" step="1" placeholder="Rating (1-5)" [(ngModel)]="rating" required>
     </mat-form-field>
     <div class="add-title-container">
       <div class="cancel-button clickable" (click)="cancelEditWish()">

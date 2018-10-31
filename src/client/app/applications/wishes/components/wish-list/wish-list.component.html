@@ -49,7 +49,7 @@
         <div class="bio-top-content">
             <div class="title-style text-sub-title logo-style">About me</div>
             <div class="bio-edit-button clickable" *ngIf="currentUserID === wishListUserID || parentUserIdsContains !== -1" (click)="onBioEditClick()">
-                <i class="fa fa-pencil button-text-style"> </i>
+                <i class="fas fa-pencil-alt button-text-style"> </i>
             </div>
         </div>
 
@@ -126,7 +126,7 @@
         <input matInput placeholder="Description (Optional)" [(ngModel)]="description">
     </mat-form-field>
     <mat-form-field class="input-style">
-        <input matInput type="number" step="0.1" placeholder="Rating (1-5)" [(ngModel)]="rating" required>
+        <input matInput type="number" step="1" placeholder="Rating (1-5)" [(ngModel)]="rating" required>
     </mat-form-field>
     <div class="add-title-container">
       <div class="cancel-button clickable" (click)="cancelAddWishDialog()">
