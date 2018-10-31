@@ -23,6 +23,7 @@
   flex-direction: row;
   width: 100%;
   justify-content: space-between;
+  align-items: center;
 }
 
 .middle-content {
@@ -146,6 +147,21 @@
   border-radius: 5px;
 }
 
+.delete-modal-style-mobile {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: $white;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 100vw;
+  height: 200px;
+  border-radius: 5px;
+}
+
 .add-title-container {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -229,5 +245,18 @@
   padding: 20px;
   border: 1px solid #888;
   width: 700px;
+  border-radius: 5px;
+}
+
+.edit-modal-style-mobile {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-direction: column;
+  background-color: $white;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 100vw;
   border-radius: 5px;
 }

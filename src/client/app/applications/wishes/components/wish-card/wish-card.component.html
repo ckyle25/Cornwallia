@@ -1,8 +1,9 @@
-<div *ngFor="let wish of wishes">
+<div *ngFor="let wish of wishes" (window:resize)="onResize($event)">
   <div class="container">
     <div class="top-content">
-      <div class="title-style text-sub-title logo-style">{{wish.titledsc}}</div>
-      <div class="button-container">
+      <div class="title-style text-sub-title logo-style" *ngIf="innerWidth >= 1000">{{wish.titledsc}}</div>
+      <div class="title-style text-paragraph-header logo-style" *ngIf="innerWidth < 1000">{{wish.titledsc}}</div>
+      <div class="button-container" *ngIf="innerWidth >= 1000">
         <div class="release-button button-container clickable" *ngIf="currentUser !== wish.userid && wish.reservedflg == 1 && currentUser === wish.reserveduserid" (click)="onReleaseClick(wish.wishid, wish.userid)">
           <i class="fa fa-times button-text-style"></i>
           <pre class="button-text-style logo-style"> Release</pre>
@@ -22,6 +23,15 @@
             <i class="fa fa-trash button-text-style"> </i>
         </div>
       </div>
+      <div *ngIf="innerWidth < 1000">
+        <i [matMenuTriggerFor]="wishCardOptions" class="fa fa-caret-down title-style text-sub-title clickable"></i>
+        <mat-menu #wishCardOptions="matMenu">
+            <div mat-menu-item class="title-style text-section-title logo-style" *ngIf="currentUser !== wish.userid && wish.reservedflg !== 1 " (click)="onReserveClick(wish.wishid, wish.userid)">Reserve</div>
+            <div mat-menu-item class="title-style text-section-title logo-style" *ngIf="currentUser !== wish.userid && wish.reservedflg == 1 && currentUser === wish.reserveduserid" (click)="onReleaseClick(wish.wishid, wish.userid)">Release</div>
+            <div mat-menu-item class="title-style text-section-title logo-style" *ngIf="currentUser === wish.userid || currentUser == wish.parent1wishesuserid || currentUser == wish.parent2wishesuserid" (click)="onEditClick(wish.titledsc, wish.costamt, wish.linktxt, wish.descriptiondsc, wish.ratingnbr, wish.wishid, wish.userid)">Edit</div>
+            <div mat-menu-item class="title-style text-section-title logo-style" *ngIf="currentUser === wish.userid || currentUser == wish.parent1wishesuserid || currentUser == wish.parent2wishesuserid" (click)="onDeleteClick(wish.wishid, wish.userid)">Delete</div>
+        </mat-menu>
+      </div>
     </div>
     <div class="title-style logo-style" *ngIf="currentUser === wish.reserveduserid && wish.reservedflg == 1 && currentUser === wish.reserveduserid">Reserved For: {{wish.firstnameval}}</div>
     <div class="middle-content">
@@ -37,7 +47,7 @@
 </div>
 
 <modal-template [modalID]="'deleteConfirm'">
-  <div class="delete-modal-style">
+  <div [ngClass]="{'delete-modal-style' : innerWidth >= 1000, 'delete-modal-style-mobile' : innerWidth < 1000}">
     <div class="add-title-container">
         <div class="title-style text-sub-title logo-style">Are you sure?</div>
     </div>
@@ -55,7 +65,7 @@
 </modal-template>
 
 <modal-template [modalID]="'editWish'">
-  <div class="edit-modal-style">
+  <div [ngClass]="{'edit-modal-style' : innerWidth >= 1000, 'edit-modal-style-mobile' : innerWidth < 1000}">
     <div class="add-title-container">
         <div class="title-style text-sub-title logo-style">Edit Wish</div>
     </div>
@@ -85,3 +95,4 @@
         </div>
     </div>
   </div>
+</modal-template>

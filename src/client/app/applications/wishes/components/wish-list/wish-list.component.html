@@ -57,6 +57,10 @@
       </div>
     </div>
   </div>
+
+
+
+
   <div class="content-mobile" *ngIf="innerWidth < 1000">
     <div class="title-container">
       <div class="title-style text-sub-title logo-style">{{wishListUserName}}'s Wishes</div>
@@ -68,15 +72,36 @@
               <i class="fa fa-plus button-text-style"></i>
           </div>
       </div>
+      <wish-card [wishes]="myWishes" [currentUser]="currentUserID" *ngIf="myWishesPresent"></wish-card>
       <div *ngIf="!myWishesPresent" class="none-style text-section-title logo-style">
         No Active Wishes
       </div>
     </div>
     <div class="active-wishes-container margin-rlb-10" *ngIf="currentUserID == wishListUserID">
-        <div class="active-wishes-top-row-mobile">
-            <div class="title-style text-sub-title logo-style">My Reserved Wishes</div>
+      <div class="active-wishes-top-row-mobile">
+          <div class="title-style text-sub-title logo-style">My Reserved Wishes</div>
+      </div>
+      <wish-card [wishes]="myReservedWishes" [currentUser]="currentUserID" *ngIf="myReservedWishesPresent"></wish-card>
+      <div *ngIf="!myReservedWishesPresent" class="none-style text-section-title logo-style">
+        No Reserved Wishes
+      </div>
+    </div>
+    <div class="active-wishes-container margin-rlb-10" *ngIf="currentUserID !== wishListUserID">
+      <div class="active-wishes-top-row-mobile">
+        <div class="title-style text-sub-title logo-style">Active Wishes</div>
+        <div class="add-button-mobile clickable" (click)="openAddWishDialog()" *ngIf="currentUserID === wishListUserID || parentUserIdsContains !== -1">
+            <i class="fa fa-plus button-text-style"></i>
         </div>
-        <div *ngIf="!myReservedWishesPresent" class="none-style text-section-title logo-style">
+      </div>
+      <wish-card [wishes]="activeWishes" [currentUser]="currentUserID" *ngIf="activeWishesPresent"></wish-card>
+      <div *ngIf="!activeWishesPresent" class="none-style text-section-title logo-style">
+        No Active Wishes
+      </div>
+    </div>
+    <div class="reserved-wishes-container margin-rlb-10" *ngIf="currentUserID !== wishListUserID">
+        <div class="title-style text-sub-title logo-style">Reserved Wishes</div>
+        <wish-card [wishes]="reservedWishes" [currentUser]="currentUserID" *ngIf="reservedWishesPresent"></wish-card>
+        <div *ngIf="!reservedWishesPresent" class="none-style text-section-title logo-style">
           No Reserved Wishes
         </div>
       </div>

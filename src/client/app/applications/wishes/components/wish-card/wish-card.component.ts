@@ -1,9 +1,10 @@
-import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, HostListener } from '@angular/core';
 import { NgRedux, select } from '@angular-redux/store';
 import { IGlobalState as GlobalState } from '../../../../redux/rootReducer';
 import { WishesActionCreators } from '../../../../redux/wishes/wishesRootReducer';
 import { ModalTemplateComponent } from '../../../../shared/modal-template/modal-template.component';
 
+@HostListener('window:resize', ['$event'])
 @Component({
   selector: 'wish-card',
   templateUrl: './wish-card.component.html',
@@ -30,6 +31,7 @@ export class WishCardComponent implements OnInit, OnChanges {
   oldLink: string;
   oldDescription: string;
   oldRating: number;
+  innerWidth: number = window.innerWidth;
 
   constructor(private ngRedux: NgRedux<GlobalState>,
               private wishesActionCreators: WishesActionCreators,
@@ -123,5 +125,9 @@ export class WishCardComponent implements OnInit, OnChanges {
     this.description = null;
     this.rating = null;
     this.wishId = null;
+  }
+
+  onResize(event) {
+    this.innerWidth =  event.target.innerWidth;
   }
 }

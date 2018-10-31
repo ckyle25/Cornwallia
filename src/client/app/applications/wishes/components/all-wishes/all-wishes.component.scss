@@ -9,7 +9,6 @@
   flex-direction: row;
   justify-content: center;
   width: 100%;
-  min-width: 600px;
   margin-top: 10px;
 }
 
@@ -18,8 +17,8 @@
   display: -ms-flexbox;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   width: 80%;
-  min-width: 600px;
 }
 
 .card-container {
@@ -33,6 +32,7 @@
 
 .label-style {
   color: $offblack;
+  text-align: center;
 }
 
 a {
