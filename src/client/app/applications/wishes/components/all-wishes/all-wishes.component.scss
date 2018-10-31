@@ -21,6 +21,16 @@
   width: 80%;
 }
 
+.content-mobile {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
 .card-container {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -28,6 +38,16 @@
   flex-direction: row;
   margin-top: 10px;
   flex-wrap: wrap;
+}
+
+.card-container-mobile {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-direction: row;
+  margin-top: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .label-style {

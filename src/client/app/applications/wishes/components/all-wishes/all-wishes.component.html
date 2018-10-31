@@ -1,7 +1,7 @@
-<div class="container">
-  <div class="content" *ngIf="viewMode === 'overall'">
+<div class="container" (window:resize)="onResize($event)">
+  <div [ngClass]="{'content' : innerWidth >= 1400, 'content-mobile' : innerWidth < 1400}" *ngIf="viewMode === 'overall'">
       <div class="label-style text-page-title logo-style">Select A Family</div>
-      <div class="card-container">
+      <div class="card-container-mobile">
         <a [routerLink]="['robshari']" (click)="setViewToFamily()">
           <filter-card [title]="'Rob & Shari'" *ngIf="family1Access"></filter-card>
         </a>

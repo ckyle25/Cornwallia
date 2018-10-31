@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { NgRedux, select } from '@angular-redux/store';
 import { IGlobalState as GlobalState } from '../../../../redux/rootReducer';
 import { WishesActionCreators } from '../../../../redux/wishes/wishesRootReducer';
 
+@HostListener('window:resize', ['$event'])
 @Component({
   selector: 'all-wishes',
   templateUrl: './all-wishes.component.html',
@@ -15,6 +16,7 @@ export class AllWishesComponent implements OnInit {
   family2Access: boolean;
   family3Access: boolean;
   currentUser: number;
+  innerWidth: number = window.innerWidth;
 
   @select('wishes') wishesObs;
 
@@ -40,4 +42,7 @@ export class AllWishesComponent implements OnInit {
     this.ngRedux.dispatch(this.wishesActionCreators.setWishListUser(userid));
   }
 
+  onResize(event) {
+    this.innerWidth =  event.target.innerWidth;
+  }
 }
