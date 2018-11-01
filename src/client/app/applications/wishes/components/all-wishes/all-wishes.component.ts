@@ -18,7 +18,7 @@ export class AllWishesComponent implements OnInit {
   currentUser: number;
   innerWidth: number = window.innerWidth;
 
-  @select('wishes') wishesObs;
+  @select(['wishes', localStorage.getItem('currentUserID')]) wishesObs;
 
   viewMode: string = 'overall';
 

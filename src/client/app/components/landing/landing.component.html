@@ -1,4 +1,4 @@
-<div class="content" (window:resize)="onResize($event)">
+<div class="content" (window:resize)="onResize($event)" *ngIf="appInitialized">
   <app-nav-bar></app-nav-bar>
   <landing-sub-nav-bar></landing-sub-nav-bar>
   <div class="header-container" *ngIf="innerWidth >= 1000">

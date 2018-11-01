@@ -40,106 +40,205 @@ const GET_MY_WISHES_FULFILLED = 'GET_MY_WISHES_FULFILLED';
 
 
 // Initial State
+class WishesState {
+  loading = false;
+  currentUser = {};
+  allUsers = [];
+  familyReference = [];
+  wishesInitialized = false;
+  wishes = [];
+  myReservedWishes = [];
+  myWishes = [];
+  wishListUser = 0;
+}
+
 export interface IWishesState {
-  loading: boolean;
-  currentUser: any;
-  allUsers: any[];
-  familyReference: any[];
-  wishesInitialized: boolean;
-  wishes: any[];
-  myReservedWishes: any[];
-  myWishes: any[];
-  wishListUser: number;
+  1: WishesState;
+  2: WishesState;
+  3: WishesState;
+  4: WishesState;
+  5: WishesState;
+  6: WishesState;
+  7: WishesState;
+  8: WishesState;
+  9: WishesState;
+  10: WishesState;
+  11: WishesState;
+  12: WishesState;
+  13: WishesState;
+  14: WishesState;
+  15: WishesState;
+  16: WishesState;
 }
 
 const wishesInitialState: IWishesState = {
-  loading: false,
-  currentUser: {},
-  allUsers: [],
-  familyReference: [],
-  wishesInitialized: false,
-  wishes: [],
-  myReservedWishes: [],
-  myWishes: [],
-  wishListUser: 0
+  1: new WishesState(),
+  2: new WishesState(),
+  3: new WishesState(),
+  4: new WishesState(),
+  5: new WishesState(),
+  6: new WishesState(),
+  7: new WishesState(),
+  8: new WishesState(),
+  9: new WishesState(),
+  10: new WishesState(),
+  11: new WishesState(),
+  12: new WishesState(),
+  13: new WishesState(),
+  14: new WishesState(),
+  15: new WishesState(),
+  16: new WishesState()
 };
 
 // Reducer
 export function wishesReducer(state: IWishesState = wishesInitialState, action): IWishesState {
+  const currentUserLocalStorage = localStorage.getItem('currentUserID');
+
+  const usersState = Object.keys(state).filter(key => key === currentUserLocalStorage).reduce((obj, key) => {
+    obj[key] = state[key];
+    return obj;
+  }, {});
+
   switch (action.type) {
 
-    case GET_ACTIVE_USER_PENDING:
-      return Object.assign({}, state, {loading: true});
-    case GET_ACTIVE_USER_FULFILLED:
-      return Object.assign({}, state, {
-        loading: false,
-        currentUser: action.payload
-      });
+    case GET_ACTIVE_USER_PENDING: {
+      usersState[currentUserLocalStorage].loading = true;
+      const newState = Object.assign({}, usersState);
+      return Object.assign({}, state, newState);
+    }
+    case GET_ACTIVE_USER_FULFILLED: {
+      usersState[currentUserLocalStorage].loading = false;
+      usersState[currentUserLocalStorage].currentUser = action.payload;
+      const newState = Object.assign({}, usersState);
+      return Object.assign({}, state, newState);
+    }
 
-    case GET_FAMILY_REFERENCE_PENDING:
-      return Object.assign({}, state, {loading: true});
-    case GET_FAMILY_REFERENCE_FULFILLED:
-      return Object.assign({}, state, {
-        loading: false,
-        familyReference: action.payload
-      });
+    case GET_FAMILY_REFERENCE_PENDING: {
+      usersState[currentUserLocalStorage].loading = true;
+      const newState = Object.assign({}, usersState);
+      return Object.assign({}, state, newState);
+    }
+    case GET_FAMILY_REFERENCE_FULFILLED: {
+      usersState[currentUserLocalStorage].loading = false;
+      usersState[currentUserLocalStorage].familyReference = action.payload;
+      const newState = Object.assign({}, usersState);
+      return Object.assign({}, state, newState);
+    }
 
-    case GET_USERS_PENDING:
-      return Object.assign({}, state, {loading: true});
-    case GET_USERS_FULFILLED:
-      return Object.assign({}, state, {
-        loading: false,
-        allUsers: action.payload
-      });
+    case GET_USERS_PENDING: {
+      usersState[currentUserLocalStorage].loading = true;
+      const newState = Object.assign({}, usersState);
+      return Object.assign({}, state, newState);
+    }
+    case GET_USERS_FULFILLED: {
+      usersState[currentUserLocalStorage].loading = false;
+      usersState[currentUserLocalStorage].allUsers = action.payload;
+      const newState = Object.assign({}, usersState);
+      return Object.assign({}, state, newState);
+    }
 
-    case GET_WISHES_PENDING:
-      return Object.assign({}, state, {loading: true});
-    case GET_WISHES_FULFILLED:
-      return Object.assign({}, state, {
-        loading: false,
-        wishes: action.payload
-      });
+    case GET_WISHES_PENDING: {
+      usersState[currentUserLocalStorage].loading = true;
+      const newState = Object.assign({}, usersState);
+      return Object.assign({}, state, newState);
+    }
+    case GET_WISHES_FULFILLED: {
+      usersState[currentUserLocalStorage].loading = false;
+      usersState[currentUserLocalStorage].wishes = action.payload;
+      const newState = Object.assign({}, usersState);
+      return Object.assign({}, state, newState);
+    }
 
-    case SET_WISHLIST_USER:
-      return Object.assign({}, state, {wishListUser: action.payload});
+    case SET_WISHLIST_USER: {
+      usersState[currentUserLocalStorage].wishListUser = action.payload;
+      const newState = Object.assign({}, usersState);
+      return Object.assign({}, state, newState);
+    }
 
-    case INITIALIZE_WISHES:
-      return Object.assign({}, state, {wishesInitialized: action.payload});
+    case INITIALIZE_WISHES: {
+      usersState[currentUserLocalStorage].wishesInitialized = action.payload;
+      const newState = Object.assign({}, usersState);
+      return Object.assign({}, state, newState);
+    }
 
-    case RESERVE_WISH_PENDING:
-      return Object.assign({}, state, {loading: true});
-    case RESERVE_WISH_FULFILLED:
-      return Object.assign({}, state, {loading: false});
+    case RESERVE_WISH_PENDING: {
+      usersState[currentUserLocalStorage].loading = true;
+      const newState = Object.assign({}, usersState);
+      return Object.assign({}, state, newState);
+    }
+    case RESERVE_WISH_FULFILLED: {
+      usersState[currentUserLocalStorage].loading = false;
+      const newState = Object.assign({}, usersState);
+      return Object.assign({}, state, newState);
+    }
 
-    case RELEASE_WISH_PENDING:
-      return Object.assign({}, state, {loading: true});
-    case RELEASE_WISH_FULFILLED:
-      return Object.assign({}, state, {loading: false});
+    case RELEASE_WISH_PENDING: {
+      usersState[currentUserLocalStorage].loading = true;
+      const newState = Object.assign({}, usersState);
+      return Object.assign({}, state, newState);
+    }
+    case RELEASE_WISH_FULFILLED: {
+      usersState[currentUserLocalStorage].loading = false;
+      const newState = Object.assign({}, usersState);
+      return Object.assign({}, state, newState);
+    }
 
-    case ADD_WISH_PENDING:
-      return Object.assign({}, state, {loading: true});
-    case ADD_WISH_FULFILLED:
-      return Object.assign({}, state, {loading: false});
+    case ADD_WISH_PENDING: {
+      usersState[currentUserLocalStorage].loading = true;
+      const newState = Object.assign({}, usersState);
+      return Object.assign({}, state, newState);
+    }
+    case ADD_WISH_FULFILLED: {
+      usersState[currentUserLocalStorage].loading = false;
+      const newState = Object.assign({}, usersState);
+      return Object.assign({}, state, newState);
+    }
 
-    case DELETE_WISH_PENDING:
-      return Object.assign({}, state, {loading: true});
-    case DELETE_WISH_FULFILLED:
-      return Object.assign({}, state, {loading: false});
+    case DELETE_WISH_PENDING: {
+      usersState[currentUserLocalStorage].loading = true;
+      const newState = Object.assign({}, usersState);
+      return Object.assign({}, state, newState);
+    }
+    case DELETE_WISH_FULFILLED: {
+      usersState[currentUserLocalStorage].loading = false;
+      const newState = Object.assign({}, usersState);
+      return Object.assign({}, state, newState);
+    }
 
-    case UPDATE_WISH_PENDING:
-      return Object.assign({}, state, {loading: true});
-    case UPDATE_WISH_FULFILLED:
-      return Object.assign({}, state, {loading: false});
+    case UPDATE_WISH_PENDING: {
+      usersState[currentUserLocalStorage].loading = true;
+      const newState = Object.assign({}, usersState);
+      return Object.assign({}, state, newState);
+    }
+    case UPDATE_WISH_FULFILLED: {
+      usersState[currentUserLocalStorage].loading = false;
+      const newState = Object.assign({}, usersState);
+      return Object.assign({}, state, newState);
+    }
 
-    case GET_RESERVED_WISHES_PENDING:
-      return Object.assign({}, state, {loading: true});
-    case GET_RESERVED_WISHES_FULFILLED:
-      return Object.assign({}, state, {loading: false, myReservedWishes: action.payload});
+    case GET_RESERVED_WISHES_PENDING: {
+      usersState[currentUserLocalStorage].loading = true;
+      const newState = Object.assign({}, usersState);
+      return Object.assign({}, state, newState);
+    }
+    case GET_RESERVED_WISHES_FULFILLED: {
+      usersState[currentUserLocalStorage].loading = false;
+      usersState[currentUserLocalStorage].myReservedWishes = action.payload;
+      const newState = Object.assign({}, usersState);
+      return Object.assign({}, state, newState);
+    }
 
-    case GET_MY_WISHES_PENDING:
-      return Object.assign({}, state, {loading: true});
-    case GET_MY_WISHES_FULFILLED:
-      return Object.assign({}, state, {loading: false, myWishes: action.payload});
+    case GET_MY_WISHES_PENDING: {
+      usersState[currentUserLocalStorage].loading = true;
+      const newState = Object.assign({}, usersState);
+      return Object.assign({}, state, newState);
+    }
+    case GET_MY_WISHES_FULFILLED: {
+      usersState[currentUserLocalStorage].loading = false;
+      usersState[currentUserLocalStorage].myWishes = action.payload;
+      const newState = Object.assign({}, usersState);
+      return Object.assign({}, state, newState);
+    }
 
     default:
       return state;
@@ -147,13 +246,9 @@ export function wishesReducer(state: IWishesState = wishesInitialState, action):
 }
 
 // Action Creators
-export interface IWishesActionCreators {
-  getActiveUser: Function;
-  getAllUsers: Function;
-}
 
 @Injectable()
-export class WishesActionCreators implements IWishesActionCreators {
+export class WishesActionCreators {
 
   constructor(private wishesService: WishesService) { }
 

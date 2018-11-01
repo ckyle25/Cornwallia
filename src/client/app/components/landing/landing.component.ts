@@ -17,7 +17,7 @@ export class LandingComponent implements OnInit {
   innerWidth: number = window.innerWidth;
 
   // Redux Observables
-  @select(['shared']) sharedObs;
+  @select(['shared', localStorage.getItem('currentUserID')]) sharedObs;
 
   constructor(private ngRedux: NgRedux<GlobalState>,
               private sharedActionCreators: SharedActionCreators) { }
@@ -38,6 +38,7 @@ export class LandingComponent implements OnInit {
   public async initializeApp(): Promise<boolean> {
     await this.ngRedux.dispatch(this.sharedActionCreators.getUser(parseInt(localStorage.getItem('currentUserID'), 10)));
     await this.ngRedux.dispatch(this.sharedActionCreators.initializeApp());
+    this.appInitialized = true;
     return true;
   }
 

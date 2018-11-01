@@ -37,8 +37,8 @@ export class WishListComponent implements OnInit {
   myReservedWishesPresent: boolean;
   innerWidth: number = window.innerWidth;
 
-  @select('shared') sharedObs;
-  @select('wishes') wishesObs;
+  @select(['shared', localStorage.getItem('currentUserID')]) sharedObs;
+  @select(['wishes', localStorage.getItem('currentUserID')]) wishesObs;
 
   constructor(private ngRedux: NgRedux<GlobalState>,
               private wishesActionCreators: WishesActionCreators,
@@ -48,7 +48,7 @@ export class WishListComponent implements OnInit {
 
     this.wishListUserID = parseInt(localStorage.getItem('wishlistUser'), 10);
 
-    this.wishesObs.subscribe((result: IWishesState) => {
+    this.wishesObs.subscribe((result) => {
       this.wishListUserID = result.wishListUser;
       this.currentUserID = result.currentUser.userid;
       if (this.wishListUserID === 0) {

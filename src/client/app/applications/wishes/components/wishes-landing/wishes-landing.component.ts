@@ -16,8 +16,8 @@ export class WishesLandingComponent implements OnInit {
   wishesInitialized: boolean = false;
   currentUserID: number;
 
-  @select('shared') sharedObs;
-  @select('wishes') wishesObs;
+  @select(['shared', localStorage.getItem('currentUserID')]) sharedObs;
+  @select(['wishes', localStorage.getItem('currentUserID')]) wishesObs;
 
   constructor(private ngRedux: NgRedux<GlobalState>,
               private wishesActionCreators: WishesActionCreators,
@@ -29,6 +29,7 @@ export class WishesLandingComponent implements OnInit {
       this.currentUserID = result.userObject.userid;
     });
     this.wishesObs.subscribe(result => {
+      console.log('wishes result', result);
       this.wishesInitialized = result.wishesInitialized;
     });
 

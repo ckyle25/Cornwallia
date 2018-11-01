@@ -13,15 +13,16 @@ export class NavBarComponent implements OnInit {
   logoutURL = `${environment.serverUrl}auth/logout`;
   loggedInName: string;
 
-  @select('shared') sharedObs;
+  @select(['shared', localStorage.getItem('currentUserID')]) sharedObs;
 
   constructor(private ngRedux: NgRedux<GlobalState>,
               private sharedActionCreators: SharedActionCreators) { }
 
   ngOnInit() {
     this.sharedObs.subscribe(result => {
+      console.log('result', result);
       this.loggedInName = result.userObject.firstnameval;
-    })
+    });
   }
 
   removeUserId() {

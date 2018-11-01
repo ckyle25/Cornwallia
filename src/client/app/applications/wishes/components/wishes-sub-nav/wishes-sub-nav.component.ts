@@ -14,7 +14,7 @@ export class WishesSubNavComponent implements OnInit {
   currentUserID: number;
   innerWidth: number = window.innerWidth;
 
-  @select('wishes') wishesObs;
+  @select(['wishes', localStorage.getItem('currentUserID')]) wishesObs;
 
   constructor(private ngRedux: NgRedux<GlobalState>,
     private wishesActionCreators: WishesActionCreators) { }

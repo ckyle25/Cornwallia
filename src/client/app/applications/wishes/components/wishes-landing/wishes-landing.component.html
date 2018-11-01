@@ -1,4 +1,4 @@
-<div class="content">
+<div class="content" *ngIf="appInitialized">
   <app-nav-bar></app-nav-bar>
   <wishes-sub-nav></wishes-sub-nav>
   <div *ngIf="wishesInitialized !== false">

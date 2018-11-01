@@ -12,7 +12,7 @@ export class AppListComponent implements OnInit {
   calendarFlag: number;
   lanPartyFlag: number;
 
-  @select('shared') sharedObs;
+  @select(['shared', localStorage.getItem('currentUserID')]) sharedObs;
 
   constructor() { }
 

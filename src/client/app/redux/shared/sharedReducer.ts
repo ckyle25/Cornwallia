@@ -10,36 +10,77 @@ const CLEAR_SELECTED_APP = 'CLEAR_SELECTED_APP';
 const INITIALIZE_APP = 'INITIALIZE_APP';
 
 // Initial State
+class SharedState {
+  loading = false;
+  userObject = {};
+  appSelection = '';
+  appInitialized = false;
+}
+
 export interface ISharedState {
-  loading: boolean;
-  userObject: any;
-  appSelection: string;
-  appInitialized: boolean;
+  1: SharedState;
+  2: SharedState;
+  3: SharedState;
+  4: SharedState;
+  5: SharedState;
+  6: SharedState;
+  7: SharedState;
+  8: SharedState;
+  9: SharedState;
+  10: SharedState;
+  11: SharedState;
+  12: SharedState;
+  13: SharedState;
+  14: SharedState;
+  15: SharedState;
+  16: SharedState;
 }
 
 const sharedInitialState: ISharedState = {
-  loading: false,
-  userObject: {},
-  appSelection: '',
-  appInitialized: false
+  1: new SharedState(),
+  2: new SharedState(),
+  3: new SharedState(),
+  4: new SharedState(),
+  5: new SharedState(),
+  6: new SharedState(),
+  7: new SharedState(),
+  8: new SharedState(),
+  9: new SharedState(),
+  10: new SharedState(),
+  11: new SharedState(),
+  12: new SharedState(),
+  13: new SharedState(),
+  14: new SharedState(),
+  15: new SharedState(),
+  16: new SharedState()
 };
 
 // Reducer
 export function sharedReducer(state: ISharedState = sharedInitialState, action): ISharedState {
+  const currentUserLocalStorage = localStorage.getItem('currentUserID');
+
+  const usersState = Object.keys(state).filter(key => key === currentUserLocalStorage).reduce((obj, key) => {
+    obj[key] = state[key];
+    return obj;
+  }, {});
+
   switch (action.type) {
     case GET_USER_PENDING:
-      return Object.assign({}, state, {loading: true});
+      usersState[currentUserLocalStorage].loading = true;
+      return Object.assign({}, state, usersState);
     case GET_USER_FULFILLED:
-      return Object.assign({}, state, {
-        loading: false,
-        userObject: action.payload
-      });
+      usersState[currentUserLocalStorage].loading = false;
+      usersState[currentUserLocalStorage].userObject = action.payload;
+      return Object.assign({}, state, usersState);
     case SET_SELECTED_APP:
-      return Object.assign({}, state, {appSelection: action.payload});
+      usersState[currentUserLocalStorage].appSelection = action.payload;
+      return Object.assign({}, state, usersState);
     case CLEAR_SELECTED_APP:
-      return Object.assign({}, state, {appSelection: action.payload});
+      usersState[currentUserLocalStorage].appSelection = action.payload;
+      return Object.assign({}, state, usersState);
     case INITIALIZE_APP:
-      return Object.assign({}, state, {appInitialized: action.payload});
+      usersState[currentUserLocalStorage].appInitialized = action.payload;
+      return Object.assign({}, state, usersState);
 
     default:
       return state;
@@ -47,12 +88,9 @@ export function sharedReducer(state: ISharedState = sharedInitialState, action):
 }
 
 // Action Creators
-export interface ISharedActionCreators {
-  getUser: Function;
-}
 
 @Injectable()
-export class SharedActionCreators implements ISharedActionCreators {
+export class SharedActionCreators {
 
   constructor(private sharedService: SharedService) { }
 

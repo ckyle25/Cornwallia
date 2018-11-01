@@ -12,7 +12,7 @@ export class AppLoadingComponent implements OnInit {
 
   appTitle: string;
 
-  @select(['shared']) sharedObs;
+  @select(['shared', localStorage.getItem('currentUserID')]) sharedObs;
 
   constructor(private router: Router) { }
 

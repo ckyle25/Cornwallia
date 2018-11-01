@@ -13,7 +13,7 @@ export class MyWishesComponent implements OnInit {
 
   constructor(private ngRedux: NgRedux<GlobalState>) { }
 
-  @select('wishes') wishesObs;
+  @select(['wishes', localStorage.getItem('currentUserID')]) wishesObs;
 
   ngOnInit() {
     this.wishesObs.subscribe(result => {
