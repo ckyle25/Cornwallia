@@ -1,6 +1,7 @@
 @import "../../../assets/styles/_colors";
 @import "../../../assets/styles/_typography";
 @import "../../../assets/styles/_ui-features";
+@font-face { font-family: GOW; src: url('../../../assets/fonts/godofwar.TTF'); }
 
 #appLoaderWrapper {
 
@@ -22,23 +23,15 @@
 
     z-index: 999999;
 
+    .gow-font {
+      position: absolute;
 
+      top: 23px;
 
-    .triflame {
-
-        position: absolute;
-
-        top: 25px;
-
-        left: 25px;
-
-        height: 50px;
-
-        width: 50px;
-
-        background-size: 50px 50px;
-
-        background-image: url('../../../assets/photos/cornwallia-logo.png');
+      left: 30px;
+      font-family: GOW;
+      color: $white;
+      font-weight: 600;
     }
 
     .loading-text {
@@ -86,7 +79,7 @@
 
      }
 
-    .loader-container { 
+    .loader-container {
 
         display: flex;
 
@@ -102,13 +95,13 @@
 
      }
 
-    
+
 
      .loader-container div { margin: 7px 0; }
 
     .spinner-container { position: relative;}
 
-    
+
 
     .fade-in { animation: fade 1.5s; -webkit-animation: fade 1.5s;}
 
