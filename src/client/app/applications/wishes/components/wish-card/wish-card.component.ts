@@ -96,8 +96,10 @@ export class WishCardComponent implements OnInit, OnChanges {
       const newDescription = description ? description : '';
       let newLink = link ? link : '';
       if (newLink !== '') {
-        if (newLink.substring(0,7) !== 'https://' || newLink.substring(0, 6) !== 'http://') {
-          newLink = 'http://' + newLink
+        console.log('new link substring7', newLink.substring(0, 7));
+        console.log('new link substring6', newLink.substring(0, 6));
+        if (newLink.substring(0, 8) !== 'https://' && newLink.substring(0, 7) !== 'http://') {
+          newLink = 'http://' + newLink;
         }
       }
       await this.ngRedux.dispatch(this.wishesActionCreators.updateWish(title, newDescription, price, newLink, rating, wishId));
