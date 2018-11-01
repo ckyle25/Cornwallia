@@ -13,6 +13,5 @@ export class RatingComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    console.log('rating', this.rating)
   }
 }

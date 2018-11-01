@@ -64,13 +64,13 @@ export class WishListComponent implements OnInit {
       const parentUserIds = [familyObj.parent1wishesuserid, familyObj.parent2wishesuserid !== null ? familyObj.parent2wishesuserid : 0];
       this.parentUserIdsContains = parentUserIds.indexOf(this.currentUserID);
 
-      this.reservedWishes = result.wishes.filter(obj => obj.reservedflg === 1);
-      this.activeWishes = result.wishes.filter(obj => obj.reservedflg !== 1);
+      this.reservedWishes = result.wishes.filter(obj => obj.reservedflg === 1).sort((a, b) => b.ratingnbr - a.ratingnbr);
+      this.activeWishes = result.wishes.filter(obj => obj.reservedflg !== 1).sort((a, b) => b.ratingnbr - a.ratingnbr);
       this.activeWishes.length > 0 ? this.activeWishesPresent = true : this.activeWishesPresent = false;
       this.reservedWishes.length > 0 ? this.reservedWishesPresent = true : this.reservedWishesPresent = false;
-      this.myWishes = result.myWishes;
+      this.myWishes = result.myWishes.sort((a, b) => b.ratingnbr - a.ratingnbr);
       this.myWishes.length > 0 ? this.myWishesPresent = true : this.myWishesPresent = false;
-      this.myReservedWishes = result.myReservedWishes;
+      this.myReservedWishes = result.myReservedWishes.sort((a, b) => b.ratingnbr - a.ratingnbr);
       this.myReservedWishes.length > 0 ? this.myReservedWishesPresent = true : this.myReservedWishesPresent = false;
     });
 
@@ -87,8 +87,8 @@ export class WishListComponent implements OnInit {
       const newDescription = this.description ? this.description : '';
       let newLink = this.link ? this.link : '';
       if (newLink !== '') {
-        if (newLink.substring(0,7) !== 'https://' || newLink.substring(0, 6) !== 'http://') {
-          newLink = 'http://' + newLink
+        if (newLink.substring(0, 8) !== 'https://' && newLink.substring(0, 7) !== 'http://') {
+          newLink = 'http://' + newLink;
         }
       }
       await this.ngRedux.dispatch(this.wishesActionCreators.addWish(this.wishListUserID, this.title, newDescription, this.cost, newLink, this.rating));
