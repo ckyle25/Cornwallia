@@ -24,13 +24,19 @@
         </div>
       </div>
       <div *ngIf="innerWidth < 1000">
-        <i [matMenuTriggerFor]="wishCardOptions" class="fa fa-caret-down title-style text-sub-title clickable"></i>
-        <mat-menu #wishCardOptions="matMenu">
-            <div mat-menu-item class="title-style text-section-title logo-style" *ngIf="currentUser !== wish.userid && wish.reservedflg !== 1 " (click)="onReserveClick(wish.wishid, wish.userid)">Reserve</div>
-            <div mat-menu-item class="title-style text-section-title logo-style" *ngIf="currentUser !== wish.userid && wish.reservedflg == 1 && currentUser === wish.reserveduserid" (click)="onReleaseClick(wish.wishid, wish.userid)">Release</div>
-            <div mat-menu-item class="title-style text-section-title logo-style" *ngIf="currentUser === wish.userid || currentUser == wish.parent1wishesuserid || currentUser == wish.parent2wishesuserid" (click)="onEditClick(wish.titledsc, wish.costamt, wish.linktxt, wish.descriptiondsc, wish.ratingnbr, wish.wishid, wish.userid)">Edit</div>
-            <div mat-menu-item class="title-style text-section-title logo-style" *ngIf="currentUser === wish.userid || currentUser == wish.parent1wishesuserid || currentUser == wish.parent2wishesuserid" (click)="onDeleteClick(wish.wishid, wish.userid)">Delete</div>
-        </mat-menu>
+        <div class="text-style text-paragraph logo-style" *ngIf="currentUser !== wish.userid && wish.reservedflg == 1  && currentUser !== wish.reserveduserid"; else regularMenu>
+          This wish is Reserved <br>
+          Contact Reserver
+        </div>
+        <div #regularMenu>
+          <i [matMenuTriggerFor]="wishCardOptions" class="fa fa-caret-down title-style text-sub-title clickable"></i>
+          <mat-menu #wishCardOptions="matMenu">
+              <div mat-menu-item class="title-style text-section-title logo-style" *ngIf="currentUser !== wish.userid && wish.reservedflg !== 1 " (click)="onReserveClick(wish.wishid, wish.userid)">Reserve</div>
+              <div mat-menu-item class="title-style text-section-title logo-style" *ngIf="currentUser !== wish.userid && wish.reservedflg == 1 && currentUser === wish.reserveduserid" (click)="onReleaseClick(wish.wishid, wish.userid)">Release</div>
+              <div mat-menu-item class="title-style text-section-title logo-style" *ngIf="currentUser === wish.userid || currentUser == wish.parent1wishesuserid || currentUser == wish.parent2wishesuserid" (click)="onEditClick(wish.titledsc, wish.costamt, wish.linktxt, wish.descriptiondsc, wish.ratingnbr, wish.wishid, wish.userid)">Edit</div>
+              <div mat-menu-item class="title-style text-section-title logo-style" *ngIf="currentUser === wish.userid || currentUser == wish.parent1wishesuserid || currentUser == wish.parent2wishesuserid" (click)="onDeleteClick(wish.wishid, wish.userid)">Delete</div>
+          </mat-menu>
+        </div>
       </div>
     </div>
     <div class="title-style logo-style" *ngIf="currentUser === wish.reserveduserid && wish.reservedflg == 1 && currentUser === wish.reserveduserid">Reserved For: {{wish.firstnameval}}</div>

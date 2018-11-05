@@ -44,9 +44,11 @@ export class WishListComponent implements OnInit {
               private wishesActionCreators: WishesActionCreators,
               private modal: ModalTemplateComponent) { }
 
-  ngOnInit() {
+  async ngOnInit() {
 
     this.wishListUserID = parseInt(localStorage.getItem('wishlistUser'), 10);
+    
+    await this.ngRedux.dispatch(this.wishesActionCreators.getWishes(this.wishListUserID));
 
     this.wishesObs.subscribe((result: IWishesState) => {
       this.wishListUserID = result.wishListUser;
@@ -73,8 +75,6 @@ export class WishListComponent implements OnInit {
       this.myReservedWishes = result.myReservedWishes.sort((a, b) => b.ratingnbr - a.ratingnbr);
       this.myReservedWishes.length > 0 ? this.myReservedWishesPresent = true : this.myReservedWishesPresent = false;
     });
-
-    this.ngRedux.dispatch(this.wishesActionCreators.getWishes(this.wishListUserID));
   }
 
   openAddWishDialog() {

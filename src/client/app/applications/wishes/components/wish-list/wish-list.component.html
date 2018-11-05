@@ -1,4 +1,4 @@
-<div class="container" (window:resize)="onResize($event)">
+<div class="container" (window:resize)="onResize($event)" *ngIf="currentUserID">
   <div class="content" *ngIf="innerWidth >= 1000" >
     <div class="left-content">
         <div class="title-container">
