@@ -14,7 +14,8 @@ export class WishesLandingComponent implements OnInit {
 
   appInitialized: boolean = false;
   wishesInitialized: boolean = false;
-  currentUserID: number;
+  edwUserID: number;
+  currentUserId: number;
 
   @select('shared') sharedObs;
   @select('wishes') wishesObs;
@@ -26,10 +27,11 @@ export class WishesLandingComponent implements OnInit {
   async ngOnInit() {
     this.sharedObs.subscribe(result => {
       this.appInitialized = result.appInitialized;
-      this.currentUserID = result.userObject.userid;
+      this.edwUserID = result.userObject.userid;
     });
     this.wishesObs.subscribe(result => {
       this.wishesInitialized = result.wishesInitialized;
+      this.currentUserId = result.currentUser.userid;
     });
 
     if (!this.appInitialized) {
@@ -49,9 +51,9 @@ export class WishesLandingComponent implements OnInit {
 
   async initializeWishes(): Promise<boolean> {
     await this.ngRedux.dispatch(this.wishesActionCreators.getFamilyReference());
-    await this.ngRedux.dispatch(this.wishesActionCreators.getActiveUser(this.currentUserID));
-    await this.ngRedux.dispatch(this.wishesActionCreators.getReservedWishes(this.currentUserID));
-    await this.ngRedux.dispatch(this.wishesActionCreators.getMyWishes(this.currentUserID));
+    await this.ngRedux.dispatch(this.wishesActionCreators.getActiveUser(this.edwUserID));
+    await this.ngRedux.dispatch(this.wishesActionCreators.getReservedWishes(this.currentUserId));
+    await this.ngRedux.dispatch(this.wishesActionCreators.getMyWishes(this.currentUserId));
     await this.ngRedux.dispatch(this.wishesActionCreators.getAllUsers());
     await this.ngRedux.dispatch(this.wishesActionCreators.initializeWishes());
     return true;
