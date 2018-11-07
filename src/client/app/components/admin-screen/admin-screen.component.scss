@@ -149,6 +149,11 @@ tr:nth-child(odd) {
   background-color: $white;
 }
 
+i:hover {
+  color: $red;
+  transition: 0.1s;
+}
+
 @keyframes fade { 0% { opacity: 0; } 100% { opacity: 1; } }
 
 @-webkit-keyframes fade { 0% { opacity: 0; } 100% { opacity: 1; } }

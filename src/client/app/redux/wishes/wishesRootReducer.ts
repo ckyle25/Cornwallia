@@ -37,6 +37,13 @@ const GET_RESERVED_WISHES_FULFILLED = 'GET_RESERVED_WISHES_FULFILLED';
 const GET_MY_WISHES = 'GET_MY_WISHES';
 const GET_MY_WISHES_PENDING = 'GET_MY_WISHES_PENDING';
 const GET_MY_WISHES_FULFILLED = 'GET_MY_WISHES_FULFILLED';
+const UPDATE_WISHES_USER = 'UPDATE_WISHES_USER';
+const UPDATE_WISHES_USER_PENDING = 'UPDATE_WISHES_USER_PENDING';
+const UPDATE_WISHES_USER_FULFILLED = 'UPDATE_WISHES_USER_FULFILLED';
+const UPDATE_WISHES_FAMILY = 'UPDATE_WISHES_FAMILY';
+const UPDATE_WISHES_FAMILY_PENDING = 'UPDATE_WISHES_FAMILY_PENDING';
+const UPDATE_WISHES_FAMILY_FULFILLED = 'UPDATE_WISHES_FAMILY_FULFILLED';
+
 
 
 // Initial State
@@ -140,6 +147,16 @@ export function wishesReducer(state: IWishesState = wishesInitialState, action):
       return Object.assign({}, state, {loading: true});
     case GET_MY_WISHES_FULFILLED:
       return Object.assign({}, state, {loading: false, myWishes: action.payload});
+
+    case UPDATE_WISHES_USER_PENDING:
+      return Object.assign({}, state, {loading: true});
+    case UPDATE_WISHES_USER_FULFILLED:
+      return Object.assign({}, state, {loading: false});
+
+    case UPDATE_WISHES_FAMILY_PENDING:
+      return Object.assign({}, state, {loading: true});
+    case UPDATE_WISHES_FAMILY_FULFILLED:
+      return Object.assign({}, state, {loading: false});
 
     default:
       return state;
@@ -245,6 +262,21 @@ export class WishesActionCreators implements IWishesActionCreators {
     return {
       type: GET_MY_WISHES,
       payload: this.wishesService.getWishes(userId)
+    };
+  }
+
+  updateWishesUser(userId: number, edwUserId: number, familyId: number, isParent: number, firstName: string, lastName: string, isAdmin: number,
+                    birthday: string, anniversary: string, group1: number, group2: number, group3: number) {
+    return {
+      type: UPDATE_WISHES_USER,
+      payload: this.wishesService.updateWishesUser(userId, edwUserId, familyId, isParent, firstName, lastName, isAdmin, birthday, anniversary, group1, group2, group3)
+    };
+  }
+
+  updateWishesFamily(familyId: number, familyName: string, parent1: number, parent2: number, familyGroup: number) {
+    return {
+      type: UPDATE_WISHES_FAMILY,
+      payload: this.wishesService.updateWishesFamily(familyId, familyName, parent1, parent2, familyGroup)
     };
   }
 }

@@ -24,4 +24,24 @@ export class SharedService {
               return response.data;
             });
   }
+
+  public updateEdwUser(userId: number, email: string, isAdmin: number, wishes: number, lanParty: number, calendar: number, firstName: string, lastName: string, auth0Id: string): Promise<any> {
+    const body = {
+      userId,
+      email,
+      isAdmin,
+      wishes,
+      lanParty,
+      calendar,
+      firstName,
+      lastName,
+      auth0Id
+    };
+
+    return axios
+            .put(`${this.url}api/shared/updateUser`, body)
+            .then(response => {
+              return response.data;
+            });
+  }
 }

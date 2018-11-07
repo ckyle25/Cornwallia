@@ -1,4 +1,4 @@
-UPDATE TABLE wishes_users
+UPDATE wishes_users
 SET edwuserid = $2,
 familyid = $3,
 isparentflg = $4,

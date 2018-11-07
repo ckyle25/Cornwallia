@@ -10,7 +10,7 @@ const express = require('express')
     , cors = require('cors')
     , massive = require('massive')
 const { getConfig } = require('./controllers/configController');
-const { getUser, getAdmin } = require('./controllers/sharedController');
+const { getUser, getAdmin, updateEdwUser } = require('./controllers/sharedController');
 const { getAllUsers,
         getActiveUser,
         getWishes,
@@ -20,7 +20,9 @@ const { getAllUsers,
         addWish,
         deleteWish,
         updateWish,
-        getReservedWishes } = require('./controllers/wishesController')
+        getReservedWishes,
+        updateWishesFamily,
+        updateWishesUser } = require('./controllers/wishesController')
 const { checkAuthenticated } = require('./middleware/isAuthenticated');
 
 const app = express();
@@ -142,6 +144,7 @@ app.get('/auth/logout', (req, res) => {
 app.get(`${baseUrl}/authConfig`, getConfig);
 app.get(`${baseUrl}/shared/getAdmin`, checkAuthenticated, getAdmin);
 app.post(`${baseUrl}/shared/getuser`, checkAuthenticated, getUser);
+app.put(`${baseUrl}/shared/updateUser`, checkAuthenticated, updateEdwUser);
 
 // Wishes API Endpoints
 app.get(`${baseUrl}/wishes/getAllUsers`, checkAuthenticated, getAllUsers);
@@ -154,6 +157,9 @@ app.post(`${baseUrl}/wishes/addWish`, checkAuthenticated, addWish);
 app.post(`${baseUrl}/wishes/deleteWish`, checkAuthenticated, deleteWish);
 app.put(`${baseUrl}/wishes/updateWish`, checkAuthenticated, updateWish);
 app.post(`${baseUrl}/wishes/getReservedWishes`, checkAuthenticated, getReservedWishes);
+app.post(`${baseUrl}/shared/getuser`, checkAuthenticated, getUser);
+app.put(`${baseUrl}/wishes/updateUser`, checkAuthenticated, updateWishesUser);
+app.put(`${baseUrl}/wishes/updateFamily`, checkAuthenticated, updateWishesFamily);
 
 const port = process.env.PORT || 3001
 app.listen( port , () => { console.log(`Server listening on port ${port}`); } );

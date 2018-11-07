@@ -135,4 +135,46 @@ export class WishesService {
               return response.data;
             });
   }
+
+  public updateWishesUser(userId: number, edwUserId: number, familyId: number, isParent: number, firstName: string, lastName: string, isAdmin: number,
+                         birthday: string, anniversary: string, group1: number, group2: number, group3: number): Promise<any> {
+
+    const body = {
+      userId,
+      edwUserId,
+      familyId,
+      isParent,
+      firstName,
+      lastName,
+      isAdmin,
+      birthday,
+      anniversary,
+      group1,
+      group2,
+      group3
+     };
+
+    return axios
+            .put(`${this.url}api/wishes/updateUser`, body)
+            .then(response => {
+              return response.data;
+            });
+  }
+
+  public updateWishesFamily(familyId: number, familyName: string, parent1: number, parent2: number, familyGroup: number): Promise<any> {
+
+    const body = {
+      familyId,
+      familyName,
+      parent1,
+      parent2,
+      familyGroup
+     };
+
+    return axios
+            .put(`${this.url}api/wishes/updateFamily`, body)
+            .then(response => {
+              return response.data;
+            });
+  }
 }

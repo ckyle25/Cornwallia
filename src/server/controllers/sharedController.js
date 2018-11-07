@@ -33,5 +33,15 @@ module.exports = {
               })
           })
       })
+  },
+
+  updateEdwUser: (req, res, next) => {
+    const dbInstance = req.app.get('db');
+    const body = req.body;
+
+    dbInstance.update_edw_users([body.userId, body.email, body.isAdmin, body.wishes, body.lanParty, body.calendar, body.firstName, body.lastName, body.auth0Id])
+      .then(response => {
+        return res.status(200).send('EDW User Updated')
+      })
   }
 }
