@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgRedux, select } from '@angular-redux/store';
 import { IGlobalState as GlobalState } from '../../redux/rootReducer';
 import { environment } from '../../../environments/environment';
-import { SharedActionCreators } from '../../redux/shared/sharedReducer';
+import { SharedActionCreators, ISharedState } from '../../redux/shared/sharedReducer';
 
 @Component({
   selector: 'app-nav-bar',
@@ -10,7 +10,9 @@ import { SharedActionCreators } from '../../redux/shared/sharedReducer';
   styleUrls: ['./nav-bar.component.scss']
 })
 export class NavBarComponent implements OnInit {
+
   logoutURL = `${environment.serverUrl}auth/logout`;
+  isAdmin: boolean;
   loggedInName: string;
 
   @select('shared') sharedObs;
@@ -19,9 +21,10 @@ export class NavBarComponent implements OnInit {
               private sharedActionCreators: SharedActionCreators) { }
 
   ngOnInit() {
-    this.sharedObs.subscribe(result => {
+    this.sharedObs.subscribe((result: ISharedState) => {
       this.loggedInName = result.userObject.firstnameval;
-    })
+      result.userObject.isadminflg === 1 ? this.isAdmin = true : this.isAdmin = false;
+    });
   }
 
   removeUserId() {

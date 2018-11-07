@@ -11,8 +11,12 @@
     <i class="fas fa-sign-out-alt"></i>
     <span class="mleft-10">Logout</span>
   </a>
-  <div mat-menu-item>
+  <!-- <div mat-menu-item>
     <i class="fa fa-question-circle"></i>
     <span class="mleft-10">Help</span>
-  </div>
+  </div> -->
+  <a [routerLink]="['/admin']" mat-menu-item *ngIf="isAdmin">
+    <i class="fas fa-toolbox"></i>
+    <span class="mleft-10">Administrator</span>
+  </a>
 </mat-menu>

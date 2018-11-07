@@ -1,0 +1,269 @@
+<div class="content" (window:resize)="onResize($event)">
+  <app-nav-bar></app-nav-bar>
+  <div class="lower-content-container">
+    <div class="table-label-style text-page-title logo-style margin-b-5">Cornwallia Users</div>
+    <table class="table margin-b-10">
+      <colgroup>
+        <col style="width: 6%">
+        <col style="width: 10%">
+        <col style="width: 6%">
+        <col style="width: 6%">
+        <col style="width: 6%">
+        <col style="width: 6%">
+        <col style="width: 10%">
+        <col style="width: 10%">
+        <col style="width: 35%">
+        <col style="width: 6%">
+      </colgroup>
+      <thead>
+        <tr>
+          <th>UserID</th>
+          <th>Email</th>
+          <th>Admin</th>
+          <th>Wishes</th>
+          <th>Lan</th>
+          <th>Calendar</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Auth0 ID</th>
+          <th>Edit</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of edwUsers">
+          <td>{{user.userid}}</td>
+          <td>{{user.emaildsc}}</td>
+          <td>{{user.isadminflg}}</td>
+          <td>{{user.wishesflg}}</td>
+          <td>{{user.lanpartyflg}}</td>
+          <td>{{user.calendarflg}}</td>
+          <td>{{user.firstnameval}}</td>
+          <td>{{user.lastnameval}}</td>
+          <td>{{user.auth0id}}</td>
+          <td>
+              <i class="fas fa-cog clickable" (click)="onCornwalliaEditClick(user.userid, user.emaildsc, user.isadminflg, user.wishesflg, user.lanpartyflg, user.calendarflg, user.firstnameval, user.lastnameval, user.auth0id)"></i>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="table-label-style text-page-title logo-style margin-b-5">Wishes Users</div>
+    <table class="table margin-b-10">
+        <colgroup>
+          <col style="width: 10%">
+          <col style="width: 10%">
+          <col style="width: 10%">
+          <col style="width: 10%">
+          <col style="width: 10%">
+          <col style="width: 10%">
+          <col style="width: 10%">
+          <col style="width: 10%">
+          <col style="width: 10%">
+          <col style="width: 10%">
+          <col style="width: 10%">
+          <col style="width: 10%">
+          <col style="width: 6%">
+        </colgroup>
+        <thead>
+          <tr>
+            <th>UserID</th>
+            <th>EDW UserID</th>
+            <th>Family</th>
+            <th>Parent</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Admin</th>
+            <th>Birthday</th>
+            <th>Anniversary</th>
+            <th>Group1</th>
+            <th>Group2</th>
+            <th>Group3</th>
+            <th>Edit</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of wishesUsers">
+            <td>{{user.userid}}</td>
+            <td>{{user.edwuserid}}</td>
+            <td>{{user.familyid}}</td>
+            <td>{{user.isparentflg}}</td>
+            <td>{{user.firstnameval}}</td>
+            <td>{{user.lastnameval}}</td>
+            <td>{{user.isadminflg}}</td>
+            <td>{{user.birthdaydt | date: 'MM/dd/yyyy'}}</td>
+            <td>{{user.anniversarydt | date: 'MM/dd/yyyy'}}</td>
+            <td>{{user.accessgroup1flg}}</td>
+            <td>{{user.accessgroup2flg}}</td>
+            <td>{{user.accessgroup3flg}}</td>
+            <td>
+                <i class="fas fa-cog clickable" (click)="onWishesUsersEditClick(user.userid, user.edwuserid, user.familyid, user.isparentflg, user.firstnameval, user.lastnameval, user.isadminflg, user.birthdaydt, user.anniversarydt, user.accessgroup1flg, user.accessgroup2flg, user.accessgroup3flg)"></i>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    <div class="table-label-style text-page-title logo-style margin-b-5">Wishes Families</div>
+    <table class="table margin-b-10">
+        <colgroup>
+          <col style="width: 10%">
+          <col style="width: 10%">
+          <col style="width: 10%">
+          <col style="width: 10%">
+          <col style="width: 10%">
+          <col style="width: 6%">
+        </colgroup>
+        <thead>
+          <tr>
+            <th>FamilyID</th>
+            <th>Family Name</th>
+            <th>Parent 1 ID</th>
+            <th>Parent 2 ID</th>
+            <th>Family Group</th>
+            <th>Edit</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of wishesFamilies">
+            <td>{{user.familyid}}</td>
+            <td>{{user.familynm}}</td>
+            <td>{{user.parent1wishesuserid}}</td>
+            <td>{{user.parent2wishesuserid}}</td>
+            <td>{{user.familygroupid}}</td>
+            <td>
+                <i class="fas fa-cog clickable" (click)="onWishesFamilyClick(user.familyid, user.familynm, user.parent1wishesuserid, user.parent2wishesuserid, user.familygroupid)"></i>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+  </div>
+</div>
+
+<modal-template [modalID]="'editCornwalliaUser'">
+    <div [ngClass]="{'edit-modal-style' : innerWidth >= 1000, 'edit-modal-style-mobile' : innerWidth < 1000}">
+      <div class="add-title-container">
+          <div class="title-style text-sub-title logo-style">Edit User</div>
+      </div>
+      <mat-form-field class="input-style">
+          <input matInput type="number" step="1" placeholder="User ID" [(ngModel)]="cornwalliaUserId" required disabled>
+      </mat-form-field>
+      <mat-form-field class="input-style">
+          <input matInput placeholder="Email" [(ngModel)]="cornwalliaEmail" required>
+      </mat-form-field>
+      <mat-form-field class="input-style">
+          <input matInput type="number" step="1" placeholder="Admin" [(ngModel)]="cornwalliaAdmin" required>
+      </mat-form-field>
+      <mat-form-field class="input-style">
+          <input matInput type="number" step="1" placeholder="Wishes" [(ngModel)]="cornwalliaWishes" required>
+      </mat-form-field>
+      <mat-form-field class="input-style">
+          <input matInput type="number" step="1" placeholder="Lan" [(ngModel)]="cornwalliaLan" required>
+      </mat-form-field>
+      <mat-form-field class="input-style">
+          <input matInput type="number" step="1" placeholder="Calendar" [(ngModel)]="cornwalliaCalendar" required>
+      </mat-form-field>
+      <mat-form-field class="input-style">
+          <input matInput placeholder="First Name" [(ngModel)]="cornwalliaFirstName" required>
+      </mat-form-field>
+      <mat-form-field class="input-style">
+          <input matInput placeholder="Last Name" [(ngModel)]="cornwalliaLastName" required>
+      </mat-form-field>
+      <mat-form-field class="input-style">
+          <input matInput placeholder="Auth 0 Id" [(ngModel)]="cornwalliaAuth0Id" required>
+      </mat-form-field>
+      <div class="add-title-container">
+        <div class="cancel-button clickable" (click)="cancelCornwalliaEditClick()">
+          <i class="fa fa-times button-text-style"></i>
+          <pre class="button-text-style logo-style"> Cancel</pre>
+        </div>
+        <div class="save-button clickable">
+            <i class="fa fa-check button-text-style"></i>
+            <pre class="button-text-style logo-style"> Save Updates</pre>
+          </div>
+      </div>
+    </div>
+  </modal-template>
+
+  <modal-template [modalID]="'editWishesUser'">
+      <div [ngClass]="{'edit-modal-style' : innerWidth >= 1000, 'edit-modal-style-mobile' : innerWidth < 1000}">
+        <div class="add-title-container">
+            <div class="title-style text-sub-title logo-style">Edit User</div>
+        </div>
+        <mat-form-field class="input-style">
+            <input matInput type="number" step="1" placeholder="User ID" [(ngModel)]="wishesUserId" required disabled>
+        </mat-form-field>
+        <mat-form-field class="input-style">
+            <input matInput type="number" step="1" placeholder="EDW User ID" [(ngModel)]="wishesEdwUserId" required>
+        </mat-form-field>
+        <mat-form-field class="input-style">
+            <input matInput type="number" step="1" placeholder="Family ID" [(ngModel)]="wishesFamilyId" required>
+        </mat-form-field>
+        <mat-form-field class="input-style">
+            <input matInput type="number" step="1" placeholder="Parent" [(ngModel)]="wishesParent" required>
+        </mat-form-field>
+        <mat-form-field class="input-style">
+            <input matInput placeholder="First Name" [(ngModel)]="wishesFirstName" required>
+        </mat-form-field>
+        <mat-form-field class="input-style">
+            <input matInput placeholder="Last Name" [(ngModel)]="wishesLastName" required>
+        </mat-form-field>
+        <mat-form-field class="input-style">
+            <input matInput type="number" step="1" placeholder="Admin" [(ngModel)]="wishesIsAdmin" required>
+        </mat-form-field>
+        <mat-form-field class="input-style">
+            <input matInput placeholder="Birthday" [(ngModel)]="wishesBirthday" required>
+        </mat-form-field>
+        <mat-form-field class="input-style">
+            <input matInput placeholder="Anniversary" [(ngModel)]="wishesAnniversary" required>
+        </mat-form-field>
+        <mat-form-field class="input-style">
+            <input matInput type="number" step="1" placeholder="Family Group 1" [(ngModel)]="wishesGroup1" required>
+        </mat-form-field>
+        <mat-form-field class="input-style">
+            <input matInput type="number" step="1" placeholder="Family Group 1" [(ngModel)]="wishesGroup2" required>
+        </mat-form-field>
+        <mat-form-field class="input-style">
+            <input matInput type="number" step="1" placeholder="Family Group 1" [(ngModel)]="wishesGroup3" required>
+        </mat-form-field>
+        <div class="add-title-container">
+          <div class="cancel-button clickable" (click)="cancelWishesUsersEdit()">
+            <i class="fa fa-times button-text-style"></i>
+            <pre class="button-text-style logo-style"> Cancel</pre>
+          </div>
+          <div class="save-button clickable">
+              <i class="fa fa-check button-text-style"></i>
+              <pre class="button-text-style logo-style"> Save Updates</pre>
+            </div>
+        </div>
+      </div>
+    </modal-template>
+
+    <modal-template [modalID]="'editFamily'">
+        <div [ngClass]="{'edit-modal-style' : innerWidth >= 1000, 'edit-modal-style-mobile' : innerWidth < 1000}">
+          <div class="add-title-container">
+              <div class="title-style text-sub-title logo-style">Edit User</div>
+          </div>
+          <mat-form-field class="input-style">
+              <input matInput type="number" step="1" placeholder="Family ID" [(ngModel)]="familyFamilyId" required disabled>
+          </mat-form-field>
+          <mat-form-field class="input-style">
+              <input matInput placeholder="Family Name" [(ngModel)]="familyName" required>
+          </mat-form-field>
+          <mat-form-field class="input-style">
+              <input matInput type="number" step="1" placeholder="Parent 1" [(ngModel)]="familyParent1" required>
+          </mat-form-field>
+          <mat-form-field class="input-style">
+              <input matInput type="number" step="1" placeholder="Parent 2" [(ngModel)]="familyParent2" required>
+          </mat-form-field>
+          <mat-form-field class="input-style">
+              <input matInput type="number" step="1" placeholder="Family Group" [(ngModel)]="familyGroup" required>
+          </mat-form-field>
+          <div class="add-title-container">
+            <div class="cancel-button clickable" (click)="cancelWishesFamilyEdit()">
+              <i class="fa fa-times button-text-style"></i>
+              <pre class="button-text-style logo-style"> Cancel</pre>
+            </div>
+            <div class="save-button clickable">
+                <i class="fa fa-check button-text-style"></i>
+                <pre class="button-text-style logo-style"> Save Updates</pre>
+              </div>
+          </div>
+        </div>
+      </modal-template>

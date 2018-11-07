@@ -32,6 +32,7 @@ import { SharedActionCreators } from './redux/shared/sharedReducer';
 import { SharedService } from './services/shared/sharedServices';
 import { WishesActionCreators } from './redux/wishes/wishesRootReducer';
 import { WishesService } from './services/wishes/wishesService';
+import { AdminScreenComponent } from './components/admin-screen/admin-screen.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { WishesService } from './services/wishes/wishesService';
     AppCardComponent,
     AppListComponent,
     RequestAccessComponent,
-    LeaveFeedbackComponent
+    LeaveFeedbackComponent,
+    AdminScreenComponent
   ],
   imports: [
     FormsModule,
@@ -62,6 +64,7 @@ import { WishesService } from './services/wishes/wishesService';
         { path: 'access', component: RequestAccessComponent, canActivate: [AuthGuardService] },
         { path: 'feedback', component: LeaveFeedbackComponent, canActivate: [AuthGuardService] }
       ]},
+      { path: 'admin', component: AdminScreenComponent, canActivate: [AuthGuardService] },
       { path: 'wishes', loadChildren: './applications/wishes/wishes.module#WishesModule', canActivate: [AuthGuardService]},
       { path: 'shared', loadChildren: './shared/shared.module#SharedModule', canActivate: [AuthGuardService]},
       { path: 'lanparty', loadChildren: './applications/lan-party-planner/lan-party-planner.module#LanPartyModule', canActivate: [AuthGuardService]}

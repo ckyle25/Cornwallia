@@ -10,7 +10,7 @@ const express = require('express')
     , cors = require('cors')
     , massive = require('massive')
 const { getConfig } = require('./controllers/configController');
-const { getUser } = require('./controllers/sharedController');
+const { getUser, getAdmin } = require('./controllers/sharedController');
 const { getAllUsers,
         getActiveUser,
         getWishes,
@@ -21,7 +21,7 @@ const { getAllUsers,
         deleteWish,
         updateWish,
         getReservedWishes } = require('./controllers/wishesController')
-const isAuthenticated = require('./middleware/isAuthenticated');
+const { checkAuthenticated } = require('./middleware/isAuthenticated');
 
 const app = express();
 
@@ -140,19 +140,20 @@ app.get('/auth/logout', (req, res) => {
 
 // Shared API Endpoints
 app.get(`${baseUrl}/authConfig`, getConfig);
-app.post(`${baseUrl}/shared/getuser`, getUser);
+app.get(`${baseUrl}/shared/getAdmin`, checkAuthenticated, getAdmin);
+app.post(`${baseUrl}/shared/getuser`, checkAuthenticated, getUser);
 
 // Wishes API Endpoints
-app.get(`${baseUrl}/wishes/getAllUsers`, getAllUsers);
-app.get(`${baseUrl}/wishes/getFamilyReference`, getFamilyReference);
-app.post(`${baseUrl}/wishes/getActiveUser`, getActiveUser);
-app.post(`${baseUrl}/wishes/getWishes`, getWishes);
-app.post(`${baseUrl}/wishes/reserveWish`, reserveWish);
-app.post(`${baseUrl}/wishes/releaseWish`, releaseWish);
-app.post(`${baseUrl}/wishes/addWish`, addWish);
-app.post(`${baseUrl}/wishes/deleteWish`, deleteWish);
-app.put(`${baseUrl}/wishes/updateWish`, updateWish);
-app.post(`${baseUrl}/wishes/getReservedWishes`, getReservedWishes);
+app.get(`${baseUrl}/wishes/getAllUsers`, checkAuthenticated, getAllUsers);
+app.get(`${baseUrl}/wishes/getFamilyReference`, checkAuthenticated, getFamilyReference);
+app.post(`${baseUrl}/wishes/getActiveUser`, checkAuthenticated, getActiveUser);
+app.post(`${baseUrl}/wishes/getWishes`, checkAuthenticated, getWishes);
+app.post(`${baseUrl}/wishes/reserveWish`, checkAuthenticated, reserveWish);
+app.post(`${baseUrl}/wishes/releaseWish`, checkAuthenticated, releaseWish);
+app.post(`${baseUrl}/wishes/addWish`, checkAuthenticated, addWish);
+app.post(`${baseUrl}/wishes/deleteWish`, checkAuthenticated, deleteWish);
+app.put(`${baseUrl}/wishes/updateWish`, checkAuthenticated, updateWish);
+app.post(`${baseUrl}/wishes/getReservedWishes`, checkAuthenticated, getReservedWishes);
 
 const port = process.env.PORT || 3001
 app.listen( port , () => { console.log(`Server listening on port ${port}`); } );

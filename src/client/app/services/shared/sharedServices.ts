@@ -16,4 +16,12 @@ export class SharedService {
               return response.data;
             });
   }
+
+  public getAdmin(): Promise<any> {
+    return axios
+            .get(`${this.url}api/shared/getAdmin`)
+            .then(response => {
+              return response.data;
+            });
+  }
 }
