@@ -11,6 +11,7 @@ const express = require('express')
     , massive = require('massive')
     , nodemailer = require('nodemailer')
     , schedule = require('node-schedule')
+    , moment = require('moment')
 const { getConfig } = require('./controllers/configController');
 const { getUser, getAdmin, updateEdwUser, requestAccess } = require('./controllers/sharedController');
 const { getAllUsers,
@@ -176,7 +177,32 @@ app.put(`${baseUrl}/wishes/updateUser`, checkAuthenticated, updateWishesUser);
 app.put(`${baseUrl}/wishes/updateFamily`, checkAuthenticated, updateWishesFamily);
 
 // Wishes Email Services
-let j = schedule.scheduleJob('20 * * *', checkEmailBirthdays)
+let j = schedule.scheduleJob('1 * * * * *', () => {
+  app.get('db').check_birthdays()
+  .then(result => {
+      const today = moment(new Date());
+      let emailArray = [];
+
+      result.forEach((user) => {
+        var birthDay = moment(user.birthdaydt).year(today.year());
+        var birthDayNextYear = moment(user.birthdaydt).year(today.year() + 1);
+        var daysRemainingThisYear = birthDay.diff(today, 'days');
+        var daysRemainingNextYear = birthDayNextYear.diff(today, 'days');
+
+        if (daysRemainingThisYear == 30 || daysRemainingNextYear == 30) {
+          emailArray.push(user);
+        }
+      });
+
+      // emailArray.forEach(user => {
+
+      //   var mailOptions = {
+      //     from: 'Cornwallia Wishes <cornwallia225@gmail.com>'
+      //   }
+      // });
+      // console.log('birthdays', emailArray);
+  });
+})
 
 const port = process.env.PORT || 3001
 app.listen( port , () => { console.log(`Server listening on port ${port}`); } );

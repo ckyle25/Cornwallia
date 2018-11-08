@@ -123,6 +123,9 @@ module.exports = {
     },
 
     checkEmailBirthdays: () => {
-      console.log('Working')
+      app.get('db').check_birthdays()
+        .then(result => {
+          console.log('Birthday stuff', result)
+        });
     }
   }
