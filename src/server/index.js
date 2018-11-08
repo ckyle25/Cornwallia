@@ -10,6 +10,7 @@ const express = require('express')
     , cors = require('cors')
     , massive = require('massive')
     , nodemailer = require('nodemailer')
+    , schedule = require('node-schedule')
 const { getConfig } = require('./controllers/configController');
 const { getUser, getAdmin, updateEdwUser, requestAccess } = require('./controllers/sharedController');
 const { getAllUsers,
@@ -23,7 +24,8 @@ const { getAllUsers,
         updateWish,
         getReservedWishes,
         updateWishesFamily,
-        updateWishesUser } = require('./controllers/wishesController')
+        updateWishesUser,
+        checkEmailBirthdays } = require('./controllers/wishesController')
 const { checkAuthenticated } = require('./middleware/isAuthenticated');
 
 const app = express();
@@ -172,6 +174,9 @@ app.post(`${baseUrl}/wishes/getReservedWishes`, checkAuthenticated, getReservedW
 app.post(`${baseUrl}/shared/getuser`, checkAuthenticated, getUser);
 app.put(`${baseUrl}/wishes/updateUser`, checkAuthenticated, updateWishesUser);
 app.put(`${baseUrl}/wishes/updateFamily`, checkAuthenticated, updateWishesFamily);
+
+// Wishes Email Services
+let j = schedule.scheduleJob('20 * * *', checkEmailBirthdays)
 
 const port = process.env.PORT || 3001
 app.listen( port , () => { console.log(`Server listening on port ${port}`); } );

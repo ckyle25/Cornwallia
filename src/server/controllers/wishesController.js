@@ -120,5 +120,9 @@ module.exports = {
         .then(result => {
           return res.status(200).send('Wishes family updated')
         })
+    },
+
+    checkEmailBirthdays: () => {
+      console.log('Working')
     }
   }
