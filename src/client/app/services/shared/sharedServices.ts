@@ -17,6 +17,20 @@ export class SharedService {
             });
   }
 
+  public requestAccess(content: string, userName: string): Promise<any> {
+
+    const body = {
+      content,
+      userName
+    };
+
+    return axios
+            .post(`${this.url}api/shared/requestAccess`, body)
+            .then(response => {
+              return response.data;
+            });
+  }
+
   public getAdmin(): Promise<any> {
     return axios
             .get(`${this.url}api/shared/getAdmin`)

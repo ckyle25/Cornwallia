@@ -9,8 +9,9 @@ const express = require('express')
     , session = require('express-session')
     , cors = require('cors')
     , massive = require('massive')
+    , nodemailer = require('nodemailer')
 const { getConfig } = require('./controllers/configController');
-const { getUser, getAdmin, updateEdwUser } = require('./controllers/sharedController');
+const { getUser, getAdmin, updateEdwUser, requestAccess } = require('./controllers/sharedController');
 const { getAllUsers,
         getActiveUser,
         getWishes,
@@ -46,6 +47,16 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static(publicweb))
+
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: 'cornwallia225@gmail.com',
+    pass: 'c0rnw@lli@p@$$'
+  }
+});
+
+app.set('transporter', transporter);
 
 passport.use(new Auth0Strategy(
   {
@@ -144,6 +155,7 @@ app.get('/auth/logout', (req, res) => {
 app.get(`${baseUrl}/authConfig`, getConfig);
 app.get(`${baseUrl}/shared/getAdmin`, checkAuthenticated, getAdmin);
 app.post(`${baseUrl}/shared/getuser`, checkAuthenticated, getUser);
+app.post(`${baseUrl}/shared/requestAccess`, checkAuthenticated, requestAccess);
 app.put(`${baseUrl}/shared/updateUser`, checkAuthenticated, updateEdwUser);
 
 // Wishes API Endpoints
