@@ -177,7 +177,8 @@ app.put(`${baseUrl}/wishes/updateUser`, checkAuthenticated, updateWishesUser);
 app.put(`${baseUrl}/wishes/updateFamily`, checkAuthenticated, updateWishesFamily);
 
 // Wishes Email Services
-let j = schedule.scheduleJob('1 * * * * *', () => {
+// let j = schedule.scheduleJob('1 * * * * *', () => {
+let j = schedule.scheduleJob('20 * * *', () => {
   app.get('db').check_birthdays()
   .then(result => {
       const today = moment(new Date());
