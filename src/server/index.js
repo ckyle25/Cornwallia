@@ -40,6 +40,17 @@ const publicweb = process.env.PUBLICWEB || './publicweb';
 
 app.use( bodyParser.json() );
 app.use( cors() );
+app.use(function(req, res, next) {
+  res.header('Access-Control-Allow-Credentials', true);
+  res.header('Access-Control-Allow-Origin', req.headers.origin);
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+  res.header('Access-Control-Allow-Headers', 'X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept');
+  if ('OPTIONS' == req.method) {
+    res.send(200);
+  } else {
+      next();
+  }
+});
 app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: false,
@@ -132,20 +143,10 @@ app.get('/callback', passport.authenticate('auth0', {
 }))
 
 app.get('/auth/me', (req, res, next) => {
-    const sessions = req.sessionStore.sessions;
-    let passport = {}
-
-  for(let sessionID in sessions) {
-    let sessionTest = JSON.parse(sessions[sessionID]);
-    if (sessionTest.hasOwnProperty('passport')) {
-      passport = sessionTest.passport
-    }
-  }
-
-  if (Object.keys(passport).length === 0 && passport.constructor === Object) {
-    return res.status(200).send("Login Required");
+  if (!req.user) {
+    return res.status(200).send('Login Required');
   } else {
-    return res.status(200).send(passport.user)
+    return res.status(200).send(req.user);
   }
 });
 
@@ -157,26 +158,26 @@ app.get('/auth/logout', (req, res) => {
 
 // Shared API Endpoints
 app.get(`${baseUrl}/authConfig`, getConfig);
-app.get(`${baseUrl}/shared/getAdmin`, checkAuthenticated, getAdmin);
-app.post(`${baseUrl}/shared/getuser`, checkAuthenticated, getUser);
-app.post(`${baseUrl}/shared/requestAccess`, checkAuthenticated, requestAccess);
-app.put(`${baseUrl}/shared/updateUser`, checkAuthenticated, updateEdwUser);
+app.get(`${baseUrl}/shared/getAdmin`, getAdmin);
+app.post(`${baseUrl}/shared/getuser`, getUser);
+app.post(`${baseUrl}/shared/requestAccess`, requestAccess);
+app.put(`${baseUrl}/shared/updateUser`, updateEdwUser);
 
 // Wishes API Endpoints
-app.get(`${baseUrl}/wishes/getAllUsers`, checkAuthenticated, getAllUsers);
-app.get(`${baseUrl}/wishes/getFamilyReference`, checkAuthenticated, getFamilyReference);
-app.post(`${baseUrl}/wishes/getActiveUser`, checkAuthenticated, getActiveUser);
-app.post(`${baseUrl}/wishes/getWishes`, checkAuthenticated, getWishes);
-app.post(`${baseUrl}/wishes/reserveWish`, checkAuthenticated, reserveWish);
-app.post(`${baseUrl}/wishes/releaseWish`, checkAuthenticated, releaseWish);
-app.post(`${baseUrl}/wishes/addWish`, checkAuthenticated, addWish);
-app.post(`${baseUrl}/wishes/deleteWish`, checkAuthenticated, deleteWish);
-app.put(`${baseUrl}/wishes/updateWish`, checkAuthenticated, updateWish);
-app.post(`${baseUrl}/wishes/getReservedWishes`, checkAuthenticated, getReservedWishes);
-app.post(`${baseUrl}/shared/getuser`, checkAuthenticated, getUser);
-app.put(`${baseUrl}/wishes/updateBio`, checkAuthenticated, updateBio);
-app.put(`${baseUrl}/wishes/updateUser`, checkAuthenticated, updateWishesUser);
-app.put(`${baseUrl}/wishes/updateFamily`, checkAuthenticated, updateWishesFamily);
+app.get(`${baseUrl}/wishes/getAllUsers`, getAllUsers);
+app.get(`${baseUrl}/wishes/getFamilyReference`, getFamilyReference);
+app.post(`${baseUrl}/wishes/getActiveUser`, getActiveUser);
+app.post(`${baseUrl}/wishes/getWishes`, getWishes);
+app.post(`${baseUrl}/wishes/reserveWish`, reserveWish);
+app.post(`${baseUrl}/wishes/releaseWish`, releaseWish);
+app.post(`${baseUrl}/wishes/addWish`, addWish);
+app.post(`${baseUrl}/wishes/deleteWish`, deleteWish);
+app.put(`${baseUrl}/wishes/updateWish`, updateWish);
+app.post(`${baseUrl}/wishes/getReservedWishes`, getReservedWishes);
+app.post(`${baseUrl}/shared/getuser`, getUser);
+app.put(`${baseUrl}/wishes/updateBio`, updateBio);
+app.put(`${baseUrl}/wishes/updateUser`, updateWishesUser);
+app.put(`${baseUrl}/wishes/updateFamily`, updateWishesFamily);
 
 // Wishes Email Services
 // let j = schedule.scheduleJob('1 * * * * *', () => {

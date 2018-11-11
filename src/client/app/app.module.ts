@@ -50,6 +50,7 @@ import { AdminScreenComponent } from './components/admin-screen/admin-screen.com
   imports: [
     FormsModule,
     BrowserModule,
+
     BrowserAnimationsModule,
     SharedModule,
     NgReduxModule,

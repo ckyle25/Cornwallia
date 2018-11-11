@@ -11,12 +11,19 @@ export class AuthGuardService implements CanActivate {
     constructor(private router: Router) { }
 
     canActivate() {
-    return axios.get(`${environment.serverUrl}auth/me`)
+      const config = {
+        withCredentials: true,
+        // headers: {
+        //   'Content-Type': 'application/json',
+        // },
+      };
+
+    return axios.get(`${environment.serverUrl}auth/me`, config)
           .then(res => {
-            this.isLoggedIn = res.data;
+            console.log('res.data', res.data);
 
             if (res.data !== 'Login Required') {
-                localStorage.setItem('currentUserID', res.data.id);
+                localStorage.setItem('currentUserID', res.data.userid);
                 return true;
             } else {
                 this.router.navigate(['login']);
