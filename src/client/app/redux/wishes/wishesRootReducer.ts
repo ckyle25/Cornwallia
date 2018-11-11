@@ -43,6 +43,9 @@ const UPDATE_WISHES_USER_FULFILLED = 'UPDATE_WISHES_USER_FULFILLED';
 const UPDATE_WISHES_FAMILY = 'UPDATE_WISHES_FAMILY';
 const UPDATE_WISHES_FAMILY_PENDING = 'UPDATE_WISHES_FAMILY_PENDING';
 const UPDATE_WISHES_FAMILY_FULFILLED = 'UPDATE_WISHES_FAMILY_FULFILLED';
+const UPDATE_BIO = 'UPDATE_BIO';
+const UPDATE_BIO_PENDING = 'UPDATE_BIO_PENDING';
+const UPDATE_BIO_FULFILLED = 'UPDATE_BIO_FULFILLED';
 
 
 
@@ -158,6 +161,11 @@ export function wishesReducer(state: IWishesState = wishesInitialState, action):
     case UPDATE_WISHES_FAMILY_FULFILLED:
       return Object.assign({}, state, {loading: false});
 
+    case UPDATE_BIO_PENDING:
+      return Object.assign({}, state, {loading: true});
+    case UPDATE_BIO_FULFILLED:
+      return Object.assign({}, state, {loading: false});
+
     default:
       return state;
   }
@@ -255,6 +263,13 @@ export class WishesActionCreators implements IWishesActionCreators {
     return {
       type: GET_RESERVED_WISHES,
       payload: this.wishesService.getReservedWishes(userId)
+    };
+  }
+
+  updateBio(userId: number, bio: string) {
+    return {
+      type: UPDATE_BIO,
+      payload: this.wishesService.updateBio(userId, bio)
     };
   }
 

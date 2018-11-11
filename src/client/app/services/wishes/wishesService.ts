@@ -118,6 +118,20 @@ export class WishesService {
             });
   }
 
+  public updateBio(userId: number, bio: string): Promise<any> {
+
+    const body = {
+      userId,
+      bio
+     };
+
+    return axios
+            .put(`${this.url}api/wishes/updateBio`, body)
+            .then(response => {
+              return response.data;
+            });
+  }
+
   public updateWish(title: string, description: string, cost: number, link: string, rating: number, wishId: number): Promise<any> {
 
     const body = {

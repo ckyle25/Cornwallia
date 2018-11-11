@@ -26,6 +26,7 @@ const { getAllUsers,
         getReservedWishes,
         updateWishesFamily,
         updateWishesUser,
+        updateBio,
         checkEmailBirthdays } = require('./controllers/wishesController')
 const { checkAuthenticated } = require('./middleware/isAuthenticated');
 
@@ -173,6 +174,7 @@ app.post(`${baseUrl}/wishes/deleteWish`, checkAuthenticated, deleteWish);
 app.put(`${baseUrl}/wishes/updateWish`, checkAuthenticated, updateWish);
 app.post(`${baseUrl}/wishes/getReservedWishes`, checkAuthenticated, getReservedWishes);
 app.post(`${baseUrl}/shared/getuser`, checkAuthenticated, getUser);
+app.put(`${baseUrl}/wishes/updateBio`, checkAuthenticated, updateBio);
 app.put(`${baseUrl}/wishes/updateUser`, checkAuthenticated, updateWishesUser);
 app.put(`${baseUrl}/wishes/updateFamily`, checkAuthenticated, updateWishesFamily);
 

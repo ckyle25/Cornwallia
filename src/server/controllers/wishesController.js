@@ -122,6 +122,16 @@ module.exports = {
         })
     },
 
+    updateBio: (req, res, next) => {
+      const body = req.body;
+      const dbInstance = req.app.get('db')
+
+      dbInstance.update_bio([body.userId, body.bio])
+        .then(result => {
+          return res.status(200).send('Bio Updated')
+        });
+    },
+
     checkEmailBirthdays: () => {
       app.get('db').check_birthdays()
         .then(result => {

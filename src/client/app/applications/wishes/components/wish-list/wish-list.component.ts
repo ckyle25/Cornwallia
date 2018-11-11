@@ -47,7 +47,7 @@ export class WishListComponent implements OnInit {
   async ngOnInit() {
 
     this.wishListUserID = parseInt(localStorage.getItem('wishlistUser'), 10);
-    
+
     await this.ngRedux.dispatch(this.wishesActionCreators.getWishes(this.wishListUserID));
 
     this.wishesObs.subscribe((result: IWishesState) => {
@@ -116,7 +116,9 @@ export class WishListComponent implements OnInit {
   }
 
   onBioEditClick() {
+    const newBio = this.wishListUserBio.replace(/<br\s*[\/]?>/gi, '\n');
     this.wishListUserBioOld = this.wishListUserBio;
+    this.wishListUserBio = newBio;
     this.modal.openModal('editBio');
   }
 
@@ -126,8 +128,11 @@ export class WishListComponent implements OnInit {
     this.modal.closeModal('editBio');
   }
 
-  saveBioEdit() {
-
+  async saveBioEdit() {
+    const newBio = this.wishListUserBio.replace(/\n\r?/g, '<br />');
+    this.modal.closeModal('editBio');
+    await this.ngRedux.dispatch(this.wishesActionCreators.updateBio(this.wishListUserID, newBio));
+    await this.ngRedux.dispatch(this.wishesActionCreators.getAllUsers());
   }
 
   onResize(event) {

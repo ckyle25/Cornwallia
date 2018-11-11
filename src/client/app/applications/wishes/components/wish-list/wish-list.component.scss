@@ -240,6 +240,19 @@
   border-radius: 5px;
 }
 
+.bio-container-mobile {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 10px;
+  background-color: $white;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
 .bio-top-content {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -267,10 +280,13 @@
   transition: 1s;
 }
 
-.text-area-style {
-  width: 100%;
+textarea {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
   height: 450px;
-  color: $blue;
+  width: 100%;
+  margin-bottom: 20px;
 }
 
 .margin-b-10 {

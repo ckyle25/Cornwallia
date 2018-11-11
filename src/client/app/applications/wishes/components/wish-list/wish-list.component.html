@@ -53,7 +53,7 @@
             </div>
         </div>
 
-          <div>{{wishListUserBio}}</div>
+          <div [innerHTML]="wishListUserBio"></div>
       </div>
     </div>
   </div>
@@ -99,12 +99,22 @@
       </div>
     </div>
     <div class="reserved-wishes-container margin-b-10" *ngIf="currentUserID !== wishListUserID">
-        <div class="title-style text-sub-title logo-style">Reserved Wishes</div>
-        <wish-card [wishes]="reservedWishes" [currentUser]="currentUserID" *ngIf="reservedWishesPresent"></wish-card>
-        <div *ngIf="!reservedWishesPresent" class="none-style text-section-title logo-style">
-          No Reserved Wishes
-        </div>
+      <div class="title-style text-sub-title logo-style">Reserved Wishes</div>
+      <wish-card [wishes]="reservedWishes" [currentUser]="currentUserID" *ngIf="reservedWishesPresent"></wish-card>
+      <div *ngIf="!reservedWishesPresent" class="none-style text-section-title logo-style">
+        No Reserved Wishes
       </div>
+     </div>
+     <div class="bio-container-mobile">
+        <div class="bio-top-content">
+          <div class="title-style text-sub-title logo-style">About me</div>
+          <div class="bio-edit-button clickable" *ngIf="currentUserID === wishListUserID || parentUserIdsContains !== -1" (click)="onBioEditClick()">
+              <i class="fas fa-pencil-alt button-text-style"> </i>
+          </div>
+        </div>
+
+        <div [innerHTML]="wishListUserBio"></div>
+    </div>
   </div>
 </div>
 
@@ -146,9 +156,7 @@
         <div class="add-title-container">
             <div class="title-style text-sub-title logo-style">Edit About Me</div>
         </div>
-        <mat-form-field class="text-area-style">
-            <textarea matInput placeholder="About Me" [(ngModel)]="wishListUserBio" style="white-space: pre-wrap;" required></textarea>
-        </mat-form-field>
+        <textarea placeholder="About Me" [(ngModel)]="wishListUserBio" class="white-space: pre-wrap;" required></textarea>
         <div class="add-title-container">
           <div class="cancel-button clickable" (click)="cancelBioEdit()">
             <i class="fa fa-times button-text-style"></i>
