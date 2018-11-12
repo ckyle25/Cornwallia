@@ -39,7 +39,6 @@ massive(process.env.CONNECTION_STRING).then( db => {
 const publicweb = process.env.PUBLICWEB || './publicweb';
 
 app.use( bodyParser.json() );
-app.use( cors() );
 app.use(function(req, res, next) {
   res.header('Access-Control-Allow-Credentials', true);
   res.header('Access-Control-Allow-Origin', req.headers.origin);
@@ -158,26 +157,26 @@ app.get('/auth/logout', (req, res) => {
 
 // Shared API Endpoints
 app.get(`${baseUrl}/authConfig`, getConfig);
-app.get(`${baseUrl}/shared/getAdmin`, getAdmin);
-app.post(`${baseUrl}/shared/getuser`, getUser);
-app.post(`${baseUrl}/shared/requestAccess`, requestAccess);
-app.put(`${baseUrl}/shared/updateUser`, updateEdwUser);
+app.get(`${baseUrl}/shared/getAdmin`, checkAuthenticated, getAdmin);
+app.post(`${baseUrl}/shared/getuser`, checkAuthenticated, getUser);
+app.post(`${baseUrl}/shared/requestAccess`, checkAuthenticated, requestAccess);
+app.put(`${baseUrl}/shared/updateUser`, checkAuthenticated, updateEdwUser);
 
 // Wishes API Endpoints
-app.get(`${baseUrl}/wishes/getAllUsers`, getAllUsers);
-app.get(`${baseUrl}/wishes/getFamilyReference`, getFamilyReference);
-app.post(`${baseUrl}/wishes/getActiveUser`, getActiveUser);
-app.post(`${baseUrl}/wishes/getWishes`, getWishes);
-app.post(`${baseUrl}/wishes/reserveWish`, reserveWish);
-app.post(`${baseUrl}/wishes/releaseWish`, releaseWish);
-app.post(`${baseUrl}/wishes/addWish`, addWish);
-app.post(`${baseUrl}/wishes/deleteWish`, deleteWish);
-app.put(`${baseUrl}/wishes/updateWish`, updateWish);
-app.post(`${baseUrl}/wishes/getReservedWishes`, getReservedWishes);
-app.post(`${baseUrl}/shared/getuser`, getUser);
-app.put(`${baseUrl}/wishes/updateBio`, updateBio);
-app.put(`${baseUrl}/wishes/updateUser`, updateWishesUser);
-app.put(`${baseUrl}/wishes/updateFamily`, updateWishesFamily);
+app.get(`${baseUrl}/wishes/getAllUsers`, checkAuthenticated, getAllUsers);
+app.get(`${baseUrl}/wishes/getFamilyReference`, checkAuthenticated, getFamilyReference);
+app.post(`${baseUrl}/wishes/getActiveUser`, checkAuthenticated, getActiveUser);
+app.post(`${baseUrl}/wishes/getWishes`, checkAuthenticated, getWishes);
+app.post(`${baseUrl}/wishes/reserveWish`, checkAuthenticated, reserveWish);
+app.post(`${baseUrl}/wishes/releaseWish`, checkAuthenticated, releaseWish);
+app.post(`${baseUrl}/wishes/addWish`, checkAuthenticated, addWish);
+app.post(`${baseUrl}/wishes/deleteWish`, checkAuthenticated, deleteWish);
+app.put(`${baseUrl}/wishes/updateWish`, checkAuthenticated, updateWish);
+app.post(`${baseUrl}/wishes/getReservedWishes`, checkAuthenticated, getReservedWishes);
+app.post(`${baseUrl}/shared/getuser`, checkAuthenticated, getUser);
+app.put(`${baseUrl}/wishes/updateBio`, checkAuthenticated, updateBio);
+app.put(`${baseUrl}/wishes/updateUser`, checkAuthenticated, updateWishesUser);
+app.put(`${baseUrl}/wishes/updateFamily`, checkAuthenticated, updateWishesFamily);
 
 // Wishes Email Services
 // let j = schedule.scheduleJob('1 * * * * *', () => {

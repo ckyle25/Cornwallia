@@ -7,12 +7,16 @@ export class WishesService {
 
   private url: string = environment.serverUrl;
 
+  config = {
+    withCredentials: true
+  }
+
   public getActiveUser(userId: number): Promise<any> {
 
     const body = { id: userId };
 
     return axios
-            .post(`${this.url}api/wishes/getActiveUser`, body)
+            .post(`${this.url}api/wishes/getActiveUser`, body, this.config)
             .then(response => {
               return response.data[0];
             });
@@ -21,7 +25,7 @@ export class WishesService {
   public getFamilyReference(): Promise<any> {
 
     return axios
-            .get(`${this.url}api/wishes/getFamilyReference`)
+            .get(`${this.url}api/wishes/getFamilyReference`, this.config)
             .then(response => {
               return response.data;
             });
@@ -30,7 +34,7 @@ export class WishesService {
   public getAllUsers(): Promise<any> {
 
     return axios
-            .get(`${this.url}api/wishes/getAllUsers`)
+            .get(`${this.url}api/wishes/getAllUsers`, this.config)
             .then(response => {
               return response.data;
             });
@@ -41,7 +45,7 @@ export class WishesService {
     const body = { id: userId };
 
     return axios
-            .post(`${this.url}api/wishes/getWishes`, body)
+            .post(`${this.url}api/wishes/getWishes`, body, this.config)
             .then(response => {
               return response.data;
             });
@@ -55,7 +59,7 @@ export class WishesService {
      };
 
     return axios
-            .post(`${this.url}api/wishes/reserveWish`, body)
+            .post(`${this.url}api/wishes/reserveWish`, body, this.config)
             .then(response => {
               return response.data;
             });
@@ -68,7 +72,7 @@ export class WishesService {
      };
 
     return axios
-            .post(`${this.url}api/wishes/releaseWish`, body)
+            .post(`${this.url}api/wishes/releaseWish`, body, this.config)
             .then(response => {
               return response.data;
             });
@@ -86,7 +90,7 @@ export class WishesService {
     };
 
     return axios
-            .post(`${this.url}api/wishes/addWish`, body)
+            .post(`${this.url}api/wishes/addWish`, body, this.config)
             .then(response => {
               return response.data;
             });
@@ -99,7 +103,7 @@ export class WishesService {
      };
 
     return axios
-            .post(`${this.url}api/wishes/deleteWish`, body)
+            .post(`${this.url}api/wishes/deleteWish`, body, this.config)
             .then(response => {
               return response.data;
             });
@@ -112,7 +116,7 @@ export class WishesService {
      };
 
     return axios
-            .post(`${this.url}api/wishes/getReservedWishes`, body)
+            .post(`${this.url}api/wishes/getReservedWishes`, body, this.config)
             .then(response => {
               return response.data;
             });
@@ -126,7 +130,7 @@ export class WishesService {
      };
 
     return axios
-            .put(`${this.url}api/wishes/updateBio`, body)
+            .put(`${this.url}api/wishes/updateBio`, body, this.config)
             .then(response => {
               return response.data;
             });
@@ -144,7 +148,7 @@ export class WishesService {
      };
 
     return axios
-            .put(`${this.url}api/wishes/updateWish`, body)
+            .put(`${this.url}api/wishes/updateWish`, body, this.config)
             .then(response => {
               return response.data;
             });
@@ -169,7 +173,7 @@ export class WishesService {
      };
 
     return axios
-            .put(`${this.url}api/wishes/updateUser`, body)
+            .put(`${this.url}api/wishes/updateUser`, body, this.config)
             .then(response => {
               return response.data;
             });
@@ -186,7 +190,7 @@ export class WishesService {
      };
 
     return axios
-            .put(`${this.url}api/wishes/updateFamily`, body)
+            .put(`${this.url}api/wishes/updateFamily`, body, this.config)
             .then(response => {
               return response.data;
             });
