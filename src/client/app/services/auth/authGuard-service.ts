@@ -20,7 +20,6 @@ export class AuthGuardService implements CanActivate {
 
     return axios.get(`${environment.serverUrl}auth/me`, config)
           .then(res => {
-            console.log('res.data', res.data);
 
             if (res.data !== 'Login Required') {
                 localStorage.setItem('currentUserID', res.data.userid);

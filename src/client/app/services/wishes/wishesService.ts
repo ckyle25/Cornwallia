@@ -179,6 +179,18 @@ export class WishesService {
             });
   }
 
+  public getReserverEmail(userId: number) {
+    const body = {
+      userId
+    }
+    return axios
+            .post(`${this.url}api/wishes/getReserverEmail`, body, this.config)
+            .then(response => {
+              return response.data;
+            });
+
+  }
+
   public updateWishesFamily(familyId: number, familyName: string, parent1: number, parent2: number, familyGroup: number): Promise<any> {
 
     const body = {

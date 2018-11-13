@@ -260,3 +260,38 @@
   width: 100vw;
   border-radius: 5px;
 }
+
+textarea {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 450px;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.modal-style {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-direction: column;
+  background-color: $white;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 700px;
+  border-radius: 5px;
+}
+
+.modal-style-mobile {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-direction: column;
+  background-color: $white;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 100vw;
+  border-radius: 5px;
+}

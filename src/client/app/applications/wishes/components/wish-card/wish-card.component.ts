@@ -3,6 +3,7 @@ import { NgRedux, select } from '@angular-redux/store';
 import { IGlobalState as GlobalState } from '../../../../redux/rootReducer';
 import { WishesActionCreators } from '../../../../redux/wishes/wishesRootReducer';
 import { ModalTemplateComponent } from '../../../../shared/modal-template/modal-template.component';
+import { WishesService } from '../../../../services/wishes/wishesService';
 
 @HostListener('window:resize', ['$event'])
 @Component({
@@ -10,7 +11,7 @@ import { ModalTemplateComponent } from '../../../../shared/modal-template/modal-
   templateUrl: './wish-card.component.html',
   styleUrls: ['./wish-card.component.scss']
 })
-export class WishCardComponent implements OnInit, OnChanges {
+export class WishCardComponent implements OnInit {
 
   @Input() wishes: any[];
   @Input() currentUser: number;
@@ -22,9 +23,13 @@ export class WishCardComponent implements OnInit, OnChanges {
   rating: number;
   wishUserId: number;
   reserved: boolean;
-  reservedUser: number;
+  contactReservedUser: number;
+  contactReservedUserEmail: string;
+  contactFirstName: string;
+  contactWishTitle: string;
   parentUsers: any[];
   wishId: number;
+  contactMessage: string;
 
   oldTitle: string;
   oldPrice: number;
@@ -35,13 +40,11 @@ export class WishCardComponent implements OnInit, OnChanges {
 
   constructor(private ngRedux: NgRedux<GlobalState>,
               private wishesActionCreators: WishesActionCreators,
+              private wishesService: WishesService,
               private modal: ModalTemplateComponent) { }
 
   ngOnInit() {
-
-  }
-
-  ngOnChanges() {
+    
   }
 
   async onReserveClick(wishid: number, userid: number) {
@@ -126,6 +129,37 @@ export class WishCardComponent implements OnInit, OnChanges {
     this.rating = null;
     this.wishId = null;
   }
+
+  onContactClick(contactFirstName: string, contactWishTitle: string, reservedUser: number) {
+    this.wishesService.getReserverEmail(reservedUser)
+      .then(result => {
+        console.log(result)
+        this.contactFirstName = contactFirstName;
+        this.contactWishTitle = contactWishTitle;
+        this.contactReservedUser = reservedUser;
+        this.contactReservedUserEmail = result.emaildsc;
+      });
+      this.modal.openModal('contactReserver');
+  }
+
+  cancelContactClick() {
+    this.contactFirstName = '';
+    this.contactWishTitle = '';
+    this.contactReservedUser = null;
+    this.contactMessage = '';
+    this.modal.closeModal('contactReserver');
+  }
+
+  async sendContact() {
+    this.modal.closeModal('contactReserver');
+    // await this.ngRedux.dispatch(this.wishesActionCreators.updateBio(this.wishListUserID, newBio));
+    // await this.ngRedux.dispatch(this.wishesActionCreators.getAllUsers());
+    this.contactFirstName = '';
+    this.contactWishTitle = '';
+    this.contactReservedUser = null;
+    // this.contactMessage = '';
+  }
+
 
   onResize(event) {
     this.innerWidth =  event.target.innerWidth;

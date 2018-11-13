@@ -27,6 +27,7 @@ const { getAllUsers,
         updateWishesFamily,
         updateWishesUser,
         updateBio,
+        getReserverEmail,
         checkEmailBirthdays } = require('./controllers/wishesController')
 const { checkAuthenticated } = require('./middleware/isAuthenticated');
 
@@ -177,6 +178,7 @@ app.post(`${baseUrl}/shared/getuser`, checkAuthenticated, getUser);
 app.put(`${baseUrl}/wishes/updateBio`, checkAuthenticated, updateBio);
 app.put(`${baseUrl}/wishes/updateUser`, checkAuthenticated, updateWishesUser);
 app.put(`${baseUrl}/wishes/updateFamily`, checkAuthenticated, updateWishesFamily);
+app.post(`${baseUrl}/wishes/getReserverEmail`, checkAuthenticated, getReserverEmail);
 
 // Wishes Email Services
 // let j = schedule.scheduleJob('1 * * * * *', () => {

@@ -132,6 +132,16 @@ module.exports = {
         });
     },
 
+    getReserverEmail: (req, res, next) => {
+      const body = req.body;
+      const dbInstance = req.app.get('db')
+
+      dbInstance.get_reserver_email([body.userId])
+        .then(result => {
+          return res.status(200).send(result[0])
+        });
+    },
+
     checkEmailBirthdays: () => {
       app.get('db').check_birthdays()
         .then(result => {
