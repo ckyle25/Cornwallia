@@ -182,7 +182,8 @@ export class WishesService {
   public getReserverEmail(userId: number) {
     const body = {
       userId
-    }
+    };
+
     return axios
             .post(`${this.url}api/wishes/getReserverEmail`, body, this.config)
             .then(response => {
@@ -203,6 +204,24 @@ export class WishesService {
 
     return axios
             .put(`${this.url}api/wishes/updateFamily`, body, this.config)
+            .then(response => {
+              return response.data;
+            });
+  }
+
+  public emailReserver(userId: number, currentUserId: number, wishTitle: string, wishRecipient: string, content: string, userName: string) {
+    const body = {
+      userId,
+      currentUserId,
+      wishTitle,
+      wishRecipient,
+      content,
+      userName
+    };
+
+    console.log('body', body);
+    return axios
+            .post(`${this.url}api/wishes/emailReserver`, body, this.config)
             .then(response => {
               return response.data;
             });

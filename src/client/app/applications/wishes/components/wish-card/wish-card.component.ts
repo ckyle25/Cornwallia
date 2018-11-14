@@ -15,6 +15,10 @@ export class WishCardComponent implements OnInit {
 
   @Input() wishes: any[];
   @Input() currentUser: number;
+  @Input() wishCardId: string;
+
+  @select(['wishes']) wishesObs;
+  currentUserFirstName: string;
 
   title: string;
   price: number;
@@ -44,7 +48,10 @@ export class WishCardComponent implements OnInit {
               private modal: ModalTemplateComponent) { }
 
   ngOnInit() {
-    
+    this.wishesObs.subscribe(data => {
+      this.currentUserFirstName = data.currentUser.firstnameval;
+    });
+    console.log('wishes', this.wishes);
   }
 
   async onReserveClick(wishid: number, userid: number) {
@@ -131,15 +138,10 @@ export class WishCardComponent implements OnInit {
   }
 
   onContactClick(contactFirstName: string, contactWishTitle: string, reservedUser: number) {
-    this.wishesService.getReserverEmail(reservedUser)
-      .then(result => {
-        console.log(result)
-        this.contactFirstName = contactFirstName;
-        this.contactWishTitle = contactWishTitle;
-        this.contactReservedUser = reservedUser;
-        this.contactReservedUserEmail = result.emaildsc;
-      });
-      this.modal.openModal('contactReserver');
+    this.contactFirstName = contactFirstName;
+    this.contactWishTitle = contactWishTitle;
+    this.contactReservedUser = reservedUser;
+    this.modal.openModal('contactReserver');
   }
 
   cancelContactClick() {
@@ -150,14 +152,13 @@ export class WishCardComponent implements OnInit {
     this.modal.closeModal('contactReserver');
   }
 
-  async sendContact() {
+  async sendContact(contactFirstName: string, contactWishTitle: string, reservedUser: number) {
     this.modal.closeModal('contactReserver');
-    // await this.ngRedux.dispatch(this.wishesActionCreators.updateBio(this.wishListUserID, newBio));
-    // await this.ngRedux.dispatch(this.wishesActionCreators.getAllUsers());
+    await this.wishesService.emailReserver(reservedUser, this.currentUser, contactWishTitle, contactFirstName, this.contactMessage, this.currentUserFirstName)
     this.contactFirstName = '';
     this.contactWishTitle = '';
     this.contactReservedUser = null;
-    // this.contactMessage = '';
+    this.contactMessage = '';
   }
 
 

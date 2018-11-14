@@ -1,4 +1,4 @@
-<div *ngFor="let wish of wishes" (window:resize)="onResize($event)">
+<div *ngFor="let wish of wishes" (window:resize)="onResize($event)" id={{wishCardId}}>
   <div class="container">
     <div class="top-content">
       <div class="title-style text-sub-title logo-style" *ngIf="innerWidth >= 1000">{{wish.titledsc}}</div>
@@ -50,6 +50,24 @@
       {{wish.descriptiondsc}}
     </div>
   </div>
+  <modal-template [modalID]="'contactReserver'">
+    <div [ngClass]="{'modal-style' : innerWidth >= 1000, 'modal-style-mobile' : innerWidth < 1000}">
+        <div class="add-title-container">
+            <div class="title-style text-sub-title logo-style">Compose Message to Reserver</div>
+        </div>
+        <textarea placeholder="Message" [(ngModel)]="contactMessage" class="white-space: pre-wrap;" required></textarea>
+        <div class="add-title-container">
+          <div class="cancel-button clickable" (click)="cancelContactClick()">
+            <i class="fa fa-times button-text-style"></i>
+            <pre class="button-text-style logo-style"> Cancel</pre>
+          </div>
+          <div class="save-button clickable" (click)="sendContact(wish.firstnameval, wish.titledsc, wish.reserveduserid)">
+              <i class="fas fa-envelope button-text-style"></i>
+              <pre class="button-text-style logo-style"> Send</pre>
+            </div>
+        </div>
+      </div>
+    </modal-template>
 </div>
 
 <modal-template [modalID]="'deleteConfirm'">
@@ -102,22 +120,3 @@
     </div>
   </div>
 </modal-template>
-
-<modal-template [modalID]="'contactReserver'">
-  <div [ngClass]="{'modal-style' : innerWidth >= 1000, 'modal-style-mobile' : innerWidth < 1000}">
-      <div class="add-title-container">
-          <div class="title-style text-sub-title logo-style">Compose Message to Reserver</div>
-      </div>
-      <textarea placeholder="Message" [(ngModel)]="contactMessage" class="white-space: pre-wrap;" required></textarea>
-      <div class="add-title-container">
-        <div class="cancel-button clickable" (click)="cancelContactClick()">
-          <i class="fa fa-times button-text-style"></i>
-          <pre class="button-text-style logo-style"> Cancel</pre>
-        </div>
-        <div class="save-button clickable" (click)="sendContact()">
-            <i class="fas fa-envelope button-text-style"></i>
-            <pre class="button-text-style logo-style"> Send</pre>
-          </div>
-      </div>
-    </div>
-  </modal-template>

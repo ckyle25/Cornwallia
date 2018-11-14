@@ -147,5 +147,40 @@ module.exports = {
         .then(result => {
           console.log('Birthday stuff', result)
         });
+    },
+
+    emailReserver: (req, res, next) => {
+      const transporterInstance = req.app.get('transporter')
+      const dbInstance = req.app.get('db')
+      const body = req.body;
+      const reserverEmail = '';
+      const questionerEmail = '';
+
+      dbInstance.get_reserver_email([body.userId])
+          .then(result => {
+            console.log('result', result);
+            reserverEmail = result[0].emaildsc;
+
+            dbInstance.get_reserver_email([body.currentUserId])
+              .then(result2 => {
+                console.log('result2', result2)
+                questionerEmail = result2[0].emaildsc
+
+                const mailOptions = {
+                  from: 'Cornwallia Wishes <cornwallia225@gmail.com>',
+                  to: reserverEmail,
+                  subject: `Regarding ${body.wishTitle} for ${body.wishRecipient}`,
+                  text: `${body.content} \n \n ${body.userName} \n ${questionerEmail}`
+                };
+
+                transporterInstance.sendMail(mailOptions, (error, info) => {
+                  if (error) {
+                    console.log(error);
+                  } else {
+                    return res.status(200).send('Email sent')
+                  }
+                });
+              });
+          });
     }
   }

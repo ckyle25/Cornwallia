@@ -28,7 +28,8 @@ const { getAllUsers,
         updateWishesUser,
         updateBio,
         getReserverEmail,
-        checkEmailBirthdays } = require('./controllers/wishesController')
+        checkEmailBirthdays,
+        emailReserver } = require('./controllers/wishesController')
 const { checkAuthenticated } = require('./middleware/isAuthenticated');
 
 const app = express();
@@ -179,6 +180,8 @@ app.put(`${baseUrl}/wishes/updateBio`, checkAuthenticated, updateBio);
 app.put(`${baseUrl}/wishes/updateUser`, checkAuthenticated, updateWishesUser);
 app.put(`${baseUrl}/wishes/updateFamily`, checkAuthenticated, updateWishesFamily);
 app.post(`${baseUrl}/wishes/getReserverEmail`, checkAuthenticated, getReserverEmail);
+app.post(`${baseUrl}/wishes/emailReserver`, checkAuthenticated, emailReserver);
+
 
 // Wishes Email Services
 // let j = schedule.scheduleJob('1 * * * * *', () => {
