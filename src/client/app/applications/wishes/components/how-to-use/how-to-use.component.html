@@ -20,7 +20,8 @@
           <div class="add-button-mobile margin-l-5">
             <i class="fa fa-plus button-text-style"></i>
           </div>
-          <pre class="instructions-style text-section-title logo-style margin-l-5">- Adding a Wish</pre>
+          <pre class="instructions-style text-section-title logo-style margin-l-5" *ngIf="innerWidth >= 1000">- Adding a Wish</pre>
+          <pre class="instructions-style text-paragraph-header logo-style margin-l-5" *ngIf="innerWidth < 1000">- Adding a Wish</pre>
         </div>
         <div class="instructions-style text-paragraph">
           You'll find this button at the top of your list. Click and fill out the form to add a wish. Parents (or adults) in each family group have the ability to add a wish for anybody within their family group.
@@ -29,7 +30,8 @@
       <div class="item-container margin-b-10">
         <div class="button-title-container">
           <rating [rating]="3"></rating>
-          <pre class="instructions-style text-section-title logo-style margin-l-5">- Star Rating</pre>
+          <pre class="instructions-style text-section-title logo-style margin-l-5" *ngIf="innerWidth >= 1000">- Star Rating</pre>
+          <pre class="instructions-style text-paragraph-header logo-style margin-l-5" *ngIf="innerWidth < 1000">- Star Rating</pre>
         </div>
         <div class="instructions-style text-paragraph">
           Star ratings are a measure of how much you want the wish in comparison to others. Wishes are sorted based on your star rating. To change a rating, click the edit wish button and change the rating field to a value between 1 and 5.
@@ -40,7 +42,8 @@
           <div class="edit-button">
             <i class="fas fa-pencil-alt button-text-style"> </i>
         </div>
-          <pre class="instructions-style text-section-title logo-style margin-l-5">- Editing a Wish</pre>
+          <pre class="instructions-style text-section-title logo-style margin-l-5" *ngIf="innerWidth >= 1000">- Editing a Wish</pre>
+          <pre class="instructions-style text-paragraph-header logo-style margin-l-5" *ngIf="innerWidth < 1000">- Editing a Wish</pre>
         </div>
         <div class="instructions-style text-paragraph">
           This button will appear on the right side of each of your wish cards. Click this button to update the wish. Parents (or adults) in each family group have the ability to edit a wish for anybody within their family group.
@@ -51,7 +54,8 @@
           <div class="delete-button">
             <i class="fa fa-trash button-text-style"> </i>
           </div>
-          <pre class="instructions-style text-section-title logo-style margin-l-5">- Deleting a Wish</pre>
+          <pre class="instructions-style text-section-title logo-style margin-l-5" *ngIf="innerWidth >= 1000">- Deleting a Wish</pre>
+          <pre class="instructions-style text-paragraph-header logo-style margin-l-5" *ngIf="innerWidth < 1000">- Deleting a Wish</pre>
         </div>
         <div class="instructions-style text-paragraph">
           This button will appear on the right side of each of your wish cards. Click this button if you no longer desire the wish. There will be a prompt to confirm the removal. Parents (or adults) in each family group have the ability to delete a wish for anybody within their family group.
@@ -63,7 +67,8 @@
             <i class="fa fa-tag button-text-style"></i>
             <pre class="button-text-style logo-style"> Reserve</pre>
           </div>
-          <pre class="instructions-style text-section-title logo-style margin-l-5">- Reserving a Wish</pre>
+          <pre class="instructions-style text-section-title logo-style margin-l-5" *ngIf="innerWidth >= 1000">- Reserving a Wish</pre>
+          <pre class="instructions-style text-paragraph-header logo-style margin-l-5" *ngIf="innerWidth < 1000">- Reserving a Wish</pre>
         </div>
         <div class="instructions-style text-paragraph">
           On wish lists that are not your own, this button will appear on the right side of each of the wish cards that have not been reserved by someone else. Clicking on this button will reserve the wish for you and move the card to the Reserved Wishes section of the person's list as well as to My Resereved Wishes section of your own wish list page.
@@ -75,7 +80,8 @@
             <i class="fa fa-times button-text-style"></i>
             <pre class="button-text-style logo-style"> Release</pre>
           </div>
-          <pre class="instructions-style text-section-title logo-style margin-l-5">- Releasing a Wish</pre>
+          <pre class="instructions-style text-section-title logo-style margin-l-5" *ngIf="innerWidth >= 1000">- Releasing a Wish</pre>
+          <pre class="instructions-style text-paragraph-header logo-style margin-l-5" *ngIf="innerWidth < 1000">- Releasing a Wish</pre>
         </div>
         <div class="instructions-style text-paragraph">
           If you reserve a wish and change your mind, clicking this button will release the wish and move the reserved wish back to the person's active wishes making it available for others to reserve.
@@ -86,7 +92,8 @@
           <div class="edit-button">
             <i class="fas fa-pencil-alt button-text-style"> </i>
           </div>
-          <pre class="instructions-style text-section-title logo-style margin-l-5">- Edit About Me</pre>
+          <pre class="instructions-style text-section-title logo-style margin-l-5" *ngIf="innerWidth >= 1000">- Edit About Me</pre>
+          <pre class="instructions-style text-paragraph-header logo-style margin-l-5" *ngIf="innerWidth < 1000">- Edit About Me</pre>
         </div>
         <div class="instructions-style text-paragraph">
           This button appears on the right side of the About Me section. Click this button to update the "About Me" page with information regarding sizes, favorite colors, favorite places for gift cards, and any other information that would be useful for someone looking at your wish list. Parents (or adults) in each family group have the ability to edit the "About Me" section for anybody within their family group.
