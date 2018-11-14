@@ -27,10 +27,6 @@ export class WishCardComponent implements OnInit {
   rating: number;
   wishUserId: number;
   reserved: boolean;
-  contactReservedUser: number;
-  contactReservedUserEmail: string;
-  contactFirstName: string;
-  contactWishTitle: string;
   parentUsers: any[];
   wishId: number;
   contactMessage: string;
@@ -51,7 +47,6 @@ export class WishCardComponent implements OnInit {
     this.wishesObs.subscribe(data => {
       this.currentUserFirstName = data.currentUser.firstnameval;
     });
-    console.log('wishes', this.wishes);
   }
 
   async onReserveClick(wishid: number, userid: number) {
@@ -138,27 +133,29 @@ export class WishCardComponent implements OnInit {
   }
 
   onContactClick(contactFirstName: string, contactWishTitle: string, reservedUser: number) {
-    this.contactFirstName = contactFirstName;
-    this.contactWishTitle = contactWishTitle;
-    this.contactReservedUser = reservedUser;
+    this.ngRedux.dispatch(this.wishesActionCreators.updateReserverInfo(contactFirstName, contactWishTitle, reservedUser))
     this.modal.openModal('contactReserver');
   }
 
   cancelContactClick() {
-    this.contactFirstName = '';
-    this.contactWishTitle = '';
-    this.contactReservedUser = null;
-    this.contactMessage = '';
+    this.ngRedux.dispatch(this.wishesActionCreators.removeReserverInfo());
     this.modal.closeModal('contactReserver');
   }
 
-  async sendContact(contactFirstName: string, contactWishTitle: string, reservedUser: number) {
+  async sendContact() {
     this.modal.closeModal('contactReserver');
-    await this.wishesService.emailReserver(reservedUser, this.currentUser, contactWishTitle, contactFirstName, this.contactMessage, this.currentUserFirstName)
-    this.contactFirstName = '';
-    this.contactWishTitle = '';
-    this.contactReservedUser = null;
-    this.contactMessage = '';
+
+    let reservedUser = null;
+    let wishTitle = '';
+    let contactFirstName = '';
+
+    await this.wishesObs.subscribe(data => {
+      reservedUser = data.reserverInfo.reservedUser;
+      wishTitle = data.reserverInfo.contactWishTitle;
+      contactFirstName = data.reserverInfo.contactFirstName;
+    });
+    await this.wishesService.emailReserver(reservedUser, this.currentUser, wishTitle, contactFirstName, this.contactMessage, this.currentUserFirstName)
+    await this.ngRedux.dispatch(this.wishesActionCreators.removeReserverInfo());
   }
 
 

@@ -46,6 +46,8 @@ const UPDATE_WISHES_FAMILY_FULFILLED = 'UPDATE_WISHES_FAMILY_FULFILLED';
 const UPDATE_BIO = 'UPDATE_BIO';
 const UPDATE_BIO_PENDING = 'UPDATE_BIO_PENDING';
 const UPDATE_BIO_FULFILLED = 'UPDATE_BIO_FULFILLED';
+const RESERVER_WISH_INFO = 'RESERVER_WISH_INFO';
+const REMOVE_RESERVER_WISH_INFO = 'REMOVE_RESERVER_WISH_INFO';
 
 
 
@@ -60,6 +62,7 @@ export interface IWishesState {
   myReservedWishes: any[];
   myWishes: any[];
   wishListUser: number;
+  reserverInfo: any;
 }
 
 const wishesInitialState: IWishesState = {
@@ -71,7 +74,8 @@ const wishesInitialState: IWishesState = {
   wishes: [],
   myReservedWishes: [],
   myWishes: [],
-  wishListUser: 0
+  wishListUser: 0,
+  reserverInfo: {}
 };
 
 // Reducer
@@ -165,6 +169,12 @@ export function wishesReducer(state: IWishesState = wishesInitialState, action):
       return Object.assign({}, state, {loading: true});
     case UPDATE_BIO_FULFILLED:
       return Object.assign({}, state, {loading: false});
+
+    case RESERVER_WISH_INFO:
+      return Object.assign({}, state, {reserverInfo: action.payload});
+
+    case REMOVE_RESERVER_WISH_INFO:
+      return Object.assign({}, state, {reserverInfo: action.payload});
 
     default:
       return state;
@@ -293,5 +303,23 @@ export class WishesActionCreators implements IWishesActionCreators {
       type: UPDATE_WISHES_FAMILY,
       payload: this.wishesService.updateWishesFamily(familyId, familyName, parent1, parent2, familyGroup)
     };
+  }
+
+  updateReserverInfo(contactFirstName: string, contactWishTitle: string, reservedUser: number) {
+    return {
+      type: RESERVER_WISH_INFO,
+      payload: {
+        contactFirstName,
+        contactWishTitle,
+        reservedUser
+      }
+    };
+  }
+
+  removeReserverInfo() {
+    return {
+      type: REMOVE_RESERVER_WISH_INFO,
+      payload: {}
+    }
   }
 }

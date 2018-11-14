@@ -219,7 +219,6 @@ export class WishesService {
       userName
     };
 
-    console.log('body', body);
     return axios
             .post(`${this.url}api/wishes/emailReserver`, body, this.config)
             .then(response => {
