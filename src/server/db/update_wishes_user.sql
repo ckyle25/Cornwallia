@@ -9,5 +9,6 @@ birthdaydt = $8,
 anniversarydt = $9,
 accessgroup1flg = $10,
 accessgroup2flg = $11,
-accessgroup3flg = $12
+accessgroup3flg = $12,
+accessgroup4flg = $13
 WHERE userid = $1

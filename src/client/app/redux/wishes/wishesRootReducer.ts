@@ -291,10 +291,10 @@ export class WishesActionCreators implements IWishesActionCreators {
   }
 
   updateWishesUser(userId: number, edwUserId: number, familyId: number, isParent: number, firstName: string, lastName: string, isAdmin: number,
-                    birthday: string, anniversary: string, group1: number, group2: number, group3: number) {
+                    birthday: string, anniversary: string, group1: number, group2: number, group3: number, group4: number) {
     return {
       type: UPDATE_WISHES_USER,
-      payload: this.wishesService.updateWishesUser(userId, edwUserId, familyId, isParent, firstName, lastName, isAdmin, birthday, anniversary, group1, group2, group3)
+      payload: this.wishesService.updateWishesUser(userId, edwUserId, familyId, isParent, firstName, lastName, isAdmin, birthday, anniversary, group1, group2, group3, group4)
     };
   }
 

@@ -20,6 +20,7 @@ import { TroyAlisonComponent } from './components/troy-alison/troy-alison.compon
 import { WishCardComponent } from './components/wish-card/wish-card.component';
 import { MyWishesComponent } from './components/my-wishes/my-wishes.component';
 import { RatingComponent } from './components/rating/rating.component';
+import { GarlinBarbaraComponent } from './components/garlin-barbara/garlin-barbara.component';
 
 // Modules
 import { SharedModule } from '../../shared/shared.module';
@@ -44,7 +45,8 @@ import { IGlobalState as GlobalState } from '../../redux/rootReducer';
     TroyAlisonComponent,
     WishCardComponent,
     MyWishesComponent,
-    RatingComponent
+    RatingComponent,
+    GarlinBarbaraComponent
   ],
   imports: [
     CommonModule,
@@ -65,7 +67,8 @@ import { IGlobalState as GlobalState } from '../../redux/rootReducer';
           { path: 'kylejodi', component: KyleJodiComponent},
           { path: 'kevinkendal', component: KevinKendalComponent},
           { path: 'robshari', component: RobShariComponent},
-          { path: 'troyalison', component: TroyAlisonComponent}
+          { path: 'troyalison', component: TroyAlisonComponent},
+          { path: 'garlinbarbara', component: GarlinBarbaraComponent}
         ]}
       ]},
     ])

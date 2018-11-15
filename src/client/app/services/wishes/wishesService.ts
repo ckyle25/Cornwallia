@@ -155,7 +155,7 @@ export class WishesService {
   }
 
   public updateWishesUser(userId: number, edwUserId: number, familyId: number, isParent: number, firstName: string, lastName: string, isAdmin: number,
-                         birthday: string, anniversary: string, group1: number, group2: number, group3: number): Promise<any> {
+                         birthday: string, anniversary: string, group1: number, group2: number, group3: number, group4: number): Promise<any> {
 
     const body = {
       userId,
@@ -169,7 +169,8 @@ export class WishesService {
       anniversary,
       group1,
       group2,
-      group3
+      group3,
+      group4
      };
 
     return axios

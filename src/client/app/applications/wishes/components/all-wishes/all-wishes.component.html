@@ -18,7 +18,10 @@
           <filter-card [title]="'Julie'" *ngIf="family2Access"></filter-card>
         </a>
         <a [routerLink]="['troyalison']" (click)="setViewToFamily()">
-          <filter-card [title]="'Troy & Allison'" *ngIf="family2Access"></filter-card>
+          <filter-card [title]="'Troy & Allison'" *ngIf="family2Access || family4Access"></filter-card>
+        </a>
+        <a [routerLink]="['garlinbarbara']" (click)="setViewToFamily()">
+          <filter-card [title]="'Garlin & Barbara'" *ngIf="family4Access"></filter-card>
         </a>
       </div>
   </div>

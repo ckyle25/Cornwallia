@@ -10,5 +10,6 @@ userid
 ,accessgroup1flg
 ,accessgroup2flg
 ,accessgroup3flg
+,accessgroup4flg
 FROM wishes_users
 WHERE edwuserid = $1

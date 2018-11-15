@@ -70,6 +70,15 @@ export class FilterCardComponent implements OnInit {
       case 'Allison':
         this.class = 'alison-image-style';
         break;
+      case 'Garlin & Barbara':
+        this.class = 'gb-image-style';
+        break;
+      case 'Garlin':
+        this.class = 'garlin-image-style';
+        break;
+      case 'Barbara':
+        this.class = 'barbara-image-style';
+        break;
     }
   }
 

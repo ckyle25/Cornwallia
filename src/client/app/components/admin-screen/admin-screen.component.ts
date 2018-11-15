@@ -42,6 +42,7 @@ export class AdminScreenComponent implements OnInit {
   wishesGroup1: number;
   wishesGroup2: number;
   wishesGroup3: number;
+  wishesGroup4: number;
 
   familyFamilyId: number;
   familyName: string;
@@ -120,7 +121,7 @@ export class AdminScreenComponent implements OnInit {
   }
 
   onWishesUsersEditClick(userId: number, edwUserId: number, familyId: number, isParent: number, firstName: string,
-                         lastName: string, isAdmin: number, birthday: string, anniversary: string, group1: number, group2: number, group3: number) {
+                         lastName: string, isAdmin: number, birthday: string, anniversary: string, group1: number, group2: number, group3: number, group4: number) {
     this.wishesUserId = userId;
     this.wishesEdwUserId = edwUserId;
     this.wishesFamilyId = familyId;
@@ -133,6 +134,7 @@ export class AdminScreenComponent implements OnInit {
     this.wishesGroup1 = group1;
     this.wishesGroup2 = group2;
     this.wishesGroup3 = group3;
+    this.wishesGroup4 = group4;
     this.modal.openModal('editWishesUser');
   }
 
@@ -150,13 +152,14 @@ export class AdminScreenComponent implements OnInit {
     this.wishesGroup1 = null;
     this.wishesGroup2 = null;
     this.wishesGroup3 = null;
+    this.wishesGroup4 = null;
   }
 
   async updateWishesUser(userId: number, edwUserId: number, familyId: number, isParent: number, firstName: string,
-    lastName: string, isAdmin: number, birthday: string, anniversary: string, group1: number, group2: number, group3: number) {
-      if (userId && familyId && isParent !== null && firstName && lastName && isAdmin !== null && birthday && group1 !== null && group2 !== null && group3 !== null) {
+    lastName: string, isAdmin: number, birthday: string, anniversary: string, group1: number, group2: number, group3: number, group4: number) {
+      if (userId && familyId && isParent !== null && firstName && lastName && isAdmin !== null && birthday && group1 !== null && group2 !== null && group3 !== null && group4 !== null) {
         this.modal.closeModal('editWishesUser');
-        await this.ngRedux.dispatch(this.wisheseActionCreators.updateWishesUser(userId, edwUserId, familyId, isParent, firstName, lastName, isAdmin, birthday, anniversary, group1, group2, group3));
+        await this.ngRedux.dispatch(this.wisheseActionCreators.updateWishesUser(userId, edwUserId, familyId, isParent, firstName, lastName, isAdmin, birthday, anniversary, group1, group2, group3, group4));
         await this.ngRedux.dispatch(this.sharedActionCreators.getAdmin());
         this.wishesUserId = null;
         this.wishesEdwUserId = null;
@@ -170,6 +173,7 @@ export class AdminScreenComponent implements OnInit {
         this.wishesGroup1 = null;
         this.wishesGroup2 = null;
         this.wishesGroup3 = null;
+        this.wishesGroup4 = null;
       } else {
         alert('Please fill out all required fields');
       }

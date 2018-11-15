@@ -106,7 +106,7 @@ module.exports = {
       const body = req.body;
       const dbInstance = req.app.get('db');
 
-      dbInstance.update_wishes_user([body.userId, body.edwUserId, body.familyId, body.isParent, body.firstName, body.lastName, body.isAdmin, body.birthday, body.anniversary, body.group1, body.group2, body.group3])
+      dbInstance.update_wishes_user([body.userId, body.edwUserId, body.familyId, body.isParent, body.firstName, body.lastName, body.isAdmin, body.birthday, body.anniversary, body.group1, body.group2, body.group3, body.group4])
         .then(result => {
           return res.status(200).send('Wishes user updated')
         })
