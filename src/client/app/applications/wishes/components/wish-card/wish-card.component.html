@@ -24,7 +24,7 @@
         </div>
       </div>
       <div *ngIf="innerWidth < 1000">
-        <div class="text-style text-paragraph logo-style" *ngIf="currentUser !== wish.userid && wish.reservedflg == 1  && currentUser !== wish.reserveduserid"; else regularMenu>
+        <div class="text-style text-paragraph logo-style" *ngIf="currentUser !== wish.userid && wish.reservedflg == 1  && currentUser !== wish.reserveduserid" else regularMenu>
           This wish is reserved <br>
           <div class="link-style text-paragraph logo-style clickable" (click)="onContactClick(wish.firstnameval, wish.titledsc, wish.reserveduserid)">Email Reserver</div>
         </div>
