@@ -29,7 +29,9 @@ const { getAllUsers,
         updateBio,
         getReserverEmail,
         checkEmailBirthdays,
+        getAmazonWishes,
         emailReserver } = require('./controllers/wishesController')
+var AmazonWishList = require('./classes/amazonWishList');
 const { checkAuthenticated } = require('./middleware/isAuthenticated');
 
 const app = express();
@@ -72,7 +74,10 @@ const transporter = nodemailer.createTransport({
   }
 });
 
+ const awl = ''; //new AmazonWishList();
+
 app.set('transporter', transporter);
+app.set('awl', awl);
 
 passport.use(new Auth0Strategy(
   {
@@ -181,6 +186,7 @@ app.put(`${baseUrl}/wishes/updateUser`, checkAuthenticated, updateWishesUser);
 app.put(`${baseUrl}/wishes/updateFamily`, checkAuthenticated, updateWishesFamily);
 app.post(`${baseUrl}/wishes/getReserverEmail`, checkAuthenticated, getReserverEmail);
 app.post(`${baseUrl}/wishes/emailReserver`, checkAuthenticated, emailReserver);
+app.post(`${baseUrl}/wishes/getAmazonWishes`, checkAuthenticated, getAmazonWishes);
 
 
 // Wishes Email Services

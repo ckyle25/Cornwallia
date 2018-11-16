@@ -9,7 +9,7 @@ export class WishesService {
 
   config = {
     withCredentials: true
-  }
+  };
 
   public getActiveUser(userId: number): Promise<any> {
 
@@ -187,6 +187,19 @@ export class WishesService {
 
     return axios
             .post(`${this.url}api/wishes/getReserverEmail`, body, this.config)
+            .then(response => {
+              return response.data;
+            });
+
+  }
+
+  public getAmazonWishes(userId: number) {
+    const body = {
+      userId
+    };
+
+    return axios
+            .post(`${this.url}api/wishes/getAmazonWishes`, body, this.config)
             .then(response => {
               return response.data;
             });

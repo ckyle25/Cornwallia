@@ -149,6 +149,29 @@ module.exports = {
         });
     },
 
+    getAmazonWishes: (req, res, next) => {
+      const awlInstance = req.app.get('awl');
+      const dbInstance = req.app.get('db');
+      const body = req.body;
+
+      console.log('body', body);
+      dbInstance.get_amazon_wish_list_id([body.userId])
+        .then(result => {
+          const amazonid = result[0].amazonwishlistid;
+
+          if (amazonid) {
+            awlInstance.getByID(amazonid)
+              .then(list => {
+                console.log('list', list);
+                res.status(200).send(list);
+              });
+          } else {
+            res.status(200).send('Provide Amazon ID');
+          }
+
+        });
+    },
+
     emailReserver: (req, res, next) => {
       const transporterInstance = req.app.get('transporter')
       const dbInstance = req.app.get('db')

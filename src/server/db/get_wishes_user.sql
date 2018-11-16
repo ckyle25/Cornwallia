@@ -11,5 +11,6 @@ userid
 ,accessgroup2flg
 ,accessgroup3flg
 ,accessgroup4flg
+,amazonwishlistid
 FROM wishes_users
 WHERE edwuserid = $1

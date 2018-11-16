@@ -3,6 +3,7 @@ import { NgRedux, select } from '@angular-redux/store';
 import { IGlobalState as GlobalState } from '../../../../redux/rootReducer';
 import { WishesActionCreators, IWishesState } from '../../../../redux//wishes/wishesRootReducer';
 import { ModalTemplateComponent } from '../../../../shared/modal-template/modal-template.component';
+import { WishesService } from '../../../../services/wishes/wishesService';
 
 @HostListener('window:resize', ['$event'])
 @Component({
@@ -16,6 +17,7 @@ export class WishListComponent implements OnInit {
   currentUserID: number;
   wishListUserID: number;
   parentUserIdsContains: number;
+  amazonWishListID: string;
 
   wishListUserName: string;
   wishListUserBio: string;
@@ -42,6 +44,7 @@ export class WishListComponent implements OnInit {
 
   constructor(private ngRedux: NgRedux<GlobalState>,
               private wishesActionCreators: WishesActionCreators,
+              private wishesService: WishesService,
               private modal: ModalTemplateComponent) { }
 
   async ngOnInit() {
@@ -53,6 +56,7 @@ export class WishListComponent implements OnInit {
     this.wishesObs.subscribe((result: IWishesState) => {
       this.wishListUserID = result.wishListUser;
       this.currentUserID = result.currentUser.userid;
+      this.amazonWishListID = result.currentUser.amazonwishlistid;
       if (this.wishListUserID === 0) {
         this.wishListUserID = parseInt(localStorage.getItem('wishlistUser'), 10);
       }
@@ -133,6 +137,21 @@ export class WishListComponent implements OnInit {
     this.modal.closeModal('editBio');
     await this.ngRedux.dispatch(this.wishesActionCreators.updateBio(this.wishListUserID, newBio));
     await this.ngRedux.dispatch(this.wishesActionCreators.getAllUsers());
+  }
+
+  onImportWishesClick() {
+    this.modal.openModal('importWishes');
+  }
+
+  onImportWishesCancel() {
+    this.modal.closeModal('importWishes');
+  }
+
+  getAmazonWishes() {
+    this.wishesService.getAmazonWishes(this.currentUserID)
+      .then(result => {
+        console.log('result', result);
+      });
   }
 
   onResize(event) {

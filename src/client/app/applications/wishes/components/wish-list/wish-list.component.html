@@ -6,9 +6,15 @@
         </div>
         <div class="active-wishes-container" *ngIf="currentUserID == wishListUserID">
           <div class="title-style text-sub-title logo-style">My Active Wishes</div>
-          <div class="add-button clickable" (click)="openAddWishDialog()" *ngIf="currentUserID === wishListUserID || parentUserIdsContains !== -1">
-            <i class="fa fa-plus button-text-style"></i>
-            <pre class="button-text-style logo-style">  Add A Wish</pre>
+          <div class="adding-buttons-container">
+            <div class="add-button clickable" (click)="openAddWishDialog()" *ngIf="currentUserID === wishListUserID || parentUserIdsContains !== -1">
+              <i class="fa fa-plus button-text-style"></i>
+              <pre class="button-text-style logo-style">  Add A Wish</pre>
+            </div>
+            <!-- <div class="import-button clickable" (click)="onImportWishesClick()" *ngIf="currentUserID === wishListUserID || parentUserIdsContains !== -1">
+              <i class="fa fa-cloud-download-alt button-text-style"></i>
+              <pre class="button-text-style logo-style">  Import Wishes</pre>
+            </div> -->
           </div>
           <wish-card [wishCardId]="'myActiveWishes'" [wishes]="myWishes" [currentUser]="currentUserID" *ngIf="myWishesPresent"></wish-card>
           <div *ngIf="!myWishesPresent" class="none-style text-section-title logo-style">
@@ -24,9 +30,15 @@
         </div>
         <div class="active-wishes-container" *ngIf="currentUserID !== wishListUserID">
           <div class="title-style text-sub-title logo-style">Active Wishes</div>
-          <div class="add-button clickable" (click)="openAddWishDialog()" *ngIf="currentUserID === wishListUserID || parentUserIdsContains !== -1">
-            <i class="fa fa-plus button-text-style"></i>
-            <pre class="button-text-style logo-style">  Add A Wish</pre>
+          <div class="adding-buttons-container">
+            <div class="add-button clickable" (click)="openAddWishDialog()" *ngIf="currentUserID === wishListUserID || parentUserIdsContains !== -1">
+              <i class="fa fa-plus button-text-style"></i>
+              <pre class="button-text-style logo-style">  Add A Wish</pre>
+            </div>
+            <!-- <div class="import-button clickable" (click)="onImportWishesClick()" *ngIf="currentUserID === wishListUserID || parentUserIdsContains !== -1">
+              <i class="fa fa-cloud-download-alt button-text-style"></i>
+              <pre class="button-text-style logo-style">  Import Wishes</pre>
+            </div> -->
           </div>
           <wish-card [wishCardId]="'activeWishes'" [wishes]="activeWishes" [currentUser]="currentUserID" *ngIf="activeWishesPresent"></wish-card>
           <div *ngIf="!activeWishesPresent" class="none-style text-section-title logo-style">
@@ -68,8 +80,13 @@
     <div class="active-wishes-container margin-b-10" *ngIf="currentUserID == wishListUserID">
       <div class="active-wishes-top-row-mobile">
           <div class="title-style text-sub-title logo-style">My Active Wishes</div>
-          <div class="add-button-mobile clickable" (click)="openAddWishDialog()" *ngIf="currentUserID === wishListUserID || parentUserIdsContains !== -1">
+          <div class="adding-buttons-container">
+            <div class="add-button-mobile clickable" (click)="openAddWishDialog()" *ngIf="currentUserID === wishListUserID || parentUserIdsContains !== -1">
               <i class="fa fa-plus button-text-style"></i>
+            </div>
+            <!-- <div class="import-button-mobile clickable" (click)="onImportWishesClick()" *ngIf="currentUserID === wishListUserID || parentUserIdsContains !== -1">
+              <i class="fa fa-cloud-download-alt button-text-style"></i>
+            </div> -->
           </div>
       </div>
       <wish-card [wishes]="myWishes" [currentUser]="currentUserID" *ngIf="myWishesPresent"></wish-card>
@@ -89,8 +106,13 @@
     <div class="active-wishes-container margin-b-10" *ngIf="currentUserID !== wishListUserID">
       <div class="active-wishes-top-row-mobile">
         <div class="title-style text-sub-title logo-style">Active Wishes</div>
-        <div class="add-button-mobile clickable" (click)="openAddWishDialog()" *ngIf="currentUserID === wishListUserID || parentUserIdsContains !== -1">
+        <div class="adding-buttons-container">
+          <div class="add-button-mobile clickable" (click)="openAddWishDialog()" *ngIf="currentUserID === wishListUserID || parentUserIdsContains !== -1">
             <i class="fa fa-plus button-text-style"></i>
+          </div>
+          <!-- <div class="import-button-mobile clickable" (click)="onImportWishesClick()" *ngIf="currentUserID === wishListUserID || parentUserIdsContains !== -1">
+            <i class="fa fa-cloud-download-alt button-text-style"></i>
+          </div> -->
         </div>
       </div>
       <wish-card [wishes]="activeWishes" [currentUser]="currentUserID" *ngIf="activeWishesPresent"></wish-card>
@@ -169,3 +191,33 @@
         </div>
       </div>
     </modal-template>
+
+<modal-template [modalID]="'importWishes'">
+  <div [ngClass]="{'modal-style' : innerWidth >= 1000, 'modal-style-mobile' : innerWidth < 1000}">
+      <div class="add-title-container">
+          <div class="title-style text-sub-title logo-style">Import Wishes</div>
+      </div>
+      <div class="title-style text-sub-title logo-style">Connected Sources:</div>
+      <div class="adding-buttons-container">
+        <div class="import-button-mobile clickable" (click)="getAmazonWishes()">
+          <i class="fab fa-amazon button-text-style"></i>
+        </div>
+      </div>
+      <div class="title-style text-sub-title logo-style">Available Sources:</div>
+      <div class="adding-buttons-container">
+        <div class="import-button-mobile clickable">
+          <i class="fab fa-amazon button-text-style"></i>
+        </div>
+      </div>
+      <div class="add-title-container">
+        <div class="cancel-button clickable" (click)="onImportWishesCancel()">
+          <i class="fa fa-times button-text-style"></i>
+          <pre class="button-text-style logo-style"> Cancel</pre>
+        </div>
+        <div class="save-button clickable">
+          <i class="fas fa-download button-text-style"></i>
+          <pre class="button-text-style logo-style"> Import</pre>
+        </div>
+      </div>
+    </div>
+  </modal-template>
