@@ -13,7 +13,7 @@ const express = require('express')
     , schedule = require('node-schedule')
     , moment = require('moment')
 const { getConfig } = require('./controllers/configController');
-const { getUser, getAdmin, updateEdwUser, requestAccess } = require('./controllers/sharedController');
+const { getUser, getAdmin, updateEdwUser, requestAccess, giveFeedback } = require('./controllers/sharedController');
 const { getAllUsers,
         getActiveUser,
         getWishes,
@@ -167,6 +167,7 @@ app.get(`${baseUrl}/authConfig`, getConfig);
 app.get(`${baseUrl}/shared/getAdmin`, checkAuthenticated, getAdmin);
 app.post(`${baseUrl}/shared/getuser`, checkAuthenticated, getUser);
 app.post(`${baseUrl}/shared/requestAccess`, checkAuthenticated, requestAccess);
+app.post(`${baseUrl}/shared/giveFeedback`, checkAuthenticated, giveFeedback);
 app.put(`${baseUrl}/shared/updateUser`, checkAuthenticated, updateEdwUser);
 
 // Wishes API Endpoints

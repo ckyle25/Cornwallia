@@ -35,6 +35,20 @@ export class SharedService {
             });
   }
 
+  public giveFeedback(content: string, userName: string): Promise<any> {
+
+    const body = {
+      content,
+      userName
+    };
+
+    return axios
+            .post(`${this.url}api/shared/giveFeedback`, body, this.config)
+            .then(response => {
+              return response.data;
+            });
+  }
+
   public getAdmin(): Promise<any> {
     return axios
             .get(`${this.url}api/shared/getAdmin`, this.config)

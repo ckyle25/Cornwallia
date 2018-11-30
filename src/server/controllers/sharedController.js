@@ -63,5 +63,25 @@ module.exports = {
         return res.status(200).send('Email sent')
       }
     });
+  },
+
+  giveFeedback: (req, res, next) => {
+    const transporterInstance = req.app.get('transporter')
+    const body = req.body;
+
+    const mailOptions = {
+      from: 'Cornwallia Admin <cornwallia225@gmail.com>',
+      to: 'ckyle25@gmail.com',
+      subject: 'Cornwallia Feedback',
+      text: `${body.content} \n \n ${body.userName}`
+    };
+
+    transporterInstance.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        console.log(error);
+      } else {
+        return res.status(200).send('Email sent')
+      }
+    });
   }
 }
