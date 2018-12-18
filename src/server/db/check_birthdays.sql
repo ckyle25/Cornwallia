@@ -4,6 +4,7 @@ WITH FamilyReference AS (
 	,wu.firstnameval
 	,wu.birthdaydt
 	,wu.edwuserid
+	,wu.familyid
 	,u.emaildsc
 	,wf.parent1wishesuserid
 	,wf.parent2wishesuserid
@@ -19,10 +20,13 @@ fr.userid
 ,fr.firstnameval
 ,fr.birthdaydt
 ,fr.edwuserid
+,fr.familyid
 ,fr.emaildsc as primaryemail
 ,wu.edwuserid AS parent1edwuserid
+,wu.firstnameval AS parent1name
 ,u.emaildsc AS parent1email
 ,wu2.edwuserid AS parent2edwuserid
+,wu2.firstnameval AS parent2name
 ,u2.emaildsc AS parent2email
 FROM FamilyReference fr
 	LEFT JOIN wishes_users wu
