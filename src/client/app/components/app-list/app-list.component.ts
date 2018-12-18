@@ -10,7 +10,7 @@ import { IGlobalState as GlobalState } from '../../redux/rootReducer';
 export class AppListComponent implements OnInit {
   wishesFlag: number;
   calendarFlag: number;
-  lanPartyFlag: number;
+  foodFlag: number;
 
   @select('shared') sharedObs;
 
@@ -20,8 +20,8 @@ export class AppListComponent implements OnInit {
     this.sharedObs.subscribe(result => {
       this.wishesFlag = result.userObject.wishesflg;
       this.calendarFlag = result.userObject.calendarflg;
-      this.lanPartyFlag = result.userObject.lanpartyflg;
-    })
+      this.foodFlag = result.userObject.foodflg;
+    });
   }
 
 }

@@ -320,6 +320,6 @@ export class WishesActionCreators implements IWishesActionCreators {
     return {
       type: REMOVE_RESERVER_WISH_INFO,
       payload: {}
-    }
+    };
   }
 }

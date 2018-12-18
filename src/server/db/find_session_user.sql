@@ -2,7 +2,7 @@ SELECT
 userid
 ,isadminflg
 ,wishesflg
-,lanpartyflg
+,foodflg
 ,calendarflg
 ,firstnameval
 ,lastnameval

@@ -17,26 +17,25 @@ export class AppCardComponent implements OnInit {
   @Input() caption: string;
 
   class: any;
-  
+
   constructor(private ngRedux: NgRedux<GlobalState>,
               private sharedActionCreators: SharedActionCreators) { }
 
   ngOnInit() {
     switch (this.appName) {
       case 'wishes':
-        this.class = 'wishes-image-style'
+        this.class = 'wishes-image-style';
         break;
-      case 'lanParty':
-        this.class = 'lan-image-style'
+      case 'foodTracker':
+        this.class = 'food-image-style';
         break;
       case 'calendar':
-        this.class = 'calendar-image-style'
+        this.class = 'calendar-image-style';
         break;
     }
   }
 
   onLaunchClick() {
-    
     this.ngRedux.dispatch(this.sharedActionCreators.setSelectedApp(this.title));
   }
 }

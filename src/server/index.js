@@ -31,6 +31,7 @@ const { getAllUsers,
         checkEmailBirthdays,
         getAmazonWishes,
         emailReserver } = require('./controllers/wishesController')
+const { foodGetActiveUser } = require('./controllers/foodController');
 var AmazonWishList = require('./classes/amazonWishList');
 const { checkAuthenticated } = require('./middleware/isAuthenticated');
 
@@ -189,6 +190,8 @@ app.post(`${baseUrl}/wishes/getReserverEmail`, checkAuthenticated, getReserverEm
 app.post(`${baseUrl}/wishes/emailReserver`, checkAuthenticated, emailReserver);
 app.post(`${baseUrl}/wishes/getAmazonWishes`, checkAuthenticated, getAmazonWishes);
 
+// Food API Endpoints
+app.post(`${baseUrl}/food/getActiveUser`, checkAuthenticated, foodGetActiveUser);
 
 // Wishes Email Services
 // let j = schedule.scheduleJob('1 * * * * *', () => {

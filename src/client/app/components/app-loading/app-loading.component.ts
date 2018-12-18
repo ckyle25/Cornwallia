@@ -19,10 +19,10 @@ export class AppLoadingComponent implements OnInit {
   ngOnInit() {
     this.sharedObs.subscribe(response => {
       this.appTitle = response.appSelection;
-      if (this.appTitle == 'Wishes') {
+      if (this.appTitle === 'Wishes') {
         setTimeout(() => {this.router.navigate(['wishes/landing'])}, 2000)
-      } else if (this.appTitle == 'LAN Party Planner') {
-        setTimeout(() => {this.router.navigate(['lanparty/landing'])}, 2000)
+      } else if (this.appTitle === 'Food Tracker') {
+        setTimeout(() => {this.router.navigate(['foodtracker/landing'])}, 2000)
       }
     });
   }

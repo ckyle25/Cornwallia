@@ -33,6 +33,8 @@ import { SharedService } from './services/shared/sharedServices';
 import { WishesActionCreators } from './redux/wishes/wishesRootReducer';
 import { WishesService } from './services/wishes/wishesService';
 import { AdminScreenComponent } from './components/admin-screen/admin-screen.component';
+import { FoodActionCreators } from './redux/food/foodReducer';
+import { FoodService } from './services/food/foodService';
 
 @NgModule({
   declarations: [
@@ -68,7 +70,7 @@ import { AdminScreenComponent } from './components/admin-screen/admin-screen.com
       { path: 'admin', component: AdminScreenComponent, canActivate: [AuthGuardService] },
       { path: 'wishes', loadChildren: './applications/wishes/wishes.module#WishesModule', canActivate: [AuthGuardService]},
       { path: 'shared', loadChildren: './shared/shared.module#SharedModule', canActivate: [AuthGuardService]},
-      { path: 'lanparty', loadChildren: './applications/lan-party-planner/lan-party-planner.module#LanPartyModule', canActivate: [AuthGuardService]}
+      { path: 'foodtracker', loadChildren: './applications/food-tracker/food-tracker.module#FoodTrackerModule', canActivate: [AuthGuardService]}
     ], {useHash: true})
   ],
   providers: [
@@ -77,7 +79,9 @@ import { AdminScreenComponent } from './components/admin-screen/admin-screen.com
     SharedActionCreators,
     SharedService,
     WishesActionCreators,
-    WishesService
+    WishesService,
+    FoodService,
+    FoodActionCreators,
   ],
   bootstrap: [AppComponent]
 })
