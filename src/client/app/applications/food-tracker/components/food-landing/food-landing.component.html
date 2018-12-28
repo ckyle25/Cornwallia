@@ -1,9 +1,6 @@
 <div class="content">
-    <app-nav-bar></app-nav-bar>
-    <food-sub-nav></food-sub-nav>
-    <div class="header-container">
-        <div class="title-text-style text-large-page-title logo-style">Welcome to Food Tracker</div>
-        <div class="top-splash"></div>
-        <div class="black-film"></div>
-      </div>
+  <app-nav-bar></app-nav-bar>
+  <div *ngIf="foodInitialized !== false">
+    <router-outlet></router-outlet>
   </div>
+</div>

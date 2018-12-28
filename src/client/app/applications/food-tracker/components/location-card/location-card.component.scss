@@ -1,0 +1,155 @@
+@import "../../../../../assets/styles/_colors";
+@import "../../../../../assets/styles/_typography";
+@import "../../../../../assets/styles/_ui-features";
+
+.container {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+  flex-direction: column;
+  width: 100%;
+	width: 300px;
+	height: 300px;
+	box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+	transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+	margin: 10px;
+  border-radius: 10px;
+  animation: fade 1.5s;
+  -webkit-animation: fade 1.5s;
+  text-decoration: none;
+}
+
+.container:hover {
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+
+.pantry-image-style {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	background-image: url('../../../../../assets/photos/pantry.jpg');
+	background-size: 350px 265px;
+	background-repeat: no-repeat;
+	border-radius: 10px 10px 0px 0px;
+	width: 100%;
+	height: 75%;
+}
+
+.fridge-image-style {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	background-image: url('../../../../../assets/photos/fridge.jpg');
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+	border-radius: 10px 10px 0px 0px;
+	width: 100%;
+	height: 75%;
+}
+
+.freezer-image-style {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	background-image: url('../../../../../assets/photos/freezer.jpg');
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+	border-radius: 10px 10px 0px 0px;
+	width: 100%;
+	height: 75%;
+}
+
+.storage-image-style {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	background-image: url('../../../../../assets/photos/food-storage.jpg');
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+	border-radius: 10px 10px 0px 0px;
+	width: 100%;
+	height: 75%;
+}
+
+.caption-container {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	flex-direction: row;
+	background-color: $white;
+	width: 100%;
+	height:25%;
+	align-items: center;
+	padding: 5px;
+	border-radius: 0px 0px 10px 10px;
+}
+
+.text-container {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+  justify-content: center;
+  align-items: center;
+	margin: 0px 0px 0px 25px;
+	width: 100%;
+	height: 100%;
+	flex-direction: column;
+	text-decoration: none;
+}
+
+.title-text {
+	color: $offblack;
+  padding-bottom: 5px;
+  text-decoration: none;
+}
+
+.button-container {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: $offblack;
+	padding: 5px;
+	width: 100px;
+	height: 50px;
+	border-radius: 5px;
+	text-decoration: none;
+	cursor: pointer;
+
+	div {
+		color: $white;
+		margin-right: 10px;
+		text-decoration: none;
+	}
+
+	i {
+		color: $white;
+		font-size: 14px;
+		font-weight: 600;
+		line-height: 1.5;
+	}
+}
+
+.button-container:hover {
+	background-color: $white;
+	border: 2px solid $offblack;
+
+	div {
+		color: $offblack;
+	}
+
+	i {
+		color: $offblack;
+	}
+
+	transition: .5s;
+}
+
+.margin-r-10 {
+	margin-right: 10px;
+}
+
+@keyframes fade { 0% { opacity: 0; } 100% { opacity: 1; } }
+
+@-webkit-keyframes fade { 0% { opacity: 0; } 100% { opacity: 1; } }

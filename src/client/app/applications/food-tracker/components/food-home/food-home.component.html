@@ -1,0 +1,25 @@
+<div class="header-container">
+    <div class="title-text-style text-large-page-title logo-style">Welcome to Food Tracker</div>
+    <div class="top-splash"></div>
+    <div class="black-film"></div>
+  </div>
+  <div class="searchbox-container">
+    <form class="example-form">
+      <mat-form-field class="example-full-width">
+        <input type="text" placeholder="Enter a Food Item" matInput [formControl]="myControl" [matAutocomplete]="auto">
+        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+          <mat-option *ngFor="let option of filteredFoodOptions | async" [value]="option">
+            <a [routerLink]="['/foodtracker/landing/overview']" class="menu-options">
+              {{option}}
+            </a>
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+    </form>
+  </div>
+  <div class="location-container">
+    <location-card [title]="'Pantry'"></location-card>
+    <location-card [title]="'Fridge & Freezer'"></location-card>
+    <location-card [title]="'Deep Freeze'"></location-card>
+    <location-card [title]="'Food Storage'"></location-card>
+  </div>
