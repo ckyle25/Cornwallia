@@ -1,4 +1,4 @@
 SELECT
 amazonwishlistid
-FROM wishes_users
+FROM wishes.users
 WHERE userid = $1

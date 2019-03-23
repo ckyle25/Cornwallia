@@ -1,4 +1,4 @@
 SELECT
 *
-FROM food_users
+FROM food.users
 WHERE edwuserid = $1

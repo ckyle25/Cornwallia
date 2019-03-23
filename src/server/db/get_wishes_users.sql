@@ -7,6 +7,6 @@ SELECT
 	,wu.lastnameval
 	,wf.familynm
 	,wf.familygroupid
-FROM wishes_users wu
-JOIN wishes_family wf
+FROM wishes.users wu
+JOIN wishes.family wf
 	ON wu.familyid = wf.familyid

@@ -1,3 +1,3 @@
 SELECT
 *
-FROM wishes_family
+FROM wishes.family

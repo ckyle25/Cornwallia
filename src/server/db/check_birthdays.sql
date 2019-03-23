@@ -8,10 +8,10 @@ WITH FamilyReference AS (
 	,u.emaildsc
 	,wf.parent1wishesuserid
 	,wf.parent2wishesuserid
-	FROM wishes_users wu
-		LEFT JOIN wishes_family wf
+	FROM wishes.users wu
+		LEFT JOIN wishes.family wf
 			ON wu.familyid = wf.familyid
-		LEFT JOIN users u
+		LEFT JOIN main.users u
 			ON wu.edwuserid = u.userid
 )
 
@@ -29,11 +29,11 @@ fr.userid
 ,wu2.firstnameval AS parent2name
 ,u2.emaildsc AS parent2email
 FROM FamilyReference fr
-	LEFT JOIN wishes_users wu
+	LEFT JOIN wishes.users wu
 		ON fr.parent1wishesuserid = wu.userid
-	LEFT JOIN wishes_users wu2
+	LEFT JOIN wishes.users wu2
 		ON fr.parent2wishesuserid = wu2.userid
-	LEFT JOIN users u
+	LEFT JOIN main.users u
 		ON wu.edwuserid = u.userid
-	LEFT JOIN users u2
+	LEFT JOIN main.users u2
 		ON wu2.edwuserid = u2.userid

@@ -1,4 +1,4 @@
-UPDATE wishes_wishes
+UPDATE wishes.wishes
 SET reservedflg = 0,
 reserveduserid = 0
 WHERE wishid = $1

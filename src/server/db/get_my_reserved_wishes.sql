@@ -11,9 +11,9 @@ ww.wishid
 ,ww.reserveduserid
 ,wf.parent1wishesuserid
 ,wf.parent2wishesuserid
-FROM wishes_wishes ww
-	LEFT JOIN wishes_users wu
+FROM wishes.wishes ww
+	LEFT JOIN wishes.users wu
 		on wu.userid = ww.userid
-	LEFT JOIN wishes_family wf
+	LEFT JOIN wishes.family wf
 		on wf.familyid = wu.familyid
 WHERE ww.reserveduserid = $1
