@@ -47,6 +47,7 @@ export class WishCardComponent implements OnInit {
     this.wishesObs.subscribe(data => {
       this.currentUserFirstName = data.currentUser.firstnameval;
     });
+    console.log('wishes', this.wishes);
   }
 
   async onReserveClick(wishid: number, userid: number) {
@@ -62,8 +63,8 @@ export class WishCardComponent implements OnInit {
   }
 
   onDeleteClick(wishid: number, userid: number) {
-    this.wishId = wishid;
-    this.wishUserId = userid;
+    localStorage.setItem('wishId', wishid.toString());
+    localStorage.setItem('wishUserId', userid.toString());
     this.modal.openModal('deleteConfirm');
   }
 
@@ -73,15 +74,17 @@ export class WishCardComponent implements OnInit {
     this.modal.closeModal('deleteConfirm');
   }
 
-  async confirmDeleteWish(wishid: number, userid: number) {
+  async confirmDeleteWish() {
     this.modal.closeModal('deleteConfirm');
+    const wishid = parseInt(localStorage.getItem('wishId'), 10);
+    const userid = parseInt(localStorage.getItem('wishUserId'), 10);
     await this.ngRedux.dispatch(this.wishesActionCreators.deleteWish(wishid));
     await this.ngRedux.dispatch(this.wishesActionCreators.getWishes(userid));
     if (userid === this.currentUser) {
       await this.ngRedux.dispatch(this.wishesActionCreators.getMyWishes(this.currentUser));
     }
-    this.wishId = null;
-    this.wishUserId = null;
+    localStorage.setItem('wishId', '');
+    localStorage.setItem('wishUserId', '');
   }
 
   onEditClick(title: string, price: number, link: string, description: string, rating: number, wishId: number, userid: number) {
