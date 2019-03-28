@@ -6,5 +6,5 @@ userid
 ,calendarflg
 ,firstnameval
 ,lastnameval
-FROM users
+FROM main.users
 WHERE userid = $1;

@@ -1,3 +1,3 @@
-SELECT * 
-FROM users
+SELECT *
+FROM main.users
 WHERE auth0id = $1;

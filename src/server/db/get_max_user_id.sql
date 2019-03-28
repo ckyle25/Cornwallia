@@ -1,3 +1,3 @@
 SELECT
 MAX(userid)
-FROM users
+FROM main.users

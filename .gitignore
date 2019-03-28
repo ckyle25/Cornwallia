@@ -44,4 +44,4 @@ testem.log
 Thumbs.db
 
 # server
-/src/server/.env
+/src/.env

@@ -1,4 +1,4 @@
-UPDATE wishes_wishes
+UPDATE wishes.wishes
 SET titledsc = $1
 ,descriptiondsc = $2
 ,costamt = $3

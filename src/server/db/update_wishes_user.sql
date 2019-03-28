@@ -1,4 +1,4 @@
-UPDATE wishes_users
+UPDATE wishes.users
 SET edwuserid = $2,
 familyid = $3,
 isparentflg = $4,

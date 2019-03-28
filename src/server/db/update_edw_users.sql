@@ -1,4 +1,4 @@
-UPDATE users
+UPDATE main.users
 SET emaildsc = $2,
 isadminflg = $3,
 wishesflg = $4,

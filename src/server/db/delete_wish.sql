@@ -1,2 +1,2 @@
-DELETE FROM wishes_wishes
+DELETE FROM wishes.wishes
 WHERE wishid = $1;
