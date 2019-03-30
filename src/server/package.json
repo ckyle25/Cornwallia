@@ -8,8 +8,10 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "server": "nodemon"    "pm2start": "pm2 start index.js -i 1",
-    "pm2reload": "pm2 reload index.js"  },
+    "server": "nodemon",
+    "pm2start": "pm2 start index.js -i 1",
+    "pm2reload": "pm2 reload index.js"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
