@@ -1,3 +1,8 @@
 #!/usr/bin/bash
-cd /home/cornwa2/public_html/
+echo "Starting Script"
+echo "Changing Directories"
+cd /home/cornwal2/public_html/
+echo "Starting server"
 npm run pm2start
+echo "Exiting"
+exit
