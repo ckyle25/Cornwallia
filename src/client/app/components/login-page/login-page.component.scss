@@ -80,4 +80,14 @@
   padding: 10px 50px 10px 50px;
 }
 
+.header-area {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 570px;
+  width: 100%;
+  background-color: $color2;
+  align-items: center;
+  justify-content: center;
+}
 
