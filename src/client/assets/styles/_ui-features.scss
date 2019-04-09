@@ -1,14 +1,18 @@
 @import "./_colors";
 
+%disp-flex {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
 .clickable {
   text-decoration: none;
   cursor: pointer;
 }
 
 .button {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
+  @extend %disp-flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -45,9 +49,7 @@
 }
 
 .navbar {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
+  @extend %disp-flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
@@ -59,9 +61,7 @@
 }
 
 .sub-navbar {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
+  @extend %disp-flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
