@@ -1,17 +1,48 @@
-<div class='navbar'>
-  <a routerLink="/login" class="text-sub-title logo-style clickable">Cornwallia</a>
+<div class='navbar' style="justify-content: center">
+  <div class="navbar-content">
+    <a routerLink="/login" class="text-sub-title logo-style clickable">Cornwallia</a>
+    <a [href]="loginURL" class="text-mini-header logo-style clickable">Login</a>
+  </div>
 </div>
 <div class="header-area">
-  <div class="header-left">
-    <div class="header-question-line">Do you need a better wish list?</div>
-    <div class="header-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
-    <div class="header-button-container">
-      <div class="started-button clickable">Get Started</div>
-      <div class="demo-button clickable">Request Demo</div>
+  <div class="header-container">
+    <div class="header-left">
+      <div class="header-question-line logo-style">Do you need a better <div class="typing" id="text-change"> wish list?</div></div>
+      <div class="header-description logo-style">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
+      <div class="header-button-container">
+        <div class="started-button clickable logo-style">Get Started</div>
+        <div class="demo-button clickable logo-style">Request Demo</div>
+      </div>
+    </div>
+    <div class="header-right">
+      <div class="top-apps-container">
+        <mini-app-card
+          [appName]="'wishes'"
+          [title]="'Wishes'"
+          [caption]="'Family gift giving portal'"
+          class="app1">
+        </mini-app-card>
+        <mini-app-card
+          [appName]="'foodTracker'"
+          [title]="'Food Tracker'"
+          [caption]="'Manage Food Storage'"
+          class="app2">
+        </mini-app-card>
+      </div>
+      <div class="bottom-apps-container">
+        <mini-app-card
+          [appName]="'calendar'"
+          [title]="'Family Calendar'"
+          [caption]="'Keep track of family events'"
+          class="app3">
+        </mini-app-card>
+        <mini-app-card
+          [appName]="'calendar'"
+          [title]="'Family Calendar'"
+          [caption]="'Keep track of family events'"
+          class="app4">
+        </mini-app-card>
+      </div>
     </div>
   </div>
-  <div class="header-right">
-
-  </div>
-  <a [href]="loginURL" class="button btnBorder btnGray login-button-style text-section-title clickable">Login</a>
 </div>

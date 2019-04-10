@@ -9,6 +9,10 @@
   height: 100vh;
 }
 
+.disp-flex {
+  @extend %disp-flex;
+}
+
 .background-image {
   background-image: url('../../../assets/photos/cornwall-bridge.jpg');
   background-repeat: no-repeat;
@@ -48,6 +52,13 @@
   min-height: 400px;
 }
 
+.navbar-content {
+  @extend %disp-flex;
+  width: 70%;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .welcome-style {
   font-family: "Cinzel", sans-serif;
   color: $white;
@@ -80,13 +91,21 @@
   width: 100%;
   background-color: $color2;
   align-items: center;
-  justify-content: space-around;
+  justify-content: center;
+}
+
+.header-container {
+  @extend %disp-flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 70%;
+  min-width: 1050px;
 }
 
 .header-left {
   @extend %disp-flex;
   flex-direction: column;
-  max-width: 500px;
+  //max-width: 550px;
 }
 
 .header-right {
@@ -98,13 +117,21 @@
   @extend %disp-flex;
 }
 
+.top-apps-container {
+  @extend %disp-flex;
+}
+
+.bottom-apps-container {
+  @extend %disp-flex;
+}
+
 .header-question-line {
-  font-size: 48px;
+  font-size: 40px;
   margin-bottom: 20px;
   color: $white;
   line-height: 1.333;
   font-weight: 600;
-  font-family: "source-serif-pro";
+  // font-family: "source-serif-pro";
 }
 
 .header-description {
@@ -114,7 +141,7 @@
   font-size: 20px;
   margin-bottom: 20px;
   max-width: 75%;
-  font-family: "proxima-nova";
+  // font-family: "proxima-nova";
 }
 
 .started-button {
@@ -146,3 +173,53 @@
   background-color: $blue;
   transition: 1s;
 }
+
+.app1 {
+  -webkit-animation: fadein 1s ;
+  -webkit-animation-delay: 1s;
+  animation: fadein 1s;
+  animation-delay: 1s;
+  animation-fill-mode: forwards;
+  opacity: 0;
+}
+
+.app2 {
+  -webkit-animation: fadein 1s ;
+  -webkit-animation-delay: 2s;
+  animation: fadein 1s;
+  animation-delay: 2s;
+  animation-fill-mode: forwards;
+  opacity: 0;
+}
+
+.app3 {
+  -webkit-animation: fadein 1s ;
+  -webkit-animation-delay: 3s;
+  animation: fadein 1s;
+  animation-delay: 3s;
+  animation-fill-mode: forwards;
+  opacity: 0;
+}
+
+.app4 {
+  -webkit-animation: fadein 1s ;
+  -webkit-animation-delay: 4s;
+  animation: fadein 1s;
+  animation-delay: 4s;
+  animation-fill-mode: forwards;
+  opacity: 0;
+}
+
+@keyframes fadein { 100% { opacity: 1; } }
+
+@-webkit-keyframes fadein { 100% { opacity: 1; } }
+
+.typing {
+  margin-left: 7px;
+  border-right: 1.5px solid $white;
+  animation: blinking .75s infinite;
+}
+
+@keyframes blinking { to { border-color: transparent; } }
+
+@-webkit-keyframes blinking { to { border-color: transparent; } }

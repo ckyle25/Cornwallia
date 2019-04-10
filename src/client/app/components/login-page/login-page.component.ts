@@ -9,11 +9,16 @@ import { environment } from '../../../environments/environment';
 export class LoginPageComponent implements OnInit {
   loginURL = `${environment.serverUrl}auth`;
 
+  changingText: string = 'wish list?'
+
+  pixelWidth: string;
+
   constructor() {
 
    }
 
   ngOnInit() {
+    this.pixelWidth = this.changingText.length * 5 + 'px';
   }
 
 }

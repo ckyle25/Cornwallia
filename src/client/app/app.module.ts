@@ -35,6 +35,7 @@ import { WishesService } from './services/wishes/wishesService';
 import { AdminScreenComponent } from './components/admin-screen/admin-screen.component';
 import { FoodActionCreators } from './redux/food/foodReducer';
 import { FoodService } from './services/food/foodService';
+import { MiniAppCardComponent } from './components/mini-app-card/mini-app-card.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { FoodService } from './services/food/foodService';
     AppListComponent,
     RequestAccessComponent,
     LeaveFeedbackComponent,
-    AdminScreenComponent
+    AdminScreenComponent,
+    MiniAppCardComponent
   ],
   imports: [
     FormsModule,
