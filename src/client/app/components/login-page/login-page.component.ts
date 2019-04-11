@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { environment } from '../../../environments/environment';
 
+@HostListener('window:resize', ['$event'])
 @Component({
   selector: 'app-login-page',
   templateUrl: './login-page.component.html',
@@ -9,12 +10,13 @@ import { environment } from '../../../environments/environment';
 export class LoginPageComponent implements OnInit {
   loginURL = `${environment.serverUrl}auth`;
 
-  options: string[] = ['wish list?', 'food storage tracking app?', 'family calendar?']
+  options: string[] = ['wish list?', 'food storage tracker?', 'family calendar?']
 
   changingText: string = this.options[0];
   speed: number = 50;
   i: number = 0;
   position: number = 0;
+  innerWidth: number = window.innerWidth;
 
   constructor() {
 
@@ -53,6 +55,10 @@ export class LoginPageComponent implements OnInit {
       this.position = 0;
       this.changingText = this.options[this.position]
     }
+  }
+
+  onResize(event) {
+    this.innerWidth =  event.target.innerWidth;
   }
 
 }

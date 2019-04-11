@@ -102,6 +102,23 @@
   min-width: 1050px;
 }
 
+.mobile-header-area {
+  @extend %disp-flex;
+  height: 400px;
+  width: 100%;
+  background-color: $color2;
+  align-items: center;
+  justify-content: center;
+}
+
+.mobile-header-container {
+  @extend %disp-flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 95%;
+  min-width: 400px;
+}
+
 .header-left {
   @extend %disp-flex;
   flex-direction: column;
@@ -171,6 +188,13 @@
 .demo-button:hover {
   background-color: $blue;
   transition: 1s;
+}
+
+.mobile-nav {
+  @extend %disp-flex;
+  width: 95%;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .app1 {

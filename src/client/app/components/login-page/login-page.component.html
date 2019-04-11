@@ -1,49 +1,62 @@
-<div class='navbar' style="justify-content: center">
-  <div class="navbar-content">
-    <a routerLink="/login" class="text-sub-title logo-style clickable">Cornwallia</a>
-    <a [href]="loginURL" class="text-mini-header logo-style clickable">Login</a>
-  </div>
-</div>
-<div class="header-area">
-  <div class="header-container">
-    <div class="header-left">
-      <div class="header-question-line logo-style">Do you need a better</div>
-      <div class="typing logo-style" id="text-change"></div>
-      <div class="header-description logo-style">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
-      <div class="header-button-container">
-        <div class="started-button clickable logo-style">Get Started</div>
-        <div class="demo-button clickable logo-style">Request Demo</div>
-      </div>
+<div (window:resize)="onResize($event)">
+  <div class='navbar' style="justify-content: center">
+    <div class="navbar-content" *ngIf="innerWidth >= 1000">
+      <a routerLink="/login" class="text-sub-title logo-style clickable">Cornwallia</a>
+      <a [href]="loginURL" class="text-mini-header logo-style clickable">Login</a>
     </div>
-    <div class="header-right">
-      <div class="top-apps-container">
-        <mini-app-card
-          [appName]="'wishes'"
-          [title]="'Wishes'"
-          [caption]="'Family gift giving portal'"
-          class="app1">
-        </mini-app-card>
-        <mini-app-card
-          [appName]="'foodTracker'"
-          [title]="'Food Tracker'"
-          [caption]="'Manage Food Storage'"
-          class="app2">
-        </mini-app-card>
-      </div>
-      <div class="bottom-apps-container">
-        <mini-app-card
-          [appName]="'calendar'"
-          [title]="'Family Calendar'"
-          [caption]="'Keep track of family events'"
-          class="app3">
-        </mini-app-card>
-        <mini-app-card
-          [appName]="'calendar'"
-          [title]="'Family Calendar'"
-          [caption]="'Keep track of family events'"
-          class="app4">
-        </mini-app-card>
-      </div>
+    <div class="mobile-nav" *ngIf="innerWidth < 1000">
+      <a routerLink="/login" class="text-sub-title logo-style clickable">Cornwallia</a>
+      <i [matMenuTriggerFor]="loginMenu" class="fa fa-bars bars-style clickable"></i>
     </div>
   </div>
+  <div [ngClass]="{'header-area' : innerWidth >= 1100, 'mobile-header-area' : innerWidth < 1100}">
+    <div [ngClass]="{'header-container' : innerWidth >= 1100, 'mobile-header-container' : innerWidth < 1100}">
+      <div class="header-left" [ngStyle]="{'align-items': innerWidth >= 1100 ? '' : 'center'}">
+        <div class="header-question-line logo-style" [ngStyle]="{'font-size': innerWidth >= 1100 ? '40px' : '30px'}">Do you need a better</div>
+        <div class="typing logo-style" id="text-change" [ngStyle]="{'font-size': innerWidth >= 1100 ? '40px' : '30px'}"></div>
+        <div class="header-description logo-style" [ngStyle]="{'font-size': innerWidth >= 1100 ? '20px' : '17px'}">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
+        <div class="header-button-container">
+          <div class="started-button clickable logo-style">Get Started</div>
+          <div class="demo-button clickable logo-style">Request Demo</div>
+        </div>
+      </div>
+      <div class="header-right"  *ngIf="innerWidth >= 1100">
+        <div class="top-apps-container">
+          <mini-app-card
+            [appName]="'wishes'"
+            [title]="'Wishes'"
+            [caption]="'Family gift giving portal'"
+            class="app1">
+          </mini-app-card>
+          <mini-app-card
+            [appName]="'foodTracker'"
+            [title]="'Food Tracker'"
+            [caption]="'Manage Food Storage'"
+            class="app2">
+          </mini-app-card>
+        </div>
+        <div class="bottom-apps-container">
+          <mini-app-card
+            [appName]="'calendar'"
+            [title]="'Family Calendar'"
+            [caption]="'Keep track of family events'"
+            class="app3">
+          </mini-app-card>
+          <mini-app-card
+            [appName]="'calendar'"
+            [title]="'Family Calendar'"
+            [caption]="'Keep track of family events'"
+            class="app4">
+          </mini-app-card>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+
+<mat-menu #loginMenu="matMenu">
+  <a [href]="loginURL" mat-menu-item>
+    <i class="fas fa-sign-in-alt"></i>
+    <span class="mleft-10">Login</span>
+  </a>
+</mat-menu>

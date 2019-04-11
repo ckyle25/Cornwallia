@@ -36,6 +36,7 @@ import { AdminScreenComponent } from './components/admin-screen/admin-screen.com
 import { FoodActionCreators } from './redux/food/foodReducer';
 import { FoodService } from './services/food/foodService';
 import { MiniAppCardComponent } from './components/mini-app-card/mini-app-card.component';
+import { MatMenuModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -54,12 +55,12 @@ import { MiniAppCardComponent } from './components/mini-app-card/mini-app-card.c
   imports: [
     FormsModule,
     BrowserModule,
-
     BrowserAnimationsModule,
     SharedModule,
     NgReduxModule,
     MatFormFieldModule,
     MatInputModule,
+    MatMenuModule,
     RouterModule.forRoot([
       { path: 'login', component: LoginPageComponent },
       { path: '', redirectTo: 'login', pathMatch: 'full'},
