@@ -109,13 +109,13 @@
   background-color: $color2;
   align-items: center;
   justify-content: center;
+  padding: 25px;
 }
 
 .mobile-header-container {
   @extend %disp-flex;
   justify-content: space-between;
   align-items: center;
-  width: 95%;
   min-width: 400px;
 }
 
@@ -170,6 +170,21 @@
   font-size: 22px;
 }
 
+.mobile-started-button {
+  @extend %disp-flex;
+  margin-right: 15px;
+  color: $white;
+  border: 2px solid $color3;
+  padding: 9px 18px 9px 18px;
+  border-radius: 5px;
+  font-size: 15px;
+}
+
+.mobile-started-button:hover {
+  background-color: $color3;
+  transition: 1s;
+}
+
 .started-button:hover {
   background-color: $color3;
   transition: 1s;
@@ -185,7 +200,22 @@
   font-size: 22px;
 }
 
+.mobile-demo-button {
+  @extend %disp-flex;
+  margin-right: 15px;
+  color: $white;
+  border: 2px solid $color3;
+  padding: 9px 18px 9px 18px;
+  border-radius: 5px;
+  font-size: 15px;
+}
+
 .demo-button:hover {
+  background-color: $blue;
+  transition: 1s;
+}
+
+.mobile-demo-button:hover {
   background-color: $blue;
   transition: 1s;
 }
