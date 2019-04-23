@@ -17,7 +17,7 @@
         <div class="header-description logo-style" [ngStyle]="{'font-size': innerWidth >= 1100 ? '20px' : '17px'}">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
         <div class="header-button-container">
           <div class="clickable logo-style" [ngClass]="{'started-button': innerWidth >= 1100, 'mobile-started-button': innerWidth < 1100}">Get Started</div>
-          <div class="clickable logo-style" [ngClass]="{'demo-button': innerWidth >= 1100, 'mobile-demo-button': innerWidth < 1100}">Request Demo</div>
+          <a [href]="loginURL" class="clickable logo-style" [ngClass]="{'demo-button': innerWidth >= 1100, 'mobile-demo-button': innerWidth < 1100}">Login</a>
         </div>
       </div>
       <div class="header-right"  *ngIf="innerWidth >= 1100">
